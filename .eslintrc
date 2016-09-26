@@ -1,0 +1,10 @@
+{
+  "extends": "google",
+  "globals": {
+    "angular": true
+  },
+  "rules": {
+    "require-jsdoc": 0,
+    "new-cap": 0
+  }
+}
