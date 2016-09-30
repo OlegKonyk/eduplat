@@ -1,27 +1,92 @@
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const ngAnnotate = require('gulp-ng-annotate');
+const livereload = require('gulp-livereload');
+const babel = require('gulp-babel');
+// const clean = require('gulp-clean');
+const mainBowerFiles = require('main-bower-files');
+const exists = require('path-exists').sync;
 
 gulp.task('lint', () => {
-  // ESLint ignores files with "node_modules" paths.
-  // So, it's best to have gulp ignore the directory as well.
-  // Also, Be sure to return the stream from the task;
-  // Otherwise, the task may end before the stream has finished.
-  return gulp.src(['**/*.js',
+  return gulp.src(['!public/build/**',
                    '!node_modules/**',
-                   '!public/bower_components/**'])
-    // eslint() attaches the lint output to the "eslint" property
-    // of the file object so it can be used by other modules.
-    .pipe(eslint(/*{
-      globals: ['angular']
-    }*/))
-    // eslint.format() outputs the lint results to the console.
-    // Alternatively use eslint.formatEach() (see Docs).
+                   '!bower_components/**',
+                   '**/*.js'
+                   ])
+    .pipe(eslint())
     .pipe(eslint.format())
-    // To have the process exit with an error code (1) on
-    // lint error, return the stream and pipe to failAfterError last.
     .pipe(eslint.failAfterError());
 });
 
-gulp.task('default', ['lint'], function() {
-  // This will only run if the lint task is successful...
+/* gulp.task('clean', function() {
+  return gulp.src(['public/dist', 'public/vendor', 'public/testReports'], {read: false})
+		.pipe(clean());
+}); */
+
+gulp.task('concat-app-js', () => {
+  return gulp.src(['public/src/*.js'
+                   // 'public/**/*module.js'
+                   ])
+    .pipe(ngAnnotate())
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(concat('app.js'))
+    .pipe(gulp.dest('public/build/'));
 });
+
+gulp.task('minify-app-js', ['concat-app-js'], () => {
+  return gulp.src('public/build/app.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('public/build/'));
+});
+
+gulp.task('concat-vendor-js', function() {
+  return gulp.src(getMainBowerFiles('js', true), {base: './bower_components'})
+        .pipe(concat('vendor.js'))
+        .pipe(gulp.dest('public/build/'));
+});
+
+gulp.task('concat-vendor-css', function() {
+  return gulp.src(getMainBowerFiles('css', true), {base: 'bower_components'})
+        .pipe(concat('vendor.css'))
+        .pipe(gulp.dest('public/build/'));
+});
+
+gulp.task('reload', ['develop'], () => {
+  livereload.listen({quiet: true});
+  gulp.src(['public/**',
+            '!public/build/**'])
+        .pipe(livereload());
+});
+
+gulp.task('watch', () => {
+  gulp.watch(['public/**',
+              '!public/build/**'], ['reload']);
+});
+
+gulp.task('default', ['build']);
+
+gulp.task('develop', ['concat-vendor-css',
+                      'concat-vendor-js',
+                      'concat-app-js',
+                      'watch']);
+
+gulp.task('build', ['lint',
+                    'concat-vendor-css',
+                    'concat-vendor-js',
+                    'minify-app-js']);
+
+function getMainBowerFiles(extention, minified) {
+  return mainBowerFiles()
+    .filter(function(path, index, arr) {
+      return path.indexOf(`.${extention}`) > 0;
+    })
+    .map(function(path, index, arr) {
+      var replaceStr = minified ? `.min.${extention}` : `.${extention}`;
+      var newPath = path.replace(/.([^.]+)$/g, replaceStr);
+      return exists(newPath) ? newPath : path;
+    });
+}

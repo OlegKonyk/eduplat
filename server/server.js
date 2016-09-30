@@ -4,9 +4,9 @@ var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var app = express();
 
-var config = require('./server/config/config')[env];
+var config = require('./config/config')[env];
 
-require('./server/config/express')(app, config);
+require('./config/express')(app, config);
 
 app.listen(config.port, function(err) {
   if (err) {

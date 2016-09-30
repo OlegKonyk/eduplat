@@ -10,6 +10,7 @@
 
  function config($mdThemingProvider, $mdIconProvider,
                  $routeProvider, $locationProvider) {
+   "ngInject";
    $locationProvider.html5Mode(true);
 
    $routeProvider
