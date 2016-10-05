@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
+const cleanCSS = require('gulp-clean-css');
 const ngAnnotate = require('gulp-ng-annotate');
 const livereload = require('gulp-livereload');
 const babel = require('gulp-babel');
@@ -43,6 +44,18 @@ gulp.task('minify-app-js', ['concat-app-js'], () => {
     .pipe(gulp.dest('public/build/'));
 });
 
+gulp.task('concat-app-css', () => {
+  return gulp.src('public/assets/css/*.css')
+    .pipe(concat('app.css'))
+    .pipe(gulp.dest('public/build/'));
+});
+
+gulp.task('minify-app-css', ['concat-app-css'], () => {
+  return gulp.src('public/build/app.css')
+    .pipe(cleanCSS())
+    .pipe(gulp.dest('public/build/'));
+});
+
 gulp.task('concat-vendor-js', function() {
   return gulp.src(getMainBowerFiles('js', true), {base: './bower_components'})
         .pipe(concat('vendor.js'))
@@ -70,12 +83,14 @@ gulp.task('watch', () => {
 gulp.task('default', ['build']);
 
 gulp.task('develop', ['concat-vendor-css',
+                      'concat-app-css',
                       'concat-vendor-js',
                       'concat-app-js',
                       'watch']);
 
 gulp.task('build', ['lint',
                     'concat-vendor-css',
+                    'minify-app-css',
                     'concat-vendor-js',
                     'minify-app-js']);
 
