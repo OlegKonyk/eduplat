@@ -4,10 +4,12 @@ console.log(rootPath);
 
 module.exports = {
   development: {
+    db: 'mongodb://localhost/eduplat',
     rootPath: rootPath,
     port: process.env.PORT || 3030
   },
   production: {
+    db: 'mongodb://localhost/eduplat',
     rootPath: rootPath,
     port: process.env.PORT || 80
   }

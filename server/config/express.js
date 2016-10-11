@@ -15,7 +15,7 @@ module.exports = function(app, config) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
 
-  app.use(session({secret: 'multivision unicorns',
+  app.use(session({secret: 'eduplat unicorns',
                    resave: false,
                    saveUninitialized: false
   }));
