@@ -8,6 +8,7 @@ const livereload = require('gulp-livereload');
 const babel = require('gulp-babel');
 // const clean = require('gulp-clean');
 const mainBowerFiles = require('main-bower-files');
+const jasmine = require('gulp-jasmine');
 const exists = require('path-exists').sync;
 
 gulp.task('lint', () => {
@@ -19,6 +20,11 @@ gulp.task('lint', () => {
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
+});
+
+gulp.task('jasmine-server', () => {
+  return gulp.src('spec_server/**/*[sS]pec.js')
+    .pipe(jasmine());
 });
 
 /* gulp.task('clean', function() {

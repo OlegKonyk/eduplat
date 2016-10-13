@@ -1,7 +1,10 @@
 {
   "extends": "google",
   "globals": {
-    "angular": true
+    "angular": true,
+    "describe": true,
+    "it": true,
+    "expect": true
   },
   "rules": {
     "require-jsdoc": 0,
