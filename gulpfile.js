@@ -6,6 +6,7 @@ const cleanCSS = require('gulp-clean-css');
 const ngAnnotate = require('gulp-ng-annotate');
 const livereload = require('gulp-livereload');
 const babel = require('gulp-babel');
+const templateCache = require('gulp-angular-templatecache');
 // const clean = require('gulp-clean');
 const mainBowerFiles = require('main-bower-files');
 const jasmine = require('gulp-jasmine');
@@ -32,8 +33,17 @@ gulp.task('jasmine-server', () => {
 		.pipe(clean());
 }); */
 
+gulp.task('templete-cache', function() {
+  return gulp.src(['!public/build/**', 'public/**/*.html'])
+    .pipe(templateCache({
+      module: 'app',
+      root: 'public'
+    }))
+    .pipe(gulp.dest('public/build/'));
+});
+
 gulp.task('concat-app-js', () => {
-  return gulp.src(['public/src/*.js'
+  return gulp.src(['public/src/**/*.js'
                    // 'public/**/*module.js'
                    ])
     .pipe(ngAnnotate())
@@ -88,13 +98,15 @@ gulp.task('watch', () => {
 
 gulp.task('default', ['build']);
 
-gulp.task('develop', ['concat-vendor-css',
+gulp.task('develop', ['templete-cache',
+                      'concat-vendor-css',
                       'concat-app-css',
                       'concat-vendor-js',
                       'concat-app-js',
                       'watch']);
 
 gulp.task('build', ['lint',
+                    'templete-cache',
                     'concat-vendor-css',
                     'minify-app-css',
                     'concat-vendor-js',
