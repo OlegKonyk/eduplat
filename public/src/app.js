@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular
-  .module('app', ['ngRoute', 'ngMaterial'])
+  .module('app', ['ngRoute', 'ngMaterial', 'ngMessages'])
   .config(config)
   .component('edAbout', {
     template: '<md-content class="md-padding"><h1>ABOUT</h1></md-content>'
