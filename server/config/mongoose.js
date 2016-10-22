@@ -9,5 +9,5 @@ module.exports = function(config) {
     console.log('eduplat db opened');
   });
 
-  userModel.createDefaultUsers();
+  //userModel.createDefaultUsers();
 };

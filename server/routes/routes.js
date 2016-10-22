@@ -1,10 +1,25 @@
-var express = require('express');
-var path = require('path');
-var router = express.Router();
+const express = require('express');
+const path = require('path');
+const passport = require('passport');
+const router = express.Router();
+const emailVerification = require('../services/emailVerification.js');
+const createSendToken = require('../services/jwt.js');
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var config = require('../config/config')[env];
+
+router.post('/api/register',
+            passport.authenticate('local-register'),
+            function(req, res) {
+              console.log("^^^^^^");
+              console.log(req.body);
+              console.log("------");
+              emailVerification.send(req, res);
+              createSendToken(req.body, res);
+            });
+
+router.get('/api/auth/verifyEmail', emailVerification.handler);
 
 router.get('/api/:name', function(req, res) {
   res.send(req.params.name);

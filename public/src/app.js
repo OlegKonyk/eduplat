@@ -1,19 +1,25 @@
 (function() {
   'use strict';
   angular
-  .module('app', ['ngRoute', 'ngMaterial', 'ngMessages'])
+  .module('app', ['ngRoute', 'ngMaterial', 'ngMessages', 'satellizer'])
   .config(config)
   .component('edAbout', {
     template: '<md-content class="md-padding"><h1>ABOUT</h1></md-content>'
   })
   .component('edHome', {
     template: '<md-content class="md-padding"><h1>HOME</h1></md-content>'
-  });
+  })
+  .constant('API_URL', 'http://localhost:3030/');
 
   function config($mdThemingProvider, $mdIconProvider,
-                 $routeProvider, $locationProvider) {
+                 $routeProvider, $locationProvider, $authProvider, API_URL, $httpProvider) {
     "ngInject";
     $locationProvider.html5Mode(true);
+
+    $authProvider.loginUrl = API_URL + 'api/login';
+    $authProvider.signupUrl = API_URL + 'api/register';
+
+    $httpProvider.interceptors.push('authInterceptor');
 
     $routeProvider
       .when('/', {

@@ -1,27 +1,40 @@
 const mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
 
-var userSchema = mongoose.Schema({
-  firstName: {type: String, required: '{PATH} is required!'},
-  lastName: {type: String, required: '{PATH} is required!'},
-  userName: {
-    type: String,
-    required: '{PATH} is required!',
-    unique: true
-  }
+var UserSchema = new mongoose.Schema({
+  email: String,
+  password: String,
+  googleId: String,
+  facebookId: String,
+  displayName: String,
+  active: Boolean
 });
 
-const User = mongoose.model('User', userSchema);
+UserSchema.methods.toJSON = function() {
+  var user = this.toObject();
+  delete user.password;
+  return user;
+};
 
-function createDefaultUsers() {
-  User.find({}).exec(function(err, colection) {
-    if (err) {
-      console.log(err);
-    }
-    if (colection.length === 0) {
-      User.create({firstName: 'Oleg', lastName: 'Konyk', userName: 'oleg@oleg.com'});
-      User.create({firstName: 'Vasa', lastName: 'Petrov', userName: 'vasa@vasa.com'});
-    }
+UserSchema.methods.comparePasswords = function(password, callback) {
+  bcrypt.compare(password, this.password, callback);
+};
+
+UserSchema.pre('save', function(next) {
+  var user = this;
+
+  if (!user.isModified('password')) return next();
+
+  bcrypt.genSalt(10, function(err, salt) {
+    if (err) return next(err);
+
+    bcrypt.hash(user.password, salt, null, function(err, hash) {
+      if (err) return next(err);
+
+      user.password = hash;
+      next();
+    });
   });
-}
+});
 
-exports.createDefaultUsers = createDefaultUsers;
+module.exports = mongoose.model('User', UserSchema);
