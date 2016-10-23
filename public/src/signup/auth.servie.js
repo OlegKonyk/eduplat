@@ -24,7 +24,7 @@
     };
 
     var urlBuilder = [];
-    var clientId = '';
+    var clientId = '755194447289-i6qu5n18jnh4lhph17j19cq08i0fq6f4.apps.googleusercontent.com';
 
     urlBuilder.push('response_type=code',
                     'client_id=' + clientId,

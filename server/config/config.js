@@ -6,20 +6,20 @@ module.exports = {
     db: 'mongodb://localhost/eduplat',
     rootPath: rootPath,
     port: process.env.PORT || 3030,
-    FACEBOOK_SECRET: '7e8d2d62f57cc692024d504cabc0141d',
-    GOOGLE_SECRET: 'iJYQI_n6YEve3YSgYO8ODG_f',
-    EMAIL_SECRET: 'something',
-    SMTP_PASS: 'universe',
-    APP_URL: 'http://localhost:9000'
+    FACEBOOK_SECRET: '',
+    GOOGLE_SECRET: '',
+    EMAIL_SECRET: '',
+    SMTP_PASS: '',
+    APP_URL: ''
   },
   production: {
     db: 'mongodb://localhost/eduplat',
     rootPath: rootPath,
     port: process.env.PORT || 80,
-    FACEBOOK_SECRET: '7e8d2d62f57cc692024d504cabc0141d',
-    GOOGLE_SECRET: 'iJYQI_n6YEve3YSgYO8ODG_f',
-    EMAIL_SECRET: 'something',
-    SMTP_PASS: 'universe',
-    APP_URL: 'http://localhost:9000'
+    FACEBOOK_SECRET: '',
+    GOOGLE_SECRET: '',
+    EMAIL_SECRET: '',
+    SMTP_PASS: '',
+    APP_URL: ''
   }
 };

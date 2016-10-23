@@ -30,13 +30,13 @@ exports.send = function(req, res) {
   var transporter = nodemailer.createTransport({
     service: 'Mailgun',
     auth: {
-      user: '',
-      pass: ''
+      user: 'postmaster@sandbox851651049ba14f918ab6661c998a1369.mailgun.org',
+      pass: 'fbf2cbd90b524886b5b91d10a4ab5e9b'
     }
   });
 
   var mailOptions = {
-    from: 'Accounts <@gmail.com>',
+    from: 'Accounts <learningmean@gmail.com>',
     to: email,
     subject: 'jwt Account verification',
     html: getHtml(token)
