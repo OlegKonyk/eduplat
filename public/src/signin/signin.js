@@ -16,5 +16,9 @@
     "ngInject";
 
     var ctrl = this;
+
+    ctrl.signup = function() {
+      console.log('logging in');
+    };
   }
 })();
