@@ -11,7 +11,7 @@ module.exports = function(user, res) {
   var token = jwt.encode(payload, "shhh..");
 
   res.status(200).send({
-    user: JSON.stringify(user),
+    user: user,
     token: token
   });
 };

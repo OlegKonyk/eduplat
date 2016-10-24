@@ -12,14 +12,15 @@ var config = require('../config/config')[env];
 router.post('/api/register',
             passport.authenticate('local-register'),
             function(req, res) {
-              console.log("^^^^^^");
-              console.log(req.body);
-              console.log("------");
               emailVerification.send(req, res);
               createSendToken(req.body, res);
             });
 
 router.get('/api/auth/verifyEmail', emailVerification.handler);
+
+router.post('/api/login', passport.authenticate('local-login'), function(req, res) {
+  createSendToken(req.user, res);
+});
 
 router.get('/api/:name', function(req, res) {
   res.send(req.params.name);

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const userModel = require('../models/User');
 
+mongoose.Promise = global.Promise;
+
 module.exports = function(config) {
   mongoose.connect(config.db);
   var db = mongoose.connection;

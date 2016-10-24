@@ -17,18 +17,10 @@
 
     var ctrl = this;
     ctrl.signup = function() {
-      var newUserData = ctrl.user;
-      console.log(newUserData);
-      /* mvAuth.createUser(newUserData).then(function() {
-        mvNotifier.notify('User account created!');
-        $location.path('/');
-      }, function(reason) {
-        mvNotifier.error(reason);
-      });*/
-      $auth.signup({user: {
+      $auth.signup({
         email: ctrl.user.email,
         password: ctrl.user.password
-      }}).then(function(res) {
+      }).then(function(res) {
         console.log('SUCSESS');
         // alert('success', 'Account Created!', 'Welcome, ' + res.data.user.email + '! Please email activate your account in the next several days.');
       }).catch(function(err) {

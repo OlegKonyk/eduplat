@@ -48,8 +48,8 @@ exports.register = new LocalStrategy(strategyOptions, function(email, password, 
       email: email,
       password: password
     });
-
     newUser.save(function(err) {
+      if (err) console.log(err);
       done(null, newUser);
     });
   });
