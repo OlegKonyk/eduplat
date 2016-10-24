@@ -5,9 +5,7 @@ const nodemailer = require('nodemailer');
 
 var User = require('../models/User.js');
 
-var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
-var config = require('../config/config')[env];
+var config = require('../config/config');
 
 function Model() {
   return {

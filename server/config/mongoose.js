@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const userModel = require('../models/User');
 
+
 mongoose.Promise = global.Promise;
 
 module.exports = function(config) {
@@ -10,6 +11,5 @@ module.exports = function(config) {
   db.once('open', function callback() {
     console.log('eduplat db opened');
   });
-
   //userModel.createDefaultUsers();
 };

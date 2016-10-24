@@ -4,10 +4,7 @@ const passport = require('passport');
 const router = express.Router();
 const emailVerification = require('../services/emailVerification.js');
 const createSendToken = require('../services/jwt.js');
-
-var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
-var config = require('../config/config')[env];
+var config = require('../config/config');
 
 router.post('/api/register',
             passport.authenticate('local-register'),
