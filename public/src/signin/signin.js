@@ -31,9 +31,11 @@
           });
         })
         .catch(function(err) {
+          console.log(err);
+          let message = err.data ? err.data.message : err.statusText;
           edToasterService.showCustomToast({
             type: 'warning',
-            message: 'Something went wrong: ' + err.data.message
+            message: 'Something went wrong: ' + message
           });
         });
     };

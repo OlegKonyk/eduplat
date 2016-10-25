@@ -2,11 +2,10 @@
 const User = require('../models/User.js');
 const LocalStrategy = require('passport-local').Strategy;
 const strategyOptions = {
-  usernameField: 'email',
-  passReqToCallback: true
+  usernameField: 'email'
 };
 
-function login(req, email, password, done) {
+function login(email, password, done) {
   var searchUser = {
     email: email
   };
@@ -15,18 +14,16 @@ function login(req, email, password, done) {
     if (err) return done(err);
 
     if (!user) {
-      req.customMessage = 'Wrong email/password';
       return done(null, false, {
-        message: req.customMessage
+        message: 'Wrong email/password'
       });
     }
 
     user.comparePasswords(password, function(err, isMatch) {
       if (err) return done(err);
       if (!isMatch) {
-        req.customMessage = 'Wrong email/password';
         return done(null, false, {
-          message: req.customMessage
+          message: 'Wrong email/password'
         });
       }
       return done(null, user);
@@ -34,7 +31,7 @@ function login(req, email, password, done) {
   });
 }
 
-function register(req, email, password, done) {
+function register(email, password, done) {
   var searchUser = {
     email: email
   };
@@ -45,9 +42,8 @@ function register(req, email, password, done) {
     }
 
     if (user) {
-      req.customMessage = 'user with this email already exists';
       return done(null, false, {
-        message: req.customMessage
+        message: 'user with this email already exists'
       });
     }
 

@@ -25,14 +25,13 @@
           type: 'success',
           message: 'Welcome, ' + res.data.user.email + '! Please email activate your account in the next several days.'
         });
-        // alert('success', 'Account Created!', 'Welcome, ' + res.data.user.email + '! Please email activate your account in the next several days.');
       }).catch(function(err) {
         console.log(err);
+        let message = err.data ? err.data.message : err.statusText;
         edToasterService.showCustomToast({
           type: 'warning',
-          message: 'Unable to create account : ' + err.data.message
+          message: 'Unable to create account : ' + message
         });
-				// alert('warning', 'Unable to create account :(', err.message);
       });
     };
   }
