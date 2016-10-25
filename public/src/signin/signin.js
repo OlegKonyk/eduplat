@@ -12,7 +12,7 @@
     }
   );
 
-  function signinCtrl($auth) {
+  function signinCtrl($auth, edToasterService) {
     "ngInject";
 
     var ctrl = this;
@@ -20,20 +20,22 @@
     ctrl.signin = function() {
       $auth.login({email: ctrl.user.email, password: ctrl.user.password})
         .then(function(res) {
-          var message = 'Thanks for comming back' + res.data.user.email + '!';
+          var message = 'Thanks for comming back ' + res.data.user.email + '!';
           if (!res.data.user.active) {
-            message = 'Just a reminder, please activate your account soon!';
+            message = 'Please activate your account soon!';
           }
-          // alert('success', 'Welcome! ', message);
           // $state.go('main');
-          console.log('go now!!!', message);
+          edToasterService.showCustomToast({
+            type: 'success',
+            message: message
+          });
         })
-        .catch(handleError);
+        .catch(function(err) {
+          edToasterService.showCustomToast({
+            type: 'warning',
+            message: 'Something went wrong: ' + err.data.message
+          });
+        });
     };
-  }
-
-  function handleError(err) {
-    console.log(err);
-    // alert('warning', 'Something went wrong: ', err.message);
   }
 })();
