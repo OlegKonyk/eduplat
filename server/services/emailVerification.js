@@ -1,11 +1,12 @@
+'use strict';
 const _ = require('underscore');
 const fs = require('fs');
 const jwt = require('jwt-simple');
 const nodemailer = require('nodemailer');
 
-var User = require('../models/User.js');
+const User = require('../models/User.js');
 
-var config = require('../config/config');
+const config = require('../config/config');
 
 function Model() {
   return {
@@ -74,7 +75,7 @@ exports.handler = function(req, res) {
 function getHtml(token) {
   var model = new Model();
   var path = config.rootPath + '/server/views/emailVerification.html';
-  var html = fs.readFileSync(path, encoding = 'utf8');
+  var html = fs.readFileSync(path, {encoding: 'utf8'});
 
   var template = _.template(html);
 

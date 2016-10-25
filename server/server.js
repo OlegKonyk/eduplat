@@ -1,12 +1,13 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var logger = require('morgan');
-var localStrategy = require('./services/localStrategy.js');
-var app = express();
+'use strict';
+const express = require('express');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+const localStrategy = require('./services/localStrategy.js');
+const app = express();
 
-var passport = require('passport');
+const passport = require('passport');
 
-var config = require('./config/config');
+const config = require('./config/config');
 
 app.use(logger('dev'));
 

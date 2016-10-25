@@ -5,8 +5,8 @@
     "ngInject";
     function authSuccessful(res) {
       edAuthTokenService.setToken(res.token);
-      //$state.go('main');
-      console.log("LOGGED IN!!!")
+      // $state.go('main');
+      console.log("LOGGED IN!!!");
     }
 
     this.login = function(email, password) {
@@ -48,7 +48,7 @@
           $http.post(API_URL + 'auth/google', {
             code: code,
             clientId: clientId,
-            redirectUri: window.location.origin
+            redirectUri: $window.location.origin
           }).success(function(jwt) {
             authSuccessful(jwt);
             deferred.resolve(jwt);

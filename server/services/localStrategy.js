@@ -1,10 +1,11 @@
+'use strict';
 const User = require('../models/User.js');
 const LocalStrategy = require('passport-local').Strategy;
 const strategyOptions = {
   usernameField: 'email'
 };
 
-exports.login = new LocalStrategy(strategyOptions, function(email, password, done) {
+function login(email, password, done) {
   var searchUser = {
     email: email
   };
@@ -26,9 +27,9 @@ exports.login = new LocalStrategy(strategyOptions, function(email, password, don
       return done(null, user);
     });
   });
-});
+}
 
-exports.register = new LocalStrategy(strategyOptions, function(email, password, done) {
+function register(email, password, done) {
   var searchUser = {
     email: email
   };
@@ -53,4 +54,7 @@ exports.register = new LocalStrategy(strategyOptions, function(email, password, 
       done(null, newUser);
     });
   });
-});
+}
+
+exports.register = new LocalStrategy(strategyOptions, register);
+exports.login = new LocalStrategy(strategyOptions, login);

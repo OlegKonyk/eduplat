@@ -1,10 +1,11 @@
+'use strict';
 const express = require('express');
 const path = require('path');
 const passport = require('passport');
 const router = express.Router();
 const emailVerification = require('../services/emailVerification.js');
 const createSendToken = require('../services/jwt.js');
-var config = require('../config/config');
+const config = require('../config/config');
 
 router.post('/api/register',
             passport.authenticate('local-register'),
@@ -15,9 +16,11 @@ router.post('/api/register',
 
 router.get('/api/auth/verifyEmail', emailVerification.handler);
 
-router.post('/api/login', passport.authenticate('local-login'), function(req, res) {
-  createSendToken(req.user, res);
-});
+router.post('/api/login',
+            passport.authenticate('local-login'),
+            function(req, res) {
+              createSendToken(req.user, res);
+            });
 
 router.get('/api/:name', function(req, res) {
   res.send(req.params.name);

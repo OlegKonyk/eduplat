@@ -1,8 +1,8 @@
+'use strict';
 const jwt = require('jwt-simple');
 const moment = require('moment');
 
 module.exports = function(user, res) {
-  console.log(user);
   var payload = {
     sub: user.id,
     exp: moment().add(10, 'days').unix()

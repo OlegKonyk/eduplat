@@ -2,12 +2,12 @@
 var path = require('path');
 var rootPath = path.resolve(__dirname, '../../');
 var env = process.env.NODE_ENV;
+var secrets = {development: {}, production: {}};
 try {
-  var secrets = require('../../secrets.json');
-} catch (err){
+  secrets = require('../../secrets.json');
+} catch (err) {
   throw new Error('secrets.json is missing.');
 }
-
 
 function getEnvironment(env) {
   let config;

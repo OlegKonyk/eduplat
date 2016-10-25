@@ -1,7 +1,8 @@
+'use strict';
 const mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt-nodejs');
 
-var UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   email: String,
   password: String,
   googleId: String,
