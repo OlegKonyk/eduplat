@@ -7,8 +7,9 @@
     <span flex class="flex"></span>
     <section layout="row" layout-align="center center" layout-wrap>
         <md-button ng-href="">Catalog</md-button>
-        <md-button class="md-raised"  href="/signin">Sign in</md-button>
-        <md-button class="md-raised"  href="/signup">Sign up</md-button>
+        <md-button ng-hide="$ctrl.isAuthenticated()" class="md-raised"  href="/signin">Sign in</md-button>
+        <md-button ng-hide="$ctrl.isAuthenticated()" class="md-raised"  href="/signup">Sign up</md-button>
+        <md-button ng-show="$ctrl.isAuthenticated()" class="md-raised"  ng-click="$ctrl.logout()">Log out</md-button>
     </section>
     </div>
 </md-toolbar>

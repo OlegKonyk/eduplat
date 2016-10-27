@@ -12,7 +12,7 @@
     }
   );
 
-  function signinCtrl($auth, edToasterService) {
+  function signinCtrl($auth, $location, edToasterService) {
     "ngInject";
 
     var ctrl = this;
@@ -24,7 +24,7 @@
           if (!res.data.user.active) {
             message = 'Please activate your account soon!';
           }
-          // $state.go('main');
+          $location.path('/');
           edToasterService.showCustomToast({
             type: 'success',
             message: message
