@@ -16,11 +16,5 @@
     "ngInject";
 
     var ctrl = this;
-
-    ctrl.isAuthenticated = $auth.isAuthenticated;
-    ctrl.logout = function() {
-      $auth.logout();
-      $location.path('/');
-    };
   }
 })();

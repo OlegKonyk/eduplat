@@ -1,12 +1,11 @@
 (function() {
   'use strict';
   angular.module('app')
-  .service('edAuthService', function auth($http, API_URL, edAuthTokenService, $window, $q) {
+  .service('edAuthService', function auth($http, API_URL, edAuthTokenService, $window, $q, $location) {
     "ngInject";
     function authSuccessful(res) {
       edAuthTokenService.setToken(res.token);
-      // $state.go('main');
-      console.log("LOGGED IN!!!");
+      $location.path('/');
     }
 
     this.login = function(email, password) {

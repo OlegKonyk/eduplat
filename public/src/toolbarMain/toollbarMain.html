@@ -5,11 +5,6 @@
     <div class="md-toolbar-tools">
     <h1><a href="/home">EDUPLAT</a></h1>
     <span flex class="flex"></span>
-    <section layout="row" layout-align="center center" layout-wrap>
-        <md-button ng-href="">Catalog</md-button>
-        <md-button ng-hide="$ctrl.isAuthenticated()" class="md-raised"  href="/signin">Sign in</md-button>
-        <md-button ng-hide="$ctrl.isAuthenticated()" class="md-raised"  href="/signup">Sign up</md-button>
-        <md-button ng-show="$ctrl.isAuthenticated()" class="md-raised"  ng-click="$ctrl.logout()">Log out</md-button>
-    </section>
+    <ed-auth></ed-auth>
     </div>
 </md-toolbar>
