@@ -1,4 +1,4 @@
-<md-content style="background-color: #FFF59D; height: 100%;">
+<md-content>
     <div layout="column" layout-align="center center">
         <md-content layout-padding  style="background-color: white; margin: 50px 0px 50px 0px; width: 400px;" class="md-whiteframe-8dp"
          layout="column" layout-align="center center">
@@ -10,7 +10,7 @@
                             <label>First Name</label>
                             <input required name="firstName" ng-model="$ctrl.user.firstName">
                             <div ng-messages="signupForm.firstName.$error">
-                                <div ng-message="required">This is required.</div>
+                                <div ng-message="required">First Name is required.</div>
                             </div>
                         </md-input-container>
 
@@ -18,7 +18,7 @@
                             <label>Last Name</label>
                             <input required name="lastName" ng-model="$ctrl.user.lastName">
                             <div ng-messages="signupForm.lastName.$error">
-                                <div ng-message="required">This is required.</div>
+                                <div ng-message="required">Last Name is required.</div>
                             </div>
                         </md-input-container>
 
@@ -36,17 +36,20 @@
 
                         <md-input-container >
                             <label>Password</label>
-                            <input required name="password" ng-model="$ctrl.user.password">
+                            <input  type="password" required name="password" ng-model="$ctrl.user.password">
                             <div ng-messages="signupForm.password.$error">
-                                <div ng-message="required">This is required.</div>
+                                <div ng-message="required">Password is required.</div>
                             </div>
                         </md-input-container>
 
                         <md-input-container >
                             <label>Confirm Password</label>
-                            <input required name="confirmPassword" ng-model="$ctrl.user.confirmPassword">
+                            <input  type="password" required name="confirmPassword" ng-model="$ctrl.user.confirmPassword"
+                            validate-equals="$ctrl.user.password">
+                            {{signupForm.confirmPassword.$error}}
                             <div ng-messages="signupForm.confirmPassword.$error">
-                                <div ng-message="required">This is required.</div>
+                                <div ng-message="required">Password is required.</div>
+                                <div ng-message="confirmPassword">confirmPassword</div>
                             </div>
                         </md-input-container>
 

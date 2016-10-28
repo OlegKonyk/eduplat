@@ -4,6 +4,7 @@
     .component('edSignup',
     {
       bindings: {},
+      require: 'ngModel',
       template: function($templateCache) {
         "ngInject";
         return $templateCache.get('public/src/signup/signup.html');
@@ -16,6 +17,7 @@
     "ngInject";
 
     var ctrl = this;
+    console.log(ctrl.ngModel);
     ctrl.signup = function() {
       $auth.signup({
         email: ctrl.user.email,
@@ -36,3 +38,35 @@
     };
   }
 })();
+
+(function() {
+  'use strict';
+  angular.module('app')
+  .directive('validateEquals', function() {
+    return {
+      require: 'ngModel',
+      /*scope: {
+        otherModelValue: "=compareTo"
+      },*/
+      link: function(scope, element, attrs, ngModelCtrl) {
+        function validateEqual(value) {
+          var valid = (value === scope.$eval(attrs.validateEquals));
+          console.log('valid: ' + valid);
+          ngModelCtrl.$setValidity('confirmPassword', valid);
+          return valid ? value : undefined;
+        }
+
+        ngModelCtrl.$parsers.push(validateEqual);
+        ngModelCtrl.$formatters.push(validateEqual);
+
+        /* scope.$watch("$ctrl.user.password", function() {
+          console.log('Password is changing: ' + attrs.validateEquals);
+          console.log(scope.register);
+          validateEqual();
+          ngModelCtrl.$setViewValue(ngModelCtrl.$viewValue);
+        });*/
+      }
+    };
+  });
+})();
+
