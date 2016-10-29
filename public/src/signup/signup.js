@@ -45,12 +45,10 @@
   .directive('validateEquals', function() {
     return {
       require: 'ngModel',
-      /*scope: {
-        otherModelValue: "=compareTo"
-      },*/
       link: function(scope, element, attrs, ngModelCtrl) {
         function validateEqual(value) {
           var valid = (value === scope.$eval(attrs.validateEquals));
+          console.log(value, scope.$eval(attrs.validateEquals))
           console.log('valid: ' + valid);
           ngModelCtrl.$setValidity('confirmPassword', valid);
           return valid ? value : undefined;
@@ -59,12 +57,12 @@
         ngModelCtrl.$parsers.push(validateEqual);
         ngModelCtrl.$formatters.push(validateEqual);
 
-        /* scope.$watch("$ctrl.user.password", function() {
+        scope.$watch(attrs.validateEquals, function() {
           console.log('Password is changing: ' + attrs.validateEquals);
-          console.log(scope.register);
-          validateEqual();
+          console.log(scope.$eval(attrs.ngModel));
+          validateEqual(scope.$eval(attrs.ngModel));
           ngModelCtrl.$setViewValue(ngModelCtrl.$viewValue);
-        });*/
+        });
       }
     };
   });
