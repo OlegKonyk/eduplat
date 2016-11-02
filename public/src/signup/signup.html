@@ -8,7 +8,7 @@
                     <div style="width: 364px;" layout="column">
                         <md-input-container>
                             <label>First Name</label>
-                            <input required name="firstName" ng-model="$ctrl.user.firstName">
+                            <input required name="firstName" ng-model="$ctrl.user.firstName" maxlength="50">
                             <div ng-messages="signupForm.firstName.$error">
                                 <div ng-message="required">First Name is required.</div>
                             </div>
@@ -16,7 +16,7 @@
 
                         <md-input-container >
                             <label>Last Name</label>
-                            <input required name="lastName" ng-model="$ctrl.user.lastName">
+                            <input required name="lastName" ng-model="$ctrl.user.lastName" maxlength="50">
                             <div ng-messages="signupForm.lastName.$error">
                                 <div ng-message="required">Last Name is required.</div>
                             </div>
@@ -25,43 +25,45 @@
                         <md-input-container>
                             <label>Email</label>
                             <input required type="email" name="email" ng-model="$ctrl.user.email"
-                                minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+                                minlength="3" maxlength="254" ng-pattern="/^.+@.+\..+$/" />
 
                             <div ng-messages="signupForm.email.$error" role="alert">
                                 <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                                    Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                    Your email must be between 3 and 254 characters long and look like an e-mail address.
                                 </div>
                             </div>
                         </md-input-container>
 
                         <md-input-container >
                             <label>Password</label>
-                            <input  type="password" required name="password" ng-model="$ctrl.user.password">
+                            <input  type="password" required name="password" ng-model="$ctrl.user.password" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/" >
                             <div ng-messages="signupForm.password.$error">
-                                <div ng-message="required">Password is required.</div>
+                                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                    Password must be at least 8 characters long and include letters, numbers and at least one special character.
+                                </div>
                             </div>
                         </md-input-container>
 
                         <md-input-container >
                             <label>Confirm Password</label>
-                            <input  type="password" required name="confirmPassword" ng-model="$ctrl.user.confirmPassword"
-                            validate-equals="$ctrl.user.password">
-                            {{signupForm.confirmPassword.$error}}
+                            <input ng-disabled="!$ctrl.user.password" autocomplete="nope" type="password" required name="confirmPassword" ng-model="$ctrl.user.confirmPassword"
+                            ed-validate-equals="$ctrl.user.password">
                             <div ng-messages="signupForm.confirmPassword.$error">
                                 <div ng-message="required">Password is required.</div>
-                                <div ng-message="confirmPassword">confirmPassword</div>
+                                <div ng-message="confirmPassword">Passwords should match.</div>
                             </div>
                         </md-input-container>
 
-                        <md-button type="submit" ng-click="$ctrl.signup()">Create Account</md-button>
-                        <!--md-button type="submit" ng-click="$ctrl.signup()" ng-disabled="signupForm.$invalid">Create Account</md-button-->
+                        <md-button type="submit" ng-click="$ctrl.signup()" ng-disabled="signupForm.$invalid">Create Account</md-button>
 
                         <md-divider></md-divider>
-
-                        <section layout="row" layout-align="center center">
-                            <md-button flex="50" href="/facebook">Facebook</md-button>
-                            <md-button flex="50" href="/google">Google</md-button>
-                        </section>
+                        <div layout="column" layout-align="center center">
+                            <div class="md-padding">or sign up with one of these services</div>
+                            <section layout="row" layout-align="center center">
+                                <md-button flex="50" href="/facebook">Facebook</md-button>
+                                <md-button flex="50" href="/google">Google</md-button>
+                            </section>
+                        </div>
 
                     </div>
                 </form>

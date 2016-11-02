@@ -15,9 +15,8 @@
 
   function signupCtrl(edAuthService, $auth, edToasterService) {
     "ngInject";
-
     var ctrl = this;
-    console.log(ctrl.ngModel);
+
     ctrl.signup = function() {
       $auth.signup({
         email: ctrl.user.email,
@@ -25,7 +24,9 @@
       }).then(function(res) {
         edToasterService.showCustomToast({
           type: 'success',
-          message: 'Welcome, ' + res.data.user.email + '! Please email activate your account in the next several days.'
+          message: 'Welcome, ' +
+                   res.data.user.email +
+                   '! Please email activate your account in the next several days.'
         });
       }).catch(function(err) {
         console.log(err);
@@ -42,24 +43,24 @@
 (function() {
   'use strict';
   angular.module('app')
-  .directive('validateEquals', function() {
+  .directive('edValidateEquals', function() {
+    "ngInject";
     return {
       require: 'ngModel',
       link: function(scope, element, attrs, ngModelCtrl) {
         function validateEqual(value) {
-          var valid = (value === scope.$eval(attrs.validateEquals));
-          console.log(value, scope.$eval(attrs.validateEquals))
+          var valid = (value === scope.$eval(attrs.edValidateEquals));
+          console.log(value, scope.$eval(attrs.edValidateEquals));
           console.log('valid: ' + valid);
+          console.log(scope);
           ngModelCtrl.$setValidity('confirmPassword', valid);
-          return valid ? value : undefined;
+          return value;
         }
 
         ngModelCtrl.$parsers.push(validateEqual);
         ngModelCtrl.$formatters.push(validateEqual);
 
-        scope.$watch(attrs.validateEquals, function() {
-          console.log('Password is changing: ' + attrs.validateEquals);
-          console.log(scope.$eval(attrs.ngModel));
+        scope.$watch(attrs.edValidateEquals, function() {
           validateEqual(scope.$eval(attrs.ngModel));
           ngModelCtrl.$setViewValue(ngModelCtrl.$viewValue);
         });

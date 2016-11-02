@@ -14,28 +14,31 @@
 
                             <div ng-messages="signinForm.email.$error" role="alert">
                                 <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                                    Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                    Your email must be between 3 and 254 characters long and look like an e-mail address.
                                 </div>
                             </div>
                         </md-input-container>
 
                         <md-input-container >
                             <label>Password</label>
-                            <input required name="password" ng-model="$ctrl.user.password">
+                            <input required autocomplete="nope" type="password" name="password" ng-model="$ctrl.user.password">
                             <div ng-messages="signinForm.password.$error">
-                                <div ng-message="required">This is required.</div>
+                                <div ng-message="required">Password is required.</div>
                             </div>
                         </md-input-container>
 
-                        <md-button type="submit" ng-click="$ctrl.signin()">Sign In</md-button>
-                        <!--md-button type="submit" ng-click="$ctrl.signin()" ng-disabled="signinForm.$invalid">Create Account</md-button-->
+                        <!--md-button type="submit" ng-click="$ctrl.signin()">Sign In</md-button-->
+                        <md-button type="submit" ng-click="$ctrl.signin()" ng-disabled="signinForm.$invalid">Sign in</md-button>
 
                         <md-divider></md-divider>
-
-                        <section layout="row" layout-align="center center">
-                            <md-button flex="50" href="/facebook">Facebook</md-button>
-                            <md-button flex="50" href="/google">Google</md-button>
-                        </section>
+                        
+                        <div layout="column" layout-align="center center">
+                            <div class="md-padding">or sign in with one of these services</div>
+                            <section layout="row" layout-align="center center">
+                                <md-button flex="50" href="/facebook">Facebook</md-button>
+                                <md-button flex="50" href="/google">Google</md-button>
+                            </section>
+                        </div>
 
                     </div>
                 </form>
