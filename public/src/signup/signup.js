@@ -18,12 +18,9 @@
     var ctrl = this;
 
     ctrl.signup = function() {
-      $auth.signup({
-        email: ctrl.user.email,
-        password: ctrl.user.password
-      })
+      $auth.signup(ctrl.user)
       .then(function(res) {
-        $auth.login({email: ctrl.user.email, password: ctrl.user.password});
+        $auth.login(ctrl.user);
         return res;
       })
       .then(function(res) {

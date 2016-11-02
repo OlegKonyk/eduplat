@@ -18,7 +18,7 @@
     var ctrl = this;
 
     ctrl.signin = function() {
-      $auth.login({email: ctrl.user.email, password: ctrl.user.password})
+      $auth.login(ctrl.user)
         .then(function(res) {
           var message = 'Thanks for comming back ' + res.data.user.email + '!';
           if (!res.data.user.active) {

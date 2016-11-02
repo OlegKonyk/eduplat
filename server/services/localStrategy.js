@@ -2,10 +2,11 @@
 const User = require('../models/User.js');
 const LocalStrategy = require('passport-local').Strategy;
 const strategyOptions = {
-  usernameField: 'email'
+  usernameField: 'email',
+  passReqToCallback: true
 };
 
-function login(email, password, done) {
+function login(req, email, password, done) {
   var searchUser = {
     email: email
   };
@@ -31,11 +32,11 @@ function login(email, password, done) {
   });
 }
 
-function register(email, password, done) {
+function register(req, email, password, done) {
   var searchUser = {
     email: email
   };
-
+  let useData = req.body;
   User.findOne(searchUser, function(err, user) {
     if (err) {
       return done(err);
@@ -47,10 +48,7 @@ function register(email, password, done) {
       });
     }
 
-    var newUser = new User({
-      email: email,
-      password: password
-    });
+    var newUser = new User(useData);
     newUser.save(function(err) {
       if (err) console.log(err);
       done(null, newUser);
