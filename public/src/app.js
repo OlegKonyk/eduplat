@@ -9,7 +9,22 @@
   .component('edHome', {
     template: '<md-content class="md-padding"><h1>HOME</h1></md-content>'
   })
-  .constant('API_URL', 'http://localhost:3030/');
+  .constant('API_URL', 'http://localhost:3030/').factory('authInterceptor', function($injector) {
+    return {
+      request: function(config) {
+        // injected manually to get around circular dependency problem.
+        var $auth = $injector.get('$auth');
+        var token = $auth.getToken();
+        if (token) {
+          config.headers.Authorization = 'Bearer ' + token;
+        }
+        return config;
+      },
+      response: function(response) {
+        return response;
+      }
+    };
+  });
 
   function config($mdThemingProvider, $mdIconProvider,
                  $routeProvider, $locationProvider, $authProvider, API_URL, $httpProvider) {
