@@ -13,7 +13,7 @@
     }
   );
 
-  function signupCtrl($auth, edToasterService) {
+  function signupCtrl($auth, $location, edToasterService) {
     "ngInject";
     var ctrl = this;
 
@@ -21,14 +21,21 @@
       $auth.signup({
         email: ctrl.user.email,
         password: ctrl.user.password
-      }).then(function(res) {
+      })
+      .then(function(res) {
+        $auth.login({email: ctrl.user.email, password: ctrl.user.password});
+        return res;
+      })
+      .then(function(res) {
+        $location.path('/');
         edToasterService.showCustomToast({
           type: 'success',
           message: 'Welcome, ' +
-                   res.data.user.email +
-                   '! Please email activate your account in the next several days.'
+            res.data.user.email +
+            '! Please email activate your account in the next several days.'
         });
-      }).catch(function(err) {
+      })
+      .catch(function(err) {
         console.log(err);
         let message = err.data ? err.data.message : err.statusText;
         edToasterService.showCustomToast({
@@ -39,5 +46,4 @@
     };
   }
 })();
-
 

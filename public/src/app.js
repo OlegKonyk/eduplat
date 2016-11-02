@@ -9,7 +9,8 @@
   .component('edHome', {
     template: '<md-content class="md-padding"><h1>HOME</h1></md-content>'
   })
-  .constant('API_URL', 'http://localhost:3030/').factory('authInterceptor', function($injector) {
+  .constant('API_URL', 'http://localhost:3030/')
+  .factory('authInterceptor', function($injector) {
     return {
       request: function(config) {
         // injected manually to get around circular dependency problem.
