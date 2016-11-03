@@ -41,6 +41,28 @@
         });
       });
     };
+
+    ctrl.authenticate = function(privider) {
+      $auth.authenticate(privider)
+        .then(function(res) {
+          console.log(res.data.user);
+          edToasterService.showCustomToast({
+            type: 'success',
+            message: 'Thanks for registering ' + res.data.user.firstName + '!'
+          });
+          $location.path('/');
+          // authToken.authSuccessfull(res)
+        }, handleError);
+    };
+
+    function handleError(err) {
+      console.log(err);
+      let message = err.data ? err.data.message : err.statusText;
+      edToasterService.showCustomToast({
+        type: 'warning',
+        message: 'Something went wrong: ' + message
+      });
+    }
   }
 })();
 

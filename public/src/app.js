@@ -37,6 +37,11 @@
 
     $httpProvider.interceptors.push('authInterceptor');
 
+    $authProvider.google({
+      clientId: '180115616906-3dekl0d823bbm280f1hidk1kk41cd9fl.apps.googleusercontent.com',
+      url: API_URL + 'api/auth/google'
+    });
+
     $routeProvider
       .when('/', {
         template: '<ed-home></ed-home>'

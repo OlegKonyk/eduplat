@@ -9,7 +9,6 @@ const UserSchema = new mongoose.Schema({
   password: String,
   googleId: String,
   facebookId: String,
-  displayName: String,
   active: Boolean
 });
 

@@ -3,15 +3,18 @@ const express = require('express');
 const path = require('path');
 const passport = require('passport');
 const router = express.Router();
-const emailVerification = require('../services/emailVerification.js');
+const emailVerification = require('../services/emailVerification');
 const createSendToken = require('../services/jwt.js');
 const config = require('../config/config');
+const googleAuth = require('../services/googleAuth');
 
 router.post('/api/register', handleSignup);
 
 router.get('/api/auth/verifyEmail', emailVerification.handler);
 
 router.post('/api/login', handleSignin);
+
+router.post('/api/auth/google', googleAuth);
 
 router.get('/api/:name', function(req, res) {
   res.send(req.params.name);
