@@ -39,8 +39,23 @@
 
     $authProvider.google({
       clientId: '180115616906-3dekl0d823bbm280f1hidk1kk41cd9fl.apps.googleusercontent.com',
-      url: API_URL + 'api/auth/google'
+      url: API_URL + 'api/auth/google',
+      authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
+      //redirectUri: $window.location.origin,
+      requiredUrlParams: ['scope'],
+      optionalUrlParams: ['display'],
+      scope: ['profile', 'email', 'https://gdata.youtube.com'],
+      scopePrefix: 'openid',
+      scopeDelimiter: ' ',
+      display: 'popup',
+      oauthType: '2.0',
+      popupOptions: { width: 452, height: 633 }
     });
+
+    /*$authProvider.google({
+      clientId: '180115616906-3dekl0d823bbm280f1hidk1kk41cd9fl.apps.googleusercontent.com',
+      url: API_URL + 'api/auth/google'
+    });*/
 
     $routeProvider
       .when('/', {

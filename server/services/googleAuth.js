@@ -7,11 +7,11 @@ module.exports = function(req, res, next) {
 
   var url = 'https://accounts.google.com/o/oauth2/token';
   var apiUrl = 'https://www.googleapis.com/plus/v1/people/me/openIdConnect';
+
   var params = {
     client_id: req.body.clientId,
     redirect_uri: req.body.redirectUri,
     code: req.body.code,
-    scope: ['https://www.googleapis.com/auth/youtube'],
     grant_type: 'authorization_code',
     client_secret: config.GOOGLE_SECRET
   };
@@ -28,15 +28,16 @@ module.exports = function(req, res, next) {
       Authorization: 'Bearer ' + accessToken
     };
 
-    /*request.get({
-      url: 'https://www.googleapis.com/auth/youtube',
+    request.get({
+      url: 'https://www.googleapis.com/youtube/v3/channels?part=id&mine=true',
       headers: headers,
       json: true
     }, function(err, response, profile) {
       if (err) return next(err);
       if (response.statusCode !== 200) return res.status(response.statusCode);
-      console.log(response);
-    }); // end get*/
+      console.log("========");
+      console.log(JSON.stringify(response.body));
+    });
 
     request.get({
       url: apiUrl,
