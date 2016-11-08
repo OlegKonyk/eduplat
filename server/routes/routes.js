@@ -7,6 +7,7 @@ const emailVerification = require('../services/emailVerification');
 const createSendToken = require('../services/jwt.js');
 const config = require('../config/config');
 const googleAuth = require('../services/googleAuth');
+const User = require('../models/User.js');
 
 router.post('/api/register', handleSignup);
 
@@ -15,6 +16,17 @@ router.get('/api/auth/verifyEmail', emailVerification.handler);
 router.post('/api/login', handleSignin);
 
 router.post('/api/auth/google', googleAuth);
+
+router.get('/api/user/', function(req, res, next) {
+  let id = req.query._id;
+  User.findById(id).exec()
+    .then(function(user) {
+      console.log(user);
+      res.json(user).status(200);
+    });
+});
+
+//router.post('/api/auth/google', googleAuth);
 
 router.get('/api/:name', function(req, res) {
   res.send(req.params.name);

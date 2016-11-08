@@ -28,7 +28,7 @@ module.exports = function(req, res, next) {
       Authorization: 'Bearer ' + accessToken
     };
 
-    request.get({
+    /*request.get({
       url: 'https://www.googleapis.com/youtube/v3/channels?part=id&mine=true',
       headers: headers,
       json: true
@@ -37,7 +37,7 @@ module.exports = function(req, res, next) {
       if (response.statusCode !== 200) return res.status(response.statusCode);
       console.log("========");
       console.log(JSON.stringify(response.body));
-    });
+    });*/
 
     request.get({
       url: apiUrl,
