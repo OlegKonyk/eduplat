@@ -7,7 +7,6 @@ const strategyOptions = {
 };
 
 function login(req, email, password, done) {
-  console.log("|||||||||");
   var searchUser = {
     email: email
   };
@@ -59,25 +58,3 @@ function register(req, email, password, done) {
 
 exports.register = new LocalStrategy(strategyOptions, register);
 exports.login = new LocalStrategy(strategyOptions, login);
-
-/*exports.tokenAuth = function(req, res, next) {
-  if (!req.isAuthenticated()) {
-    res.status(403);
-    res.end();
-  } else {
-    next();
-  }
-};
-
-/* exports.requiresRole = function(role){
-	return function(req, res, next){
-		if(req, res, next){
-			if(!req.isAuthenticated() || req.user.roles.indexOf(role) === -1){
-				res.status(403);
-				res.end();
-			}else{
-				next();
-			}
-		}
-	}
-}*/
