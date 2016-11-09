@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const localStrategy = require('./services/localStrategy.js');
+const jwtStrategy = require('./services/jwtStrategy.js');
 const app = express();
 
 const passport = require('passport');
@@ -19,8 +20,7 @@ passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
 
-passport.use('local-register', localStrategy.register);
-passport.use('local-login', localStrategy.login);
+
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -29,6 +29,10 @@ app.use(function(req, res, next) {
 
   next();
 });
+
+passport.use('local-register', localStrategy.register);
+passport.use('local-login', localStrategy.login);
+passport.use('jwt-startegy', jwtStrategy);
 
 require('./config/express')(app, config);
 

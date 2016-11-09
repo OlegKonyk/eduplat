@@ -17,7 +17,7 @@
         var $auth = $injector.get('$auth');
         var token = $auth.getToken();
         if (token) {
-          config.headers.Authorization = 'Bearer ' + token;
+          config.headers.Authorization = token;//'Bearer ' + token;
         }
         return config;
       },

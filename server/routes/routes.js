@@ -17,7 +17,7 @@ router.post('/api/login', handleSignin);
 
 router.post('/api/auth/google', googleAuth);
 
-router.get('/api/user/', function(req, res, next) {
+router.get('/api/user/', passport.authenticate('jwt-startegy'), function(req, res, next) {
   let id = req.query._id;
   User.findById(id).exec()
     .then(function(user) {
@@ -25,8 +25,6 @@ router.get('/api/user/', function(req, res, next) {
       res.json(user).status(200);
     });
 });
-
-//router.post('/api/auth/google', googleAuth);
 
 router.get('/api/:name', function(req, res) {
   res.send(req.params.name);
