@@ -17,7 +17,7 @@
         var $auth = $injector.get('$auth');
         var token = $auth.getToken();
         if (token) {
-          config.headers.Authorization = 'Bearer ' + token;
+          config.headers.Authorization = token;//'Bearer ' + token;
         }
         return config;
       },
@@ -69,6 +69,9 @@
       })
       .when('/signup', {
         template: '<ed-signup></ed-signup>'
+      })
+      .when('/profile', {
+        template: '<ed-user-profile></ed-user-profile>'
       })
       .otherwise({
         redirectTo: '/'

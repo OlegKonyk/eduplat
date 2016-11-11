@@ -21,7 +21,6 @@ function register(req, res, next) {
 
 function resHandler(req, res, next, err, user, info) {
   if (err) { return next(err); }
-  console.log(info.message)
   if (!user) { return res.status(401).json(info.message); }
   req.user = user;
   next();

@@ -1,1 +1,25 @@
-<h1>USER STATUS</h1>
+<md-toolbar md-ink-ripple="true" ng-show="$ctrl.isAuthenticated()" style="width: 224px;">
+    <md-menu-bar>
+        <md-menu>
+            <div class="md-toolbar-tools"  ng-click="$ctrl.openMenu($mdOpenMenu, $event)">
+                <h1>{{$ctrl.user.firstName}} {{$ctrl.user.lastName}}</h1>
+            </div>
+            <!--md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="$ctrl.openMenu($mdOpenMenu, $event)">
+                <md-icon style="fill: white;" md-svg-src="front/assets/svg/close.svg"></md-icon>
+            </md-button-->
+            <md-menu-content width="4">
+                <md-menu-item>
+                    <md-button href="/profile">
+                        My profile
+                    </md-button>
+                </md-menu-item>
+                <md-menu-divider></md-menu-divider>
+                <md-menu-item>
+                    <md-button ng-show="$ctrl.isAuthenticated()" ng-click="$ctrl.logout()">
+                        Log out
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </md-menu-bar>
+</md-toolbar>

@@ -12,10 +12,22 @@
     }
   );
 
-  function userStatusCtrl() {
+  function userStatusCtrl($auth, edAuthService, $mdDialog) {
     "ngInject";
 
     var ctrl = this;
+    ctrl.isAuthenticated = $auth.isAuthenticated;
+    edAuthService.getUser()
+     .then(function(user) {
+       ctrl.user = user;
+       console.log(ctrl.user);
+     });
+
+    ctrl.logout = edAuthService.logout;
+
+    ctrl.openMenu = function($mdOpenMenu, ev) {
+      $mdOpenMenu(ev);
+    };
   }
 })();
 

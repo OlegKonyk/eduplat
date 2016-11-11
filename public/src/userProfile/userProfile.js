@@ -12,10 +12,15 @@
     }
   );
 
-  function userProfileCtrl() {
+  function userProfileCtrl(edAuthService) {
     "ngInject";
 
     var ctrl = this;
+
+    edAuthService.getUser()
+     .then(function(user) {
+       ctrl.user = user;
+     });
   }
 })();
 
