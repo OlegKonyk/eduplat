@@ -12,7 +12,7 @@
     }
   );
 
-  function edAuthCtrl($auth, $location, $resource) {
+  function edAuthCtrl($auth, $location, $resource, edToasterService) {
     "ngInject";
 
     var ctrl = this;
@@ -34,17 +34,22 @@
       let expired = payload.exp - Date.now() <= 0;
       console.log(expired);
       if (!expired) {
-        console.log('getting user data: ' + payload.sub);
         userResource.get({_id: payload.sub})
         .$promise
         .then(function(user) {
-          console.log(">>>>>>>");
-          console.log(user);
           ctrl.user = user;
-        });
+        }, handleError);
       }
     }
 
     if (ctrl.isAuthenticated()) validateToken();
+
+    function handleError(err) {
+      let message = err.data ? err.data : err.statusText;
+      edToasterService.showCustomToast({
+        type: 'warning',
+        message: 'Something went wrong: ' + message
+      });
+    }
   }
 })();

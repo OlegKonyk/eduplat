@@ -9,7 +9,7 @@ opts.jwtFromRequest = ExtractJwt.fromHeader('authorization');
 opts.secretOrKey = "shhh..";
 
 module.exports = new JwtStrategy(opts, function(req, payload, done) {
-  User.findOne({_id: payload.sub}, function(err, user) {
+  User.findById(payload.sub, function(err, user) {
     if (err) {
       return done(err, false);
     }

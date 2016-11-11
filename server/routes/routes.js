@@ -7,28 +7,18 @@ const emailVerification = require('../services/emailVerification');
 const createSendToken = require('../services/jwt.js');
 const config = require('../config/config');
 const googleAuth = require('../services/googleAuth');
+const auth = require('../controllers/authHandlers');
 const User = require('../models/User.js');
-
-router.post('/api/register', handleSignup);
 
 router.get('/api/auth/verifyEmail', emailVerification.handler);
 
-router.post('/api/login', handleSignin);
-
 router.post('/api/auth/google', googleAuth);
 
-router.get('/api/user/', passport.authenticate('jwt-startegy'), function(req, res, next) {
-  let id = req.query._id;
-  User.findById(id).exec()
-    .then(function(user) {
-      console.log(user);
-      res.json(user).status(200);
-    });
-});
+router.post('/api/register', auth.register, register);
 
-router.get('/api/:name', function(req, res) {
-  res.send(req.params.name);
-});
+router.post('/api/login', auth.login, login);
+
+router.get('/api/user/', auth.jwt, returnUser);
 
 router.get('/front/*', function(req, res) {
   res.sendFile(path.join(config.rootPath, 'public', req.params[0]));
@@ -38,21 +28,23 @@ router.get('*', function(req, res) {
   res.sendFile(path.join(config.rootPath, 'public/index.html'));
 });
 
-function handleSignin(req, res, next) {
-  passport.authenticate('local-login', function(err, user, info) {
-    if (err) { return next(err); }
-    if (!user) { return res.status(403).json(info); }
-    createSendToken(user, res);
-  })(req, res, next);
+function register(req, res, next) {
+  emailVerification.send(req, res);
+  createSendToken(req.user, res);
 }
 
-function handleSignup(req, res, next) {
-  passport.authenticate('local-register', function(err, user, info) {
-    if (err) { return next(err); }
-    if (!user) { return res.status(403).json(info); }
-    emailVerification.send(req, res);
-    createSendToken(user, res);
-  })(req, res, next);
+function login(req, res, next) {
+  createSendToken(req.user, res);
 }
+
+function returnUser(req, res, next) {
+  let id = req.query._id;
+  User.findById(id).exec()
+  .then(function(user) {
+    res.json(user.toJSON()).status(200);
+  });
+}
+
+
 
 module.exports = router;

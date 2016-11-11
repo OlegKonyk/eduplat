@@ -47,8 +47,7 @@
     };
 
     function handleError(err) {
-      console.log(err);
-      let message = err.data ? err.data.message : err.statusText;
+      let message = err.data ? err.data : err.statusText;
       edToasterService.showCustomToast({
         type: 'warning',
         message: 'Something went wrong: ' + message
