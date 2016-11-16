@@ -52,11 +52,6 @@
       popupOptions: { width: 452, height: 633 }
     });
 
-    /*$authProvider.google({
-      clientId: '180115616906-3dekl0d823bbm280f1hidk1kk41cd9fl.apps.googleusercontent.com',
-      url: API_URL + 'api/auth/google'
-    });*/
-
     $routeProvider
       .when('/', {
         template: '<ed-home></ed-home>'
@@ -72,6 +67,9 @@
       })
       .when('/profile', {
         template: '<ed-user-profile></ed-user-profile>'
+      })
+      .when('/myPlaylists', {
+        template: '<ed-my-playlists></ed-my-playlists>'
       })
       .otherwise({
         redirectTo: '/'

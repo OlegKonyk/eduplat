@@ -9,6 +9,7 @@ const config = require('../config/config');
 const googleAuth = require('../services/googleAuth');
 const auth = require('../controllers/authHandlers');
 const User = require('../models/User.js');
+const Playlist = require('../models/Playlist.js');
 
 router.get('/api/auth/verifyEmail', emailVerification.handler);
 
@@ -19,6 +20,27 @@ router.post('/api/register', auth.register, register);
 router.post('/api/login', auth.login, login);
 
 router.get('/api/user/', auth.jwt, returnUser);
+
+router.post('/api/playlist', auth.jwt, function(req, res, next) {
+  var playlistData = req.body;
+  playlistData.ownerId = req.user._id;
+  var newPlaylist = new Playlist(playlistData);
+  newPlaylist.save()
+    .then(function() {
+      res.send('New playlist created: ' + playlistData.name).status(200);
+    }, function(err) {
+      res.send(err.message).status(500);
+    });
+});
+
+router.get('/api/playlist', auth.jwt, function(req, res, next) {
+  Playlist.find({ownerId: req.user._id})
+    .then(function(playlists) {
+      res.json(playlists).status(200);
+    }, function(err) {
+      res.send(err.message).status(500);
+    });
+});
 
 router.get('/front/*', function(req, res) {
   res.sendFile(path.join(config.rootPath, 'public', req.params[0]));

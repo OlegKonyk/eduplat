@@ -1,16 +1,23 @@
-<md-toolbar md-ink-ripple="true" ng-show="$ctrl.isAuthenticated()" style="width: 224px;">
+<div ng-show="$ctrl.isAuthenticated()" style="">
     <md-menu-bar>
         <md-menu>
-            <div class="md-toolbar-tools"  ng-click="$ctrl.openMenu($mdOpenMenu, $event)">
-                <h1>{{$ctrl.user.firstName}} {{$ctrl.user.lastName}}</h1>
+            <div  class="md-toolbar-tools" layout="row" ng-click="$ctrl.openMenu($mdOpenMenu, $event)" >
+                <div>
+                    <h1>{{$ctrl.user.firstName}} {{$ctrl.user.lastName}}</h1>
+                </div>
+                <md-button class="md-icon-button">
+                    <md-icon style="" md-svg-src="front/assets/svg/user.svg"></md-icon>
+                </md-button>
             </div>
-            <!--md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="$ctrl.openMenu($mdOpenMenu, $event)">
-                <md-icon style="fill: white;" md-svg-src="front/assets/svg/close.svg"></md-icon>
-            </md-button-->
             <md-menu-content width="4">
                 <md-menu-item>
                     <md-button href="/profile">
                         My profile
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button href="/myPlaylists">
+                        My playlists
                     </md-button>
                 </md-menu-item>
                 <md-menu-divider></md-menu-divider>
@@ -22,4 +29,4 @@
             </md-menu-content>
         </md-menu>
     </md-menu-bar>
-</md-toolbar>
+</div>

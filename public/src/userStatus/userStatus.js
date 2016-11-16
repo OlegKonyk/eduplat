@@ -17,6 +17,7 @@
 
     var ctrl = this;
     ctrl.isAuthenticated = $auth.isAuthenticated;
+
     edAuthService.getUser()
      .then(function(user) {
        ctrl.user = user;
