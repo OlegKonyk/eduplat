@@ -19,10 +19,11 @@
     ctrl.isAuthenticated = $auth.isAuthenticated;
 
     edAuthService.getUser()
-     .then(function(user) {
-       ctrl.user = user;
-       console.log(ctrl.user);
-     });
+      .then(function(user) {
+        ctrl.user = user;
+      }, function(err) {
+        console.log(err);
+      });
 
     ctrl.logout = edAuthService.logout;
 

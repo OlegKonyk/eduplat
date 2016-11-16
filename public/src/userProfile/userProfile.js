@@ -17,6 +17,10 @@
 
     var ctrl = this;
 
+    ctrl.user = edAuthService.user;
+    /*console.log("||||||||||||||||")
+    console.log(edAuthService.user)*/
+
     edAuthService.getUser()
      .then(function(user) {
        ctrl.user = user;

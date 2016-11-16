@@ -1,4 +1,4 @@
-<div ng-show="$ctrl.isAuthenticated()" style="">
+<div style="">
     <md-menu-bar>
         <md-menu>
             <div  class="md-toolbar-tools" layout="row" ng-click="$ctrl.openMenu($mdOpenMenu, $event)" >
@@ -22,7 +22,7 @@
                 </md-menu-item>
                 <md-menu-divider></md-menu-divider>
                 <md-menu-item>
-                    <md-button ng-show="$ctrl.isAuthenticated()" ng-click="$ctrl.logout()">
+                    <md-button ng-if="$ctrl.isAuthenticated()" ng-click="$ctrl.logout()">
                         Log out
                     </md-button>
                 </md-menu-item>

@@ -52,6 +52,17 @@
       popupOptions: { width: 452, height: 633 }
     });
 
+    var originalWhen = $routeProvider.when;
+
+    /*$routeProvider.when = function(path, route) {
+      route.resolve || (route.resolve = {});
+      angular.extend(route.resolve, {
+        getCurrentUser: getCurrentUser
+      });
+
+      return originalWhen.call($routeProvider, path, route);
+    };*/
+
     $routeProvider
       .when('/', {
         template: '<ed-home></ed-home>'
@@ -82,6 +93,10 @@
     $mdThemingProvider.theme('default')
             .primaryPalette('blue')
             .accentPalette('yellow');
+
+    function getCurrentUser(edAuthService) {
+      return edAuthService.getUser();
+    }
   }
 })();
 
