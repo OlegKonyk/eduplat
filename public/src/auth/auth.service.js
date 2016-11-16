@@ -4,7 +4,7 @@
   angular.module('app')
 		.service('edAuthService', edAuthService);
 
-  function edAuthService($resource, $auth, edToasterService, $location) {
+  function edAuthService($resource, $auth, edToasterService, $location, edErrorsService) {
     "ngInject";
     var service = {
       getUser, logout, user: undefined
@@ -31,7 +31,10 @@
               .then(function(_user) {
                 service.user = _user;
                 return service.user;
-              }, handleError);
+              }, function(err) {
+                logout();
+                edErrorsService.handleError(err);
+              });
           }
         }
       } else {
@@ -43,15 +46,6 @@
       $auth.logout();
       service.user = undefined;
       $location.path('/');
-    }
-
-    function handleError(err) {
-      let message = err.data ? err.data : err.statusText;
-      edToasterService.showCustomToast({
-        type: 'warning',
-        message: 'Something went wrong: ' + message
-      });
-      logout();
     }
 
     return service;

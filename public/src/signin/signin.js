@@ -12,7 +12,7 @@
     }
   );
 
-  function signinCtrl($auth, $location, edToasterService) {
+  function signinCtrl($auth, $location, edToasterService, edErrorsService) {
     "ngInject";
 
     var ctrl = this;
@@ -30,7 +30,7 @@
             message: message
           });
         })
-        .catch(handleError);
+        .catch(edErrorsService.handleError);
     };
 
     ctrl.authenticate = function(privider) {
@@ -43,15 +43,8 @@
           });
           $location.path('/');
           // authToken.authSuccessfull(res)
-        }, handleError);
+        }, edErrorsService.handleError);
     };
 
-    function handleError(err) {
-      let message = err.data ? err.data : err.statusText;
-      edToasterService.showCustomToast({
-        type: 'warning',
-        message: 'Something went wrong: ' + message
-      });
-    }
   }
 })();
