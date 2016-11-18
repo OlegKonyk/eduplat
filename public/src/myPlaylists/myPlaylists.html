@@ -21,7 +21,8 @@
             {{playlist.name}}
             <ol>
                 <li ng-repeat="link in playlist.links">
-                    {{link}}
+                    <youtube-video video-url="link"></youtube-video>
+                    
                 </li>
             </ol>
         </li>
