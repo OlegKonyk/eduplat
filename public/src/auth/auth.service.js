@@ -15,6 +15,10 @@
       {_id: '@_id'}
     );
 
+    userResource.prototype.isAdmin = function() {
+      return this.roles && this.roles.indexOf('admin') > -1;
+    };
+
     function getUser() {
       if($auth.isAuthenticated()){
         let payload = $auth.getPayload();

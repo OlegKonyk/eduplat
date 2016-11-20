@@ -20,6 +20,11 @@
                         My playlists
                     </md-button>
                 </md-menu-item>
+                <md-menu-item ng-if="$ctrl.user.isAdmin()">
+                    <md-button href="/admin">
+                        Admin
+                    </md-button>
+                </md-menu-item>
                 <md-menu-divider></md-menu-divider>
                 <md-menu-item>
                     <md-button ng-if="$ctrl.isAuthenticated()" ng-click="$ctrl.logout()">
