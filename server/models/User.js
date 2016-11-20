@@ -9,7 +9,10 @@ const UserSchema = new mongoose.Schema({
   password: String,
   googleId: String,
   facebookId: String,
-  active: Boolean
+  active: Boolean,
+  roles: [String],
+  groups: [String],
+  owner: [String]
 });
 
 UserSchema.methods.toJSON = function() {
@@ -38,5 +41,22 @@ UserSchema.pre('save', function(next) {
     });
   });
 });
+
+UserSchema.statics.createDefaultUsers = function() {
+  this.find({}).exec()
+  .then(colection => {
+    if (colection.length === 0) {
+      this.create({
+        firstName: 'admin',
+        lastName: 'admin',
+        email: 'foo@bar.com',
+        password: 'admin',
+        roles: ['admin']}
+      );
+    }
+  }, err => {
+    console.log(err);
+  });
+};
 
 module.exports = mongoose.model('User', UserSchema);
