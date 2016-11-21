@@ -12,39 +12,17 @@
     }
   );
 
-  function signinCtrl($auth, $location, edToasterService, edErrorsService) {
+  function signinCtrl(edAuthService) {
     "ngInject";
 
     var ctrl = this;
 
     ctrl.signin = function() {
-      $auth.login(ctrl.user)
-        .then(function(res) {
-          var message = 'Thanks for comming back ' + res.data.user.email + '!';
-          if (!res.data.user.active) {
-            message = 'Please activate your account soon!';
-          }
-          $location.path('/');
-          edToasterService.showCustomToast({
-            type: 'success',
-            message: message
-          });
-        })
-        .catch(edErrorsService.handleError);
+      edAuthService.login(ctrl.user);
     };
 
     ctrl.authenticate = function(privider) {
-      $auth.authenticate(privider)
-        .then(function(res) {
-          console.log(res.data.user);
-          edToasterService.showCustomToast({
-            type: 'success',
-            message: 'Thanks for comming back ' + res.data.user.firstName + '!'
-          });
-          $location.path('/');
-          // authToken.authSuccessfull(res)
-        }, edErrorsService.handleError);
+      edAuthService.authenticate(privider);
     };
-
   }
 })();

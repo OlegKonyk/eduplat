@@ -12,7 +12,7 @@
     }
   );
 
-  function userStatusCtrl($auth, edAuthService, $mdDialog) {
+  function userStatusCtrl($auth, $scope, edAuthService, $mdDialog, $rootScope) {
     "ngInject";
 
     var ctrl = this;
@@ -32,6 +32,14 @@
     };
 
     ctrl.logout = edAuthService.logout;
+
+    let userCangeListener = $rootScope.$on('edUserChange', function() {
+      ctrl.user = edAuthService.user;
+    });
+
+    $scope.$on('$destroy', function() {
+      userCangeListener();
+    });
 
     ctrl.openMenu = function($mdOpenMenu, ev) {
       $mdOpenMenu(ev);
