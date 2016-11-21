@@ -19,20 +19,20 @@
 
     ctrl.signup = function() {
       $auth.signup(ctrl.user)
-      .then(function(res) {
-        $auth.login(ctrl.user);
-        return res;
-      })
-      .then(function(res) {
-        $location.path('/');
-        edToasterService.showCustomToast({
-          type: 'success',
-          message: 'Welcome, ' +
-            res.data.user.email +
-            '! Please email activate your account in the next several days.'
-        });
-      })
-      .catch(edErrorsService.handleError);
+        .then(function(res) {
+          $auth.login(ctrl.user);
+          return res;
+        })
+        .then(function(res) {
+          $location.path('/');
+          edToasterService.showCustomToast({
+            type: 'success',
+            message: 'Welcome, ' +
+              res.data.user.email +
+              '! Please email activate your account in the next several days.'
+          });
+        })
+        .catch(edErrorsService.handleError);
     };
 
     ctrl.authenticate = function(privider) {

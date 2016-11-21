@@ -18,12 +18,18 @@
     var ctrl = this;
     ctrl.isAuthenticated = $auth.isAuthenticated;
 
-    edAuthService.getUser()
-      .then(function(user) {
-        ctrl.user = user;
-      }, function(err) {
-        console.log(err);
-      });
+    ctrl.getUser = function() {
+      edAuthService.getUser()
+        .then(function(user) {
+          ctrl.user = user;
+        }, function(err) {
+          console.log(err);
+        });
+    };
+
+    ctrl.$onInit = function() {
+      ctrl.getUser();
+    };
 
     ctrl.logout = edAuthService.logout;
 

@@ -12,6 +12,12 @@
             <label>Paste links separated by coma</label>
             <textarea ng-model="$ctrl.newPlaylist.links"></textarea>
         </md-input-container>
+        <md-input-container class="md-block">
+            <label>Groups</label>
+            <md-select ng-model="$ctrl.newPlaylist.groups" multiple>
+                <md-option ng-value="group.name" ng-repeat="group in $ctrl.groups">{{group.name}}</md-option>
+            </md-select>
+        </md-input-container>
 
         <md-button class="md-raised md-primary" ng-click="$ctrl.addPlaylist($ctrl.newPlaylist);">Add playlist</md-button>
     </div>

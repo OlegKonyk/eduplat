@@ -80,7 +80,8 @@
         template: '<ed-user-profile></ed-user-profile>'
       })
       .when('/myPlaylists', {
-        template: '<ed-my-playlists></ed-my-playlists>'
+        template: '<ed-my-playlists></ed-my-playlists>',
+        resolve: {getCurrentUser: getCurrentUser}
       })
       .otherwise({
         redirectTo: '/'

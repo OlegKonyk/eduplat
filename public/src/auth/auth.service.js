@@ -4,7 +4,7 @@
   angular.module('app')
 		.service('edAuthService', edAuthService);
 
-  function edAuthService($resource, $auth, edToasterService, $location, edErrorsService) {
+  function edAuthService($rootScope, $resource, $auth, edToasterService, $location, edErrorsService) {
     "ngInject";
     var service = {
       getUser, logout, user: undefined
@@ -19,6 +19,8 @@
       return this.roles && this.roles.indexOf('admin') > -1;
     };
 
+    let getUserPromise;
+
     function getUser() {
       if($auth.isAuthenticated()){
         let payload = $auth.getPayload();
@@ -30,15 +32,21 @@
           if (service.user) {
             return Promise.resolve(service.user);
           } else {
-            return userResource.get({_id: payload.sub})
-              .$promise
-              .then(function(_user) {
-                service.user = _user;
-                return service.user;
-              }, function(err) {
-                logout();
-                edErrorsService.handleError(err);
-              });
+            if (getUserPromise) {
+              return getUserPromise;
+            } else {
+              getUserPromise = userResource.get({_id: payload.sub})
+                .$promise
+                .then(function(_user) {
+                  service.user = _user;
+                  return service.user;
+                }, function(err) {
+                  logout();
+                  edErrorsService.handleError(err);
+                });
+              return getUserPromise;
+            }
+            
           }
         }
       } else {

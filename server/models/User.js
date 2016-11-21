@@ -10,9 +10,9 @@ const UserSchema = new mongoose.Schema({
   googleId: String,
   facebookId: String,
   active: Boolean,
-  roles: [String],
-  groups: [String],
-  owner: [String]
+  roles: {type: [String], default: ['user']},
+  groups: {type: [String], default: ['public', 'personal']},
+  owner: {type: [String], default: ['personal']}
 });
 
 UserSchema.methods.toJSON = function() {
@@ -51,7 +51,9 @@ UserSchema.statics.createDefaultUsers = function() {
         lastName: 'admin',
         email: 'foo@bar.com',
         password: 'admin',
-        roles: ['admin']}
+        roles: ['admin'],
+        groups: ['public', 'personal'],
+        owner: ['public', 'personal']}
       );
     }
   }, err => {
