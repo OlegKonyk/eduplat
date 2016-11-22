@@ -79,6 +79,9 @@
       .when('/profile', {
         template: '<ed-user-profile></ed-user-profile>'
       })
+      .when('/admin', {
+        template: '<ed-admin></ed-admin>'
+      })
       .when('/myPlaylists', {
         template: '<ed-my-playlists></ed-my-playlists>',
         resolve: {getCurrentUser: getCurrentUser}
