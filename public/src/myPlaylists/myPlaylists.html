@@ -25,12 +25,7 @@
     <ul>
         <li ng-repeat="playlist in $ctrl.playlists">
             {{playlist.name}}
-            <ol>
-                <li ng-repeat="link in playlist.links">
-                    <youtube-video video-url="link"></youtube-video>
-                    
-                </li>
-            </ol>
+            <youtube-video video-url=" playlist.links[0]"></youtube-video>
         </li>
     </ul>
 

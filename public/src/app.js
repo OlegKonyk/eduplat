@@ -7,7 +7,7 @@
     template: '<md-content class="md-padding"><h1>ABOUT</h1></md-content>'
   })
   .component('edHome', {
-    template: '<md-content class="md-padding"><h1>HOME</h1></md-content>'
+    template: '<md-content class="md-padding"><ed-hero></ed-hero></md-content>'
   })
   .constant('API_URL', 'http://localhost:3030/')
   .factory('authInterceptor', function($injector) {
