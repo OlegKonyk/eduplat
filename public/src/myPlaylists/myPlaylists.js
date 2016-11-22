@@ -12,16 +12,10 @@
     }
   );
 
-  function myPlaylistsCtrl($resource, edAuthService) {
+  function myPlaylistsCtrl(edAuthService, edPlaylistService) {
     "ngInject";
 
     var ctrl = this;
-
-    var playlistResource = $resource(
-      '/api/playlist/',
-      {},
-      {get: {method: 'GET', isArray: true}}
-    );
 
     ctrl.user = edAuthService.user;
 
@@ -32,7 +26,7 @@
 
     ctrl.addPlaylist = function(newPlaylist) {
       newPlaylist.links = newPlaylist.links.split(',');
-      playlistResource
+      edPlaylistService.personalResource
         .save(newPlaylist)
         .$promise
         .then(function(something) {
@@ -46,7 +40,7 @@
       groups: [ctrl.groups[0].name]
     };
 
-    playlistResource
+    edPlaylistService.personalResource
       .get()
       .$promise
       .then(function(playlists) {

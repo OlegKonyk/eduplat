@@ -86,6 +86,9 @@
         template: '<ed-my-playlists></ed-my-playlists>',
         resolve: {getCurrentUser: getCurrentUser}
       })
+      .when('/playlist/public/:id', {
+        template: '<ed-playlist-player></ed-playlist-player>'
+      })
       .otherwise({
         redirectTo: '/'
       });

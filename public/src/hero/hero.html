@@ -1,52 +1,19 @@
 <div layout="row">
-    <div flex-xs flex-gt-xs="33" flex-gt-md="33" layout="column"  layout-align="center center">
+    <div ng-repeat="playlist in $ctrl.featuredPlaylists" ng-click="$ctrl.goToPlaylist(playlist._id)"
+        flex-xs flex-gt-xs="33" flex-gt-md="33" layout="column"  layout-align="center center">
         <div style="max-width: 360px;">
             <md-card >
                 <img src="front/assets/img/comp.jpg" class="md-card-image" alt="Washed Out">
                 <md-card-title>
                 <md-card-title-text>
-                    <span class="md-headline">Action buttons</span>
+                    <span class="md-headline">{{playlist.name}}</span>
                 </md-card-title-text>
                 </md-card-title>
-                <md-card-content>
+                <!--md-card-content>
                 <p>
                     The titles of Washed Out's breakthrough song ...
                 </p>
-                </md-card-content>
-            </md-card>
-        </div>
-    </div>
-    <div flex-xs flex-gt-xs="33" flex-gt-md="33" layout="column"  layout-align="center center">
-        <div style="max-width: 360px;">
-            <md-card >
-                <img src="front/assets/img/comp.jpg" class="md-card-image" alt="Washed Out">
-                <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">Action buttons</span>
-                </md-card-title-text>
-                </md-card-title>
-                <md-card-content>
-                <p>
-                    The titles of Washed Out's breakthrough song ...
-                </p>
-                </md-card-content>
-            </md-card>
-        </div>
-    </div>
-    <div flex-xs flex-gt-xs="33" flex-gt-md="33" layout="column"  layout-align="center center">
-        <div style="max-width: 360px;">
-            <md-card >
-                <img src="front/assets/img/comp.jpg" class="md-card-image" alt="Washed Out">
-                <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">Action buttons</span>
-                </md-card-title-text>
-                </md-card-title>
-                <md-card-content>
-                <p>
-                    The titles of Washed Out's breakthrough song ...
-                </p>
-                </md-card-content>
+                </md-card-content-->
             </md-card>
         </div>
     </div>

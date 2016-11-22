@@ -1,0 +1,7 @@
+<h1>COURSE PLAYER {{$ctrl.id}}</h1>
+<ul>
+    <li ng-repeat="video in $ctrl.playlist.links">
+        {{playlist.name}}
+        <youtube-video video-url="video"></youtube-video>
+    </li>
+</ul>
