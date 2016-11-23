@@ -8,7 +8,6 @@ const config = require('../config/config');
 const googleAuth = require('../services/googleAuth');
 const auth = require('../controllers/authHandlers');
 const User = require('../models/User.js');
-const Playlist = require('../models/Playlist.js');
 
 router.get('/api/auth/verifyEmail', emailVerification.handler);
 
@@ -44,7 +43,5 @@ function returnUser(req, res, next) {
     res.json(user.toJSON()).status(200);
   });
 }
-
-
 
 module.exports = router;

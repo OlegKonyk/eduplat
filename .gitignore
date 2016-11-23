@@ -3,5 +3,6 @@
 node_modules/
 bower_components/
 public/build/
+sslcert/
 *.log
 secrets.json
