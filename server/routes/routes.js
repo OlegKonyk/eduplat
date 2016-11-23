@@ -1,7 +1,6 @@
 'use strict';
 const express = require('express');
 const path = require('path');
-const passport = require('passport');
 const router = express.Router();
 const emailVerification = require('../services/emailVerification');
 const createSendToken = require('../services/jwt.js');
@@ -20,46 +19,6 @@ router.post('/api/register', auth.register, register);
 router.post('/api/login', auth.login, login);
 
 router.get('/api/user/', auth.jwt, returnUser);
-
-router.post('/api/playlist/personal', auth.jwt, function(req, res, next) {
-  var playlistData = req.body;
-  playlistData.ownerId = req.user._id;
-  var newPlaylist = new Playlist(playlistData);
-  newPlaylist.save()
-    .then(function() {
-      res.send('New playlist created: ' + playlistData.name).status(200);
-    }, function(err) {
-      res.send(err.message).status(500);
-    });
-});
-
-router.get('/api/playlist/personal', auth.jwt, function(req, res, next) {
-  Playlist.find({ownerId: req.user._id})
-    .then(function(playlists) {
-      res.json(playlists).status(200);
-    }, function(err) {
-      res.send(err.message).status(500);
-    });
-});
-
-router.get('/api/playlist/featured', function(req, res, next) {
-  Playlist.find({groups: 'public'})
-    .then(function(playlists) {
-      res.json(playlists).status(200);
-    }, function(err) {
-      res.send(err.message).status(500);
-    });
-});
-
-router.get('/api/playlist/public/', function(req, res, next) {
-  let id = req.query._id;
-  Playlist.findById(id)
-    .then(function(playlist) {
-      res.json(playlist).status(200);
-    }, function(err) {
-      res.send(err.message).status(500);
-    });
-});
 
 router.get('/front/*', function(req, res) {
   res.sendFile(path.join(config.rootPath, 'public', req.params[0]));
