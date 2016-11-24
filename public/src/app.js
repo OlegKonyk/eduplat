@@ -28,7 +28,7 @@
   });
 
   function config($mdThemingProvider, $mdIconProvider,
-                 $routeProvider, $locationProvider, $authProvider, API_URL, $httpProvider) {
+                 $routeProvider, $locationProvider, $authProvider, API_URL, $httpProvider, $sceDelegateProvider) {
     "ngInject";
     $locationProvider.html5Mode(true);
 

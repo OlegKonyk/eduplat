@@ -12,7 +12,7 @@
     }
   );
 
-  function playlistPlayerCtrl($routeParams, edPlaylistService) {
+  function playlistPlayerCtrl($routeParams, $sce, edPlaylistService) {
     "ngInject";
 
     var ctrl = this;
@@ -23,11 +23,16 @@
       .get({_id: ctrl.id})
       .$promise
       .then(function(playlist) {
-        console.log(playlist);
         ctrl.playlist = playlist;
+        ctrl.currentVideo = ctrl.playlist.links[0];
       }, function(err) {
         console.log(err);
       });
+
+    ctrl.setVideoUrl = function(url) {
+      ctrl.currentVideo = url;
+      console.log(url);
+    };
   }
 })();
 

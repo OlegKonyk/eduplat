@@ -24,19 +24,21 @@ module.exports = function(req, res, next) {
     if (response.statusCode !== 200) return res.status(response.statusCode);
 
     var accessToken = token.access_token;
+
     var headers = {
       Authorization: 'Bearer ' + accessToken
     };
 
     /*request.get({
-      url: 'https://www.googleapis.com/youtube/v3/channels?part=id&mine=true',
+      //url: 'https://www.googleapis.com/youtube/v3/channels?part=id&mine=true',
+      url: "https://www.googleapis.com/youtube/v3/videos?id=ybdFLSeSS6I&part=snippet",
       headers: headers,
       json: true
     }, function(err, response, profile) {
       if (err) return next(err);
       if (response.statusCode !== 200) return res.status(response.statusCode);
-      console.log("========");
-      console.log(JSON.stringify(response.body));
+      //console.log("========");
+      //console.log(JSON.stringify(response.body));
     });*/
 
     request.get({
