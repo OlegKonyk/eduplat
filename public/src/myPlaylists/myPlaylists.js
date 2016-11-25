@@ -17,15 +17,32 @@
 
     var ctrl = this;
 
-    edPlaylistService.personalResource
-      .get()
-      .$promise
-      .then(function(playlists) {
-        console.log(playlists);
-        ctrl.playlists = playlists;
-      }, function(err) {
-        console.log(err);
-      });
+    function grtPlaylists() {
+      return edPlaylistService.personalResource
+        .get()
+        .$promise
+        .then(function(playlists) {
+          console.log(playlists);
+          ctrl.playlists = playlists;
+        });
+    }
+
+    grtPlaylists()
+      .then(null,
+        function(err) {
+          console.log(err);
+        });
+
+    ctrl.deletePlaylist = function(_id) {
+      console.log(_id);
+      edPlaylistService.personalResource
+        .delete({_id: _id})
+        .$promise
+        .then(grtPlaylists,
+          function(err) {
+            console.log(err);
+          });
+    };
   }
 })();
 

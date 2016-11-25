@@ -11,6 +11,17 @@ const Playlist = require('../models/Playlist.js');
 
 router.post('/personal', auth.jwt, createPlaylist);
 
+router.delete('/personal', auth.jwt, function(req, res) {
+  let id = req.query._id;
+  Playlist.findById(id).remove().exec()
+  .then(function(playlist) {
+    res.json(playlist.toJSON()).status(200);
+  }, function(err) {
+    console.log(err);
+    res.status(500);
+  });
+});
+
 router.post('/upload', auth.jwt, multipartyMiddleware, function(req, res) {
   // We are able to access req.files.file thanks to 
   // the multiparty middleware

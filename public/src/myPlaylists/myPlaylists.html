@@ -4,7 +4,9 @@
 
     <ul>
         <li ng-repeat="playlist in $ctrl.playlists">
-            {{playlist.name}}
+            <div layout="row"><h3>{{playlist.name}}</h3>
+            <md-button class="md-raised md-warn" ng-click="$ctrl.deletePlaylist(playlist._id);">Delete</md-button>
+            </div>
             <youtube-video video-url=" playlist.links[0]"></youtube-video>
         </li>
     </ul>
