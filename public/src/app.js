@@ -1,7 +1,8 @@
 (function() {
   'use strict';
   angular
-  .module('app', ['ngRoute', 'ngMaterial', 'ngMessages', 'ngResource', 'satellizer', 'youtube-embed'])
+  .module('app', ['ngRoute', 'ngMaterial', 'ngMessages', 'ngResource',
+    'satellizer', 'youtube-embed', 'ngFileUpload', 'ngImgCrop'])
   .config(config)
   .component('edAbout', {
     template: '<md-content class="md-padding"><h1>ABOUT</h1></md-content>'
@@ -17,7 +18,7 @@
         var $auth = $injector.get('$auth');
         var token = $auth.getToken();
         if (token) {
-          config.headers.Authorization = token;//'Bearer ' + token;
+          config.headers.Authorization = token;// 'Bearer ' + token;
         }
         return config;
       },
@@ -28,10 +29,10 @@
   });
 
   function config($mdThemingProvider, $mdIconProvider,
-                 $routeProvider, $locationProvider, $authProvider, API_URL, $httpProvider, $sceDelegateProvider) {
+                 $routeProvider, $locationProvider, $authProvider, API_URL, $httpProvider, $sceDelegateProvider, $compileProvider) {
     "ngInject";
     $locationProvider.html5Mode(true);
-
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|ftp|blob):|data:image\//);
     $authProvider.loginUrl = API_URL + 'api/login';
     $authProvider.signupUrl = API_URL + 'api/register';
 
@@ -41,7 +42,7 @@
       clientId: '180115616906-3dekl0d823bbm280f1hidk1kk41cd9fl.apps.googleusercontent.com',
       url: API_URL + 'api/auth/google',
       authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
-      //redirectUri: $window.location.origin,
+      // redirectUri: $window.location.origin,
       requiredUrlParams: ['scope'],
       optionalUrlParams: ['display'],
       scope: ['profile', 'email', 'https://gdata.youtube.com'],
@@ -49,12 +50,12 @@
       scopeDelimiter: ' ',
       display: 'popup',
       oauthType: '2.0',
-      popupOptions: { width: 452, height: 633 }
+      popupOptions: {width: 452, height: 633}
     });
 
     var originalWhen = $routeProvider.when;
 
-    /*$routeProvider.when = function(path, route) {
+    /* $routeProvider.when = function(path, route) {
       route.resolve || (route.resolve = {});
       angular.extend(route.resolve, {
         getCurrentUser: getCurrentUser

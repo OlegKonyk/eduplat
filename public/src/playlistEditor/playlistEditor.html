@@ -1,1 +1,58 @@
 <h3>PLAYLIST EDITOR</h3>
+<style>
+    .drop-box {
+        background: #F8F8F8;
+        border: 5px dashed #DDD;
+        width: 200px;
+        height: 65px;
+        text-align: center;
+        padding-top: 25px;
+        margin: 10px;
+    }
+    .dragover {
+        border: 5px dashed blue;
+    }
+</style>
+<div layout="row">
+
+    <div flex class="md-padding">
+        <md-input-container class="md-block">
+            <label>Playlist Name</label>
+            <input ng-model="$ctrl.newPlaylist.name">
+        </md-input-container>
+                
+        <md-input-container class="md-block">
+            <label>Paste links separated by coma</label>
+            <textarea ng-model="$ctrl.newPlaylist.links"></textarea>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Groups</label>
+            <md-select ng-model="$ctrl.newPlaylist.groups" multiple>
+                <md-option ng-value="group.name" ng-repeat="group in $ctrl.groups">{{group.name}}</md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-button class="md-raised md-primary" ng-click="$ctrl.addPlaylist($ctrl.newPlaylist);">Add playlist</md-button>
+        <md-button class="md-raised md-primary" ng-click="$ctrl.upload($ctrl.file, $ctrl.newPlaylist);">Upload</md-button>
+    </div>
+
+    <div flex  class="md-padding">
+        <div ng-hide="$ctrl.file">
+            
+
+            <div ngf-drop ngf-select ng-model="$ctrl.file" class="drop-box" 
+                ngf-drag-over-class="'dragover'" ngf-multiple="false"
+                accept="image/*,application/pdf" 
+                ngf-pattern="'image/*,application/pdf'">Drop image here or click to upload</div>
+            <!--div ngf-no-file-drop>
+                <div class="button" ngf-select ng-model="$ctrl.file" ngf-multiple="false">Select File</div>
+            </div-->
+        </div>
+
+        <img ngf-thumbnail="$ctrl.file">
+
+        <h3 style="font:smaller">File: {{$ctrl.file.name}} {{$ctrl.file.$error}} {{$ctrl.file.$errorParam}}</h3>
+        Upload Log:
+        <pre>{{$ctrl.log}}</pre>
+    </div>
+</div>

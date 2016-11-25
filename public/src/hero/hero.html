@@ -3,7 +3,8 @@
         flex-xs flex-gt-xs="33" flex-gt-md="33" layout="column"  layout-align="center center">
         <div style="max-width: 360px;">
             <md-card >
-                <img src="front/assets/img/comp.jpg" class="md-card-image" alt="Washed Out">
+                <img ng-if="!playlist.thumbnail" src="front/assets/img/comp.jpg" class="md-card-image" alt="Washed Out">
+                <img ng-if="playlist.thumbnail" ng-src="data:image/JPEG;base64,{{playlist.thumbnail}}">
                 <md-card-title>
                 <md-card-title-text>
                     <span class="md-headline">{{playlist.name}}</span>
