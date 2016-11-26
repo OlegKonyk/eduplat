@@ -71,9 +71,25 @@
           template: '<ed-signin></ed-signin>'
         })
         .state('signup', {
-          url: '/signup',
+          url: 'signup',
           template: '<ed-signup></ed-signup>'
-        });
+        })
+        .state('profile', {
+          url: '/profile',
+          template: '<ed-user-profile></ed-user-profile>'
+        })
+        .state('admin', {
+          url: '/admin',
+          template: '<ed-admin></ed-admin>'
+        })
+        .state('playlists', {
+          url: '/playlists',
+          template: '<ed-playlists></ed-playlists>',
+          resolve: {getCurrentUser: getCurrentUser}
+        })
+        /*.state('/playlist/public/:id', {
+          template: '<ed-playlist-player></ed-playlist-player>'
+        });*/
         // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
         /* .state('about', {
           url: '/about',
