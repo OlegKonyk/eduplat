@@ -2,7 +2,7 @@
   'use strict';
   angular
   .module('app', ['ngRoute', 'ngMaterial', 'ngMessages', 'ngResource',
-    'satellizer', 'youtube-embed', 'ngFileUpload', 'ngImgCrop'])
+    'satellizer', 'youtube-embed', 'ngFileUpload', 'ngImgCrop', 'ui.router'])
   .config(config)
   .component('edAbout', {
     template: '<md-content class="md-padding"><h1>ABOUT</h1></md-content>'
@@ -28,7 +28,7 @@
     };
   });
 
-  function config($mdThemingProvider, $mdIconProvider,
+  function config($mdThemingProvider, $mdIconProvider, $stateProvider, $urlRouterProvider,
                  $routeProvider, $locationProvider, $authProvider, API_URL, $httpProvider, $sceDelegateProvider, $compileProvider) {
     "ngInject";
     $locationProvider.html5Mode(true);
@@ -53,16 +53,32 @@
       popupOptions: {width: 452, height: 633}
     });
 
-    var originalWhen = $routeProvider.when;
+    $urlRouterProvider.otherwise('/');
 
-    /* $routeProvider.when = function(path, route) {
-      route.resolve || (route.resolve = {});
-      angular.extend(route.resolve, {
-        getCurrentUser: getCurrentUser
-      });
-
-      return originalWhen.call($routeProvider, path, route);
-    };*/
+    $stateProvider
+        
+        // HOME STATES AND NESTED VIEWS ========================================
+        .state('home', {
+          url: '/',
+          template: '<ed-home></ed-home>'
+        })
+        .state('about', {
+          url: '/about',
+          template: '<ed-about></ed-about>'
+        })
+        .state('signin', {
+          url: '/signin',
+          template: '<ed-signin></ed-signin>'
+        })
+        .state('signup', {
+          url: '/signup',
+          template: '<ed-signup></ed-signup>'
+        });
+        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
+        /* .state('about', {
+          url: '/about',
+          template: '<ed-about></ed-about>'
+        });*/
 
     $routeProvider
       .when('/', {
@@ -83,8 +99,8 @@
       .when('/admin', {
         template: '<ed-admin></ed-admin>'
       })
-      .when('/myPlaylists', {
-        template: '<ed-my-playlists></ed-my-playlists>',
+      .when('/playlists', {
+        template: '<ed-playlists></ed-playlists>',
         resolve: {getCurrentUser: getCurrentUser}
       })
       .when('/playlist/public/:id', {
@@ -100,7 +116,7 @@
 
     $mdThemingProvider.theme('default')
             .primaryPalette('blue')
-            .accentPalette('yellow');
+            .accentPalette('red');
 
     function getCurrentUser(edAuthService) {
       return edAuthService.getUser();

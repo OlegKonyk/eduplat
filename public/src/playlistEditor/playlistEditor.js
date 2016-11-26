@@ -10,7 +10,7 @@
     controller: playlistEditorCtrl
   });
 
-  function playlistEditorCtrl($scope, Upload, $timeout, edPlaylistService, edAuthService) {
+  function playlistEditorCtrl($scope, Upload, $timeout, edPlaylistsService, edAuthService) {
     "ngInject";
 
     var ctrl = this;
@@ -24,7 +24,7 @@
 
     ctrl.addPlaylist = function(newPlaylist) {
       newPlaylist.links = newPlaylist.links.split(',');
-      edPlaylistService.personalResource
+      edPlaylistsService.personalResource
         .save(newPlaylist)
         .$promise
         .then(function(something) {

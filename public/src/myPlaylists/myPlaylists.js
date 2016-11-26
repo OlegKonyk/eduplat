@@ -12,13 +12,13 @@
     }
   );
 
-  function myPlaylistsCtrl(edAuthService, edPlaylistService) {
+  function myPlaylistsCtrl(edAuthService, edPlaylistsService) {
     "ngInject";
 
     var ctrl = this;
 
     function grtPlaylists() {
-      return edPlaylistService.personalResource
+      return edPlaylistsService.personalResource
         .get()
         .$promise
         .then(function(playlists) {
@@ -35,7 +35,7 @@
 
     ctrl.deletePlaylist = function(_id) {
       console.log(_id);
-      edPlaylistService.personalResource
+      edPlaylistsService.personalResource
         .delete({_id: _id})
         .$promise
         .then(grtPlaylists,

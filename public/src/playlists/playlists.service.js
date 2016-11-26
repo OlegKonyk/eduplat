@@ -1,4 +1,4 @@
-angular.module('app').service('edPlaylistService', function($resource) {
+angular.module('app').service('edPlaylistsService', function($resource) {
   "ngInject";
 
   var personalResource = $resource(

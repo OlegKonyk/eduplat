@@ -12,12 +12,12 @@
     }
   );
 
-  function heroCtrl(edPlaylistService, $location) {
+  function heroCtrl(edPlaylistsService, $location) {
     "ngInject";
 
     var ctrl = this;
 
-    edPlaylistService.featuredResource
+    edPlaylistsService.featuredResource
       .get()
       .$promise
       .then(function(playlists) {
