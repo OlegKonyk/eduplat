@@ -87,9 +87,20 @@
           template: '<ed-playlists></ed-playlists>',
           resolve: {getCurrentUser: getCurrentUser}
         })
-        /*.state('/playlist/public/:id', {
+        .state('playlists.myPlaylists', {
+          url: '/playlists/myPlaylists',
+          template: '<ed-my-playlists></ed-my-playlists>',
+          resolve: {getCurrentUser: getCurrentUser}
+        })
+        .state('playlists.addPlaylist', {
+          url: '/playlists/addPlaylist',
+          template: '<ed-playlist-editor></ed-playlist-editor>',
+          resolve: {getCurrentUser: getCurrentUser}
+        })
+        .state('player', {
+          url: '/playlist/public?video',
           template: '<ed-playlist-player></ed-playlist-player>'
-        });*/
+        });
         // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
         /* .state('about', {
           url: '/about',

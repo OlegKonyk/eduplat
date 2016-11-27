@@ -23,15 +23,15 @@
       //console.log($routeParams.tab)
     }
 
-    $location.path('/playlists/').search({tab: 'myPlaylists'});
+    //$location.path('/playlists/').search({tab: 'myPlaylists'});
 
     //ctrl.tabIndex = 0;
 
-    ctrl.asignTab = function(tab) {
+    /*ctrl.asignTab = function(tab) {
       console.log("<><><<><><><><>");
       console.log(tab);
       $location.path('/playlists/').search({tab: tab});
-    };
+    };*/
   }
 })();
 

@@ -1,6 +1,5 @@
-<md-content class="view-column">
-
-    <!--md-tabs md-selected="$ctrl.tabIndex" md-dynamic-height md-border-bottom>
+<!--md-content class="view-column">
+    <md-tabs md-selected="$ctrl.tabIndex" md-dynamic-height md-border-bottom>
         <md-tab md-on-select="$ctrl.asignTab('myPlaylists')" label="My Playlists">
             <md-content>
                 <ed-my-playlists></ed-my-playlists>
@@ -11,6 +10,16 @@
                 <ed-playlist-editor></ed-playlist-editor>
             </md-content>
         </md-tab>
-    </md-tabs-->
+    </md-tabs>
 
+</md-content-->
+
+<md-content class="view-column">
+    <md-nav-bar>
+        <md-nav-item md-nav-sref="playlists.myPlaylists" name="myPlaylists">My Playlists</md-nav-item>
+        <md-nav-item md-nav-sref="playlists.addPlaylist" name="addPlaylist">Add Playlist</md-nav-item>
+    </md-nav-bar>
+    <div class="md-padding">
+        <div ui-view></div>
+    </div>
 </md-content>

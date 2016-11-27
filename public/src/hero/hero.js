@@ -12,7 +12,7 @@
     }
   );
 
-  function heroCtrl(edPlaylistsService, $location) {
+  function heroCtrl(edPlaylistsService, $location, $state) {
     "ngInject";
 
     var ctrl = this;
@@ -28,8 +28,7 @@
       });
 
     ctrl.goToPlaylist = function(id) {
-      console.log(`/playlist/public/${id}`);
-      $location.path(`/playlist/public/${id}`);
+      $state.go('player', {video: id});
     };
   }
 })();

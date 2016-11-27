@@ -12,15 +12,14 @@
     }
   );
 
-  function playlistPlayerCtrl($routeParams, $sce, edPlaylistsService) {
+  function playlistPlayerCtrl($stateParams, $routeParams, $sce, edPlaylistsService) {
     "ngInject";
 
     var ctrl = this;
-
-    ctrl.id = $routeParams.id;
+    ctrl.video = $stateParams.video;
 
     edPlaylistsService.publicResource
-      .get({_id: ctrl.id})
+      .get({_id: ctrl.video})
       .$promise
       .then(function(playlist) {
         ctrl.playlist = playlist;
