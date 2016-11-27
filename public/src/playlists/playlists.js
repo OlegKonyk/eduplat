@@ -17,23 +17,7 @@
 
     var ctrl = this;
 
-    ctrl.tabs = ['myPlaylists', 'addPlaylist'];
-
     $state.go('playlists.myPlaylists');
-
-    if ($routeParams.tab) {
-      //console.log($routeParams.tab)
-    }
-
-    //$location.path('/playlists/').search({tab: 'myPlaylists'});
-
-    //ctrl.tabIndex = 0;
-
-    /*ctrl.asignTab = function(tab) {
-      console.log("<><><<><><><><>");
-      console.log(tab);
-      $location.path('/playlists/').search({tab: tab});
-    };*/
   }
 })();
 

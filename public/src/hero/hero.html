@@ -1,7 +1,6 @@
 <div class="view-column" layout="row">
-    <div
-       ng-repeat="playlist in $ctrl.featuredPlaylists" 
-       flex-xs flex-gt-xs="33" flex-gt-md="33" layout="column"  layout-align="center center">
+    <div ng-repeat="playlist in $ctrl.featuredPlaylists"
+         flex-xs flex-gt-xs="33" flex-gt-md="33" layout="column" layout-align="center center">
         <div style="max-width: 360px;">
             <md-card ng-click="$ctrl.goToPlaylist(playlist._id)" style="cursor:pointer;">
                 <img ng-if="!playlist.thumbnail" src="front/assets/img/comp.jpg" class="md-card-image" alt="Washed Out">

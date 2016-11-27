@@ -29,7 +29,7 @@
   });
 
   function config($mdThemingProvider, $mdIconProvider, $stateProvider, $urlRouterProvider,
-                 $routeProvider, $locationProvider, $authProvider, API_URL, $httpProvider, $sceDelegateProvider, $compileProvider) {
+                 $locationProvider, $authProvider, API_URL, $httpProvider, $compileProvider) {
     "ngInject";
     $locationProvider.html5Mode(true);
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|ftp|blob):|data:image\//);
@@ -56,8 +56,6 @@
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
-        
-        // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
           url: '/',
           template: '<ed-home></ed-home>'
@@ -101,41 +99,6 @@
           url: '/playlist/public?video',
           template: '<ed-playlist-player></ed-playlist-player>'
         });
-        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-        /* .state('about', {
-          url: '/about',
-          template: '<ed-about></ed-about>'
-        });*/
-
-    $routeProvider
-      .when('/', {
-        template: '<ed-home></ed-home>'
-      })
-      .when('/about', {
-        template: '<ed-about></ed-about>'
-      })
-      .when('/signin', {
-        template: '<ed-signin></ed-signin>'
-      })
-      .when('/signup', {
-        template: '<ed-signup></ed-signup>'
-      })
-      .when('/profile', {
-        template: '<ed-user-profile></ed-user-profile>'
-      })
-      .when('/admin', {
-        template: '<ed-admin></ed-admin>'
-      })
-      .when('/playlists', {
-        template: '<ed-playlists></ed-playlists>',
-        resolve: {getCurrentUser: getCurrentUser}
-      })
-      .when('/playlist/public/:id', {
-        template: '<ed-playlist-player></ed-playlist-player>'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
 
     /* $mdIconProvider
         .defaultIconSet("./assets/svg/avatars.svg", 128)
