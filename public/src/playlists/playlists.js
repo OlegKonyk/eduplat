@@ -12,12 +12,14 @@
     }
   );
 
-  function playlistsCtrl($location, $routeParams) {
+  function playlistsCtrl($location, $routeParams, $state) {
     "ngInject";
 
     var ctrl = this;
 
     ctrl.tabs = ['myPlaylists', 'addPlaylist'];
+
+    $state.go('playlists.myPlaylists');
 
     if ($routeParams.tab) {
       //console.log($routeParams.tab)
