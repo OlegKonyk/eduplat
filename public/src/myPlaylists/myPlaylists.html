@@ -1,4 +1,4 @@
-<md-content>
+<!--md-content>
 <h3>MY PLAYLISTS</h3>
 
 
@@ -10,4 +10,27 @@
             <youtube-video video-url=" playlist.links[0]"></youtube-video>
         </li>
     </ul>
-</md-content>
+</md-content-->
+
+<div ayout="row">
+    <div ng-repeat="playlist in $ctrl.playlists"
+         flex-xs flex-gt-xs="33" flex-gt-md="33" layout="column" layout-align="center center">
+        <div style="max-width: 360px;">
+            <md-card ng-click="$ctrl.goToPlaylist(playlist._id)" style="cursor:pointer;">
+                <img ng-if="!playlist.thumbnail" src="front/assets/img/comp.jpg" class="md-card-image" alt="Washed Out">
+                <img ng-if="playlist.thumbnail" ng-src="data:image/JPEG;base64,{{playlist.thumbnail}}">
+                <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{playlist.name}}</span>
+                    <md-button class="md-raised md-warn" ng-click="$ctrl.deletePlaylist(playlist._id);">Delete</md-button>
+                </md-card-title-text>
+                </md-card-title>
+                <!--md-card-content>
+                <p>
+                    The titles of Washed Out's breakthrough song ...
+                </p>
+                </md-card-content-->
+            </md-card>
+        </div>
+    </div>
+</div>

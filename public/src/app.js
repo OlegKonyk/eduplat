@@ -86,12 +86,12 @@
           resolve: {getCurrentUser: getCurrentUser}
         })
         .state('playlists.myPlaylists', {
-          url: '/playlists/myPlaylists',
+          url: '/myPlaylists',
           template: '<ed-my-playlists></ed-my-playlists>',
           resolve: {getCurrentUser: getCurrentUser}
         })
         .state('playlists.addPlaylist', {
-          url: '/playlists/addPlaylist',
+          url: '/addPlaylist',
           template: '<ed-playlist-editor></ed-playlist-editor>',
           resolve: {getCurrentUser: getCurrentUser}
         })
