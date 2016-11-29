@@ -17,6 +17,8 @@
 
     var ctrl = this;
 
+    console.log('still getting here');
+    ctrl.currentNavItem = 'myPlaylists';
     $state.go('playlists.myPlaylists');
   }
 })();
