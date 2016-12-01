@@ -2,7 +2,7 @@
   'use strict';
   angular
   .module('app', ['ngRoute', 'ngMaterial', 'ngMessages', 'ngResource',
-    'satellizer', 'youtube-embed', 'ngFileUpload', 'ngImgCrop', 'ui.router'])
+    'satellizer', 'youtube-embed', 'ngFileUpload', 'ngImgCrop', 'ui.router', 'jkAngularCarousel'])
   .config(config)
   .component('edAbout', {
     template: '<md-content class="md-padding"><h1>ABOUT</h1></md-content>'
@@ -100,9 +100,11 @@
           template: '<ed-playlist-player></ed-playlist-player>'
         });
 
-    /* $mdIconProvider
-        .defaultIconSet("./assets/svg/avatars.svg", 128)
-        .icon("menu", "./assets/svg/menu.svg", 24) */
+    $mdIconProvider
+        //.defaultIconSet("./assets/svg/avatars.svg", 128)
+        .icon("menu", "front/assets/svg/menu.svg", 24)
+        .icon("chevron_right", "front/assets/svg/chevron_right.svg", 24)
+        .icon("chevron_left", "front/assets/svg/chevron_left.svg", 24);
 
     $mdThemingProvider.theme('default')
             .primaryPalette('blue')
