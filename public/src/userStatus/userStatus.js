@@ -12,7 +12,7 @@
     }
   );
 
-  function userStatusCtrl($auth, $scope, edAuthService, $mdDialog, $rootScope) {
+  function userStatusCtrl($auth, $scope, edAuthService, $mdDialog, $rootScope, $mdMenu) {
     "ngInject";
 
     var ctrl = this;
@@ -39,6 +39,10 @@
 
     $scope.$on('$destroy', function() {
       userCangeListener();
+    });
+
+    $scope.$on('$locationChangeSuccess', function(event) {
+      $mdMenu.hide();
     });
 
     ctrl.openMenu = function($mdOpenMenu, ev) {
