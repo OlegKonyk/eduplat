@@ -31,10 +31,10 @@
       $state.go('player', {video: id});
     };
 
-    ctrl.slides = [{
+    ctrl.slides = [/*{
       id: 0,
       src: 'front/assets/img/1.jpeg'
-    },
+    },*/
     {
       id: 1,
       src: 'front/assets/img/2.jpeg'

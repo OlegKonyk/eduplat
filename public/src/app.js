@@ -107,7 +107,7 @@
         .icon("chevron_left", "front/assets/svg/chevron_left.svg", 24);
 
     $mdThemingProvider.theme('default')
-            .primaryPalette('blue')
+            .primaryPalette('teal')
             .accentPalette('red');
 
     function getCurrentUser(edAuthService) {
