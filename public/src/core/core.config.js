@@ -1,14 +1,10 @@
 (function() {
   'use strict';
   angular
-  .module('app', ['ngRoute', 'ngMaterial', 'ngMessages', 'ngResource',
-    'satellizer', 'youtube-embed', 'ngFileUpload', 'ngImgCrop', 'ui.router', 'jkAngularCarousel'])
+  .module('app.core')
   .config(config)
   .component('edAbout', {
     template: '<md-content class="md-padding"><h1>ABOUT</h1></md-content>'
-  })
-  .component('edHome', {
-    template: '<md-content class="md-padding"><ed-hero></ed-hero></md-content>'
   })
   .constant('API_URL', 'http://localhost:3030/')
   .factory('authInterceptor', function($injector) {
@@ -58,7 +54,7 @@
     $stateProvider
         .state('home', {
           url: '/',
-          template: '<ed-home></ed-home>'
+          template: '<ed-hero></ed-hero>'
         })
         .state('about', {
           url: '/about',

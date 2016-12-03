@@ -43,8 +43,9 @@ gulp.task('templete-cache', function() {
 });
 
 gulp.task('concat-app-js', () => {
-  return gulp.src(['public/src/**/*.js'
-                   // 'public/**/*module.js'
+  return gulp.src(['public/src/*.js',
+                   'public/src/**/*module.js',
+                   'public/src/**/*.js'
                    ])
     .pipe(ngAnnotate())
     .pipe(babel({
@@ -73,7 +74,7 @@ gulp.task('minify-app-css', ['concat-app-css'], () => {
 });
 
 gulp.task('concat-vendor-js', function() {
-  return gulp.src(getMainBowerFiles('js', true), {base: './bower_components'})
+  return gulp.src(getMainBowerFiles('js', true), {base: 'bower_components'})
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest('public/build/'));
 });
@@ -94,6 +95,9 @@ gulp.task('reload', ['develop'], () => {
 gulp.task('watch', () => {
   gulp.watch(['public/**',
               '!public/build/**'], ['reload']);
+  // gulp.watch(['public/*.html',
+  //             'public/assets/**',
+  //             'public/src/**'], ['reload']); 
 });
 
 gulp.task('default', ['build']);
@@ -102,8 +106,9 @@ gulp.task('develop', ['templete-cache',
                       'concat-vendor-css',
                       'concat-app-css',
                       'concat-vendor-js',
-                      'concat-app-js',
-                      'watch']);
+                      'concat-app-js']);
+
+gulp.task('dev-watch', ['develop', 'watch']);
 
 gulp.task('build', ['lint',
                     'templete-cache',
