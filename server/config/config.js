@@ -9,31 +9,33 @@ try {
   throw new Error('secrets.json is missing.');
 }
 
+function baseEnvironment(customConfig) {
+  this.db = 'mongodb://localhost/eduplat';
+  this.rootPath = rootPath;
+  this.port = 3030;
+  this.APP_URL = 'http://localhost:3030/';
+  this.FACEBOOK_SECRET = secrets.development.FACEBOOK_SECRET;
+  this.GOOGLE_SECRET = secrets.development.GOOGLE_SECRET;
+  this.EMAIL_SECRET = secrets.development.EMAIL_SECRET;
+  this.SMTP_PASS = secrets.development.SMTP_PASS;
+  this.MAILGUN_AUTH = secrets.development.MAILGUN_AUTH;
+  if (customConfig) {
+    Object.assign(this, customConfig);
+  }
+}
+
 function getEnvironment(env) {
   let config;
   let evironments = {
-    development: {
+    development: new baseEnvironment(),
+    docker: new baseEnvironment({
+      db: 'mongodb://' + process.env.MONGODB_PORT_27017_TCP_ADDR + ':' + process.env.MONGODB_PORT_27017_TCP_PORT + '/eduplat',
+      port: 3030
+    }),
+    production: new baseEnvironment({
       db: 'mongodb://localhost/eduplat',
-      rootPath: rootPath,
-      port: process.env.PORT || 3030,
-      APP_URL: 'http://localhost:3030/',
-      FACEBOOK_SECRET: secrets.development.FACEBOOK_SECRET,
-      GOOGLE_SECRET: secrets.development.GOOGLE_SECRET,
-      EMAIL_SECRET: secrets.development.EMAIL_SECRET,
-      SMTP_PASS: secrets.development.SMTP_PASS,
-      MAILGUN_AUTH: secrets.development.MAILGUN_AUTH
-    },
-    production: {
-      db: 'mongodb://localhost/eduplat',
-      rootPath: rootPath,
-      port: process.env.PORT || 80,
-      APP_URL: 'http://localhost:3030/',
-      FACEBOOK_SECRET: secrets.production.FACEBOOK_SECRET,
-      GOOGLE_SECRET: secrets.production.GOOGLE_SECRET,
-      EMAIL_SECRET: secrets.production.EMAIL_SECRET,
-      SMTP_PASS: secrets.production.SMTP_PASS,
-      MAILGUN_AUTH: secrets.production.MAILGUN_AUTH
-    }
+      port: 80
+    })
   };
   if (evironments[env]) {
     console.log(`Running in ${env} mode.`);

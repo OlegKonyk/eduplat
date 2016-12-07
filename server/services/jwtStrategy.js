@@ -16,7 +16,7 @@ module.exports = new JwtStrategy(opts, function(req, payload, done) {
     if (user) {
       done(null, user);
     } else {
-      done(null, false);
+      done(null, false, 'user is not found');
     }
   });
 });
