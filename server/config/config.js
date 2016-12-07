@@ -4,7 +4,7 @@ var rootPath = path.resolve(__dirname, '../../');
 var env = process.env.NODE_ENV;
 var secrets = {development: {}, production: {}};
 try {
-  secrets = require('../../secrets.json');
+  secrets = require('../../sec/secrets.json');
 } catch (err) {
   throw new Error('secrets.json is missing.');
 }

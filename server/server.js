@@ -12,8 +12,8 @@ const jwtStrategy = require('./services/jwtStrategy.js');
 let credentials;
 
 try {
-  let privateKey = fs.readFileSync('sslcert/key.pem', 'utf8');
-  let certificate = fs.readFileSync('sslcert/cert.pem', 'utf8');
+  let privateKey = fs.readFileSync('./sec/sslcert/key.pem', 'utf8');
+  let certificate = fs.readFileSync('./sec/sslcert/cert.pem', 'utf8');
   credentials = {key: privateKey, cert: certificate};
 } catch (err) {
   console.error("ssl sertificate missing");
