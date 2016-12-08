@@ -1,0 +1,23 @@
+version: '2'
+services:
+ mongodb:
+  image: mongo:3.0.14
+  volumes:
+   - ../mongo:/data/db
+ web:
+  build: .
+  ports:
+   - "3030:3030"
+  volumes:
+   - ../sec:/sec
+  links:
+   - mongodb:mongodb
+  depends_on:
+   - mongodb
+  #command: ["ls"]
+  command: ["./wait-for.sh", "mongodb:27017", "--", "node", "server/server.js"]
+  
+  # Command to run DB & Web app
+  # docker-compose run -d -p 3000:3000 webapp npm start
+  # Not - Check database host name in config.js
+  #"db_host": "mongodb_1"
