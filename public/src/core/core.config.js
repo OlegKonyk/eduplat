@@ -6,7 +6,7 @@
   .component('edAbout', {
     template: '<md-content class="md-padding"><h1>ABOUT</h1></md-content>'
   })
-  .constant('API_URL', 'http://localhost:3030/')
+  //.constant('API_URL', 'http://localhost:3030/')
   .factory('authInterceptor', function($injector) {
     return {
       request: function(config) {
@@ -25,18 +25,18 @@
   });
 
   function config($mdThemingProvider, $mdIconProvider, $stateProvider, $urlRouterProvider,
-                 $locationProvider, $authProvider, API_URL, $httpProvider, $compileProvider) {
+                 $locationProvider, $authProvider, $httpProvider, $compileProvider) {
     "ngInject";
     $locationProvider.html5Mode(true);
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|ftp|blob):|data:image\//);
-    $authProvider.loginUrl = API_URL + 'api/login';
-    $authProvider.signupUrl = API_URL + 'api/register';
+    $authProvider.loginUrl = 'api/login';
+    $authProvider.signupUrl = 'api/register';
 
     $httpProvider.interceptors.push('authInterceptor');
 
     $authProvider.google({
       clientId: '180115616906-3dekl0d823bbm280f1hidk1kk41cd9fl.apps.googleusercontent.com',
-      url: API_URL + 'api/auth/google',
+      url: 'api/auth/google',
       authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
       // redirectUri: $window.location.origin,
       requiredUrlParams: ['scope'],
