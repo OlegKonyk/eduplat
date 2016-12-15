@@ -121,11 +121,29 @@
       <div layout="row"><span flex></span><div>- Donald Knuth</div></div>
     </div>
   </div>
-
+<style>
+.moving-box {
+  transition:4s linear all;
+  /*display: none;*/
+}
+.moving-box.isInView-add {
+  background:white;
+}
+.moving-box.isInView {
+  background:yellow;
+  /*display: block;*/
+}
+.moving-box.isInView-remove {
+  background:black;
+}
+.outer-moving-box{
+  /*overflow: hidden;*/
+}
+</style>
 
   <md-content layout-xs="column" layout="row">
-    <div flex-gt-xs="50" in-view="$ctrl.myDivIsVisible = $inview" ng-class="{ isInView: $ctrl.myDivIsVisible }">
-      <md-card>
+    <div class="outer-moving-box" flex-gt-xs="50" in-view="$ctrl.isVisible_1 = $inview">
+      <md-card class="moving-box" ng-class="{ 'animated slideInLeft': $ctrl.isVisible_1 }">
         <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
         <md-card-title>
           <md-card-title-text>
@@ -152,8 +170,8 @@
         </md-card-actions>
       </md-card>
     </div>
-    <div flex-gt-xs="50">
-      <md-card>
+    <div class="outer-moving-box" flex-gt-xs="50" in-view="$ctrl.isVisible_2 = $inview">
+      <md-card class="moving-box" ng-class="{ 'animated slideInRight': $ctrl.isVisible_2 }">
         <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
         <md-card-title>
           <md-card-title-text>

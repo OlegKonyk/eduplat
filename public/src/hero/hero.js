@@ -31,10 +31,10 @@
       $state.go('player', {video: id});
     };
 
-    $scope.$watch('$ctrl.myDivIsVisible', function(){
+    /*$scope.$watch('$ctrl.myDivIsVisible', function(){
       console.log("^^^^^^^");
       console.log(ctrl.myDivIsVisible);
-    })
+    })*/
 
     ctrl.slides = [/*{
       id: 0,

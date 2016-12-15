@@ -18,7 +18,8 @@
     "ngImgCrop": "~0.3.2",
     "angular-ui-router": "~0.3.2",
     "angular-jk-carousel": "~0.1.7",
-    "angular-inview": "~2.2.0"
+    "angular-inview": "~2.2.0",
+    "animate.css": "~3.5.2"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.9"
