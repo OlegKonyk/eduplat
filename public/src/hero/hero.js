@@ -12,7 +12,7 @@
     }
   );
 
-  function heroCtrl(edPlaylistsService, $location, $state) {
+  function heroCtrl($scope, edPlaylistsService, $location, $state) {
     "ngInject";
 
     var ctrl = this;
@@ -30,6 +30,11 @@
     ctrl.goToPlaylist = function(id) {
       $state.go('player', {video: id});
     };
+
+    $scope.$watch('$ctrl.myDivIsVisible', function(){
+      console.log("^^^^^^^");
+      console.log(ctrl.myDivIsVisible);
+    })
 
     ctrl.slides = [/*{
       id: 0,

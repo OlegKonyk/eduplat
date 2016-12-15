@@ -11,7 +11,8 @@
     'ngFileUpload',
     'ngImgCrop',
     'ui.router',
-    'jkAngularCarousel'
+    'jkAngularCarousel',
+    'angular-inview'
   ]);
 })();
 

@@ -25,79 +25,79 @@
   }
 </style>
 <div class="view-column" ng-cloak>
-<div layout="column" layout-gt-sm="row" style="">
-  <!--div flex flex-gt-sm="60" class="">
-    <jk-carousel
-      data="$ctrl.slides"
-      item-template-url="'front/item-template.html'"
-      max-width="1000" 
-      max-height="680"
-      auto-slide="true"
-      auto-slide-time="5000" >
-    </jk-carousel>
-  </div-->
-  <div class="slider">
+  <div layout="column" layout-gt-sm="row" style="">
+    <!--div flex flex-gt-sm="60" class="">
+      <jk-carousel
+        data="$ctrl.slides"
+        item-template-url="'front/item-template.html'"
+        max-width="1000" 
+        max-height="680"
+        auto-slide="true"
+        auto-slide-time="5000" >
+      </jk-carousel>
+    </div-->
+    <div class="slider">
 
-  </div>
-  <!--span flex hide show-gt-sm></span-->
-  <div flex flex-gt-sm="30" layout="row" layout-xs="column" layout-gt-sm="column">
-    
-    <md-card flex>
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">Card</span>
-          <span class="md-subhead">Small</span>
-        </md-card-title-text>
-        <!--md-card-title-media>
-          <div class="md-media-sm card-media"></div>
-        </md-card-title-media-->
-      </md-card-title>
-    </md-card>
-    <md-card flex>
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">Card</span>
-          <span class="md-subhead">Small</span>
-        </md-card-title-text>
-        <!--md-card-title-media>
-          <div class="md-media-sm card-media"></div>
-        </md-card-title-media-->
-      </md-card-title>
-    </md-card>
-
-    <md-card flex hide show-gt-sm>
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">Card</span>
-          <span class="md-subhead">Small</span>
-        </md-card-title-text>
-        <!--md-card-title-media>
-          <div class="md-media-sm card-media"></div>
-        </md-card-title-media-->
-      </md-card-title>
-    </md-card>
-    <md-card flex>
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">Card</span>
-          <span class="md-subhead">Small</span>
-        </md-card-title-text>
-        <!--md-card-title-media>
-          <div class="md-media-sm card-media"></div>
-        </md-card-title-media-->
-      </md-card-title>
-    </md-card>
-
-  </div>
-
-</div>
-
-<div  layout="row" layout-align="center center" class="quotations">
-    <div flex="70">
-      <div class="quotation-text">"Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live.""</div>
-      <div layout="row"><span flex></span><div>- Rick Osborne</div></div>
     </div>
-</div>
+    <!--span flex hide show-gt-sm></span-->
+    <div flex flex-gt-sm="30" layout="row" layout-xs="column" layout-gt-sm="column">
+      
+      <md-card flex>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Card</span>
+            <span class="md-subhead">Small</span>
+          </md-card-title-text>
+          <!--md-card-title-media>
+            <div class="md-media-sm card-media"></div>
+          </md-card-title-media-->
+        </md-card-title>
+      </md-card>
+      <md-card flex>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Card</span>
+            <span class="md-subhead">Small</span>
+          </md-card-title-text>
+          <!--md-card-title-media>
+            <div class="md-media-sm card-media"></div>
+          </md-card-title-media-->
+        </md-card-title>
+      </md-card>
+
+      <md-card flex hide show-gt-sm>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Card</span>
+            <span class="md-subhead">Small</span>
+          </md-card-title-text>
+          <!--md-card-title-media>
+            <div class="md-media-sm card-media"></div>
+          </md-card-title-media-->
+        </md-card-title>
+      </md-card>
+      <md-card flex>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Card</span>
+            <span class="md-subhead">Small</span>
+          </md-card-title-text>
+          <!--md-card-title-media>
+            <div class="md-media-sm card-media"></div>
+          </md-card-title-media-->
+        </md-card-title>
+      </md-card>
+
+    </div>
+
+  </div>
+
+  <div  layout="row" layout-align="center center" class="quotations">
+      <div flex="70">
+        <div class="quotation-text">"Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live."</div>
+        <div layout="row"><span flex></span><div>- Rick Osborne</div></div>
+      </div>
+  </div>
 
   <md-grid-list
         md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3"
@@ -114,4 +114,73 @@
     </md-grid-tile>
 
   </md-grid-list>
+
+  <div  layout="row" layout-align="center center" class="quotations">
+    <div flex="70">
+      <div class="quotation-text">"People think that computer science is the art of geniuses but the actual reality is the opposite, just many people doing things that build on each other, like a wall of mini stones."</div>
+      <div layout="row"><span flex></span><div>- Donald Knuth</div></div>
+    </div>
+  </div>
+
+
+  <md-content layout-xs="column" layout="row">
+    <div flex-gt-xs="50" in-view="$ctrl.myDivIsVisible = $inview" ng-class="{ isInView: $ctrl.myDivIsVisible }">
+      <md-card>
+        <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Action buttons</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+          </p>
+          <p>
+            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+          </p>
+          <p>
+            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+          </p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+    <div flex-gt-xs="50">
+      <md-card>
+        <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Action buttons</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+          </p>
+          <p>
+            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+          </p>
+          <p>
+            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+          </p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>
+
+    </div>
+  </md-content>
+
 </div>
