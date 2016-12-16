@@ -31,6 +31,12 @@
       $state.go('player', {video: id});
     };
 
+    ctrl.asighnVisibility = function(visibility, prop) {
+      if (!ctrl[prop]) {
+        ctrl[prop] = visibility;
+      }
+    };
+
     /*$scope.$watch('$ctrl.myDivIsVisible', function(){
       console.log("^^^^^^^");
       console.log(ctrl.myDivIsVisible);

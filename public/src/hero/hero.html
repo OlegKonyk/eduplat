@@ -47,9 +47,20 @@
   .havy-margin{
     margin: 15px;
   }
+  
+  .gradient-secondary { 
+    padding: 10px;
+    min-height: 300px;
+    margin: 30px 0px;
+    /*border-top:    1px solid  #CFD8DC;
+    border-bottom: 1px solid #CFD8DC;*/
+    background-image: -webkit-linear-gradient(top left, #02b3e4, #02ccba);
+    background-image: -o-linear-gradient(top left, #02b3e4, #02ccba);
+    background-image: linear-gradient(to bottom right, #02b3e4, #02ccba);
+  }
 </style>
 <div class="view-column" ng-cloak>
-  <div layout="column" layout-gt-sm="row" style="">
+  <div layout="column" layout-gt-sm="row" style="" class="havy-padding">
     <!--div flex flex-gt-sm="60" class="">
       <jk-carousel
         data="$ctrl.slides"
@@ -116,7 +127,7 @@
 
   </div>
 
-  <div  layout="row" layout-align="center center" class="quotations">
+  <div  layout="row" layout-align="center center" class="quotations havy-margin">
       <div flex="70">
         <div class="quotation-text">"Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live."</div>
         <div layout="row"><span flex></span><div>- Rick Osborne</div></div>
@@ -139,14 +150,33 @@
 
   </md-grid-list>
 
-  <div  layout="row" layout-align="center center" class="quotations">
+  <!--div  layout="row" layout-align="center center" class="quotations gradient-secondary">
     <div flex="70">
       <div class="quotation-text">"People think that computer science is the art of geniuses but the actual reality is the opposite, just many people doing things that build on each other, like a wall of mini stones."</div>
       <div layout="row"><span flex></span><div>- Donald Knuth</div></div>
     </div>
+  </div-->
+</div>
+
+  <div  layout="row" layout-align="center center" class="gradient-secondary" style="">
+    <div layout="row" layout-align="center center" class="view-column" style="width: 100%;">
+      <md-whiteframe class="md-whiteframe-15dp havy-padding" flex="80" layout-gt-sm="row" layout= "column" layout-align="center center" style="background-color: white; min-height: 240px;" >
+        <span hide show-gt-sm flex></span>
+        <div flex-gt-sm="60">
+          <h1>Imagine your future!</h1>
+          <p style="font-size: 1.6em">
+            What do you want to learn today? What's your dream job? Discover the program that's right for you!
+          </p>
+        </div>
+        
+        <div flex-gt-sm="30" layout= "row" layout-align="center center">
+          <md-button class="md-raised md-primary">Get Started</md-button>
+        </div>
+      </md-whiteframe>
+    </div>
   </div>
   
-
+<div class="view-column" ng-cloak>
   <md-content class="havy-padding" layout="column" layout-gt-sm="row" layout-align="center center" style="overflow: hidden;">
     <div flex-order-gt-sm="2" class="outer-moving-box" flex flex-gt-sm="50">
       <div class="moving-box md-padding">
@@ -159,7 +189,7 @@
 
       </div>
     </div>
-    <div  flex-order-gt-sm="1" class="outer-moving-box" flex flex-gt-sm="50" in-view="$ctrl.isVisible_1 = $inview">
+    <div  flex-order-gt-sm="1" class="outer-moving-box" flex flex-gt-sm="50" in-view="$ctrl.asighnVisibility($inview, 'isVisible_1')">
       <md-card class="moving-box" ng-class="{ 'animated slideInUp': $ctrl.isVisible_1 }">
         <img src="front/assets/img/2.jpeg" class="md-card-image" alt="Washed Out">
       </md-card>
@@ -179,7 +209,7 @@
 
       </div>
     </div>
-    <div  class="outer-moving-box" flex flex-gt-sm="50" in-view="$ctrl.isVisible_2 = $inview">
+    <div  class="outer-moving-box" flex flex-gt-sm="50" in-view="$ctrl.asighnVisibility($inview, 'isVisible_2')">
       <md-card class="moving-box" ng-class="{ 'animated slideInRight': $ctrl.isVisible_2 }">
         <img src="front/assets/img/3.jpeg" class="md-card-image" alt="Washed Out">
       </md-card>
