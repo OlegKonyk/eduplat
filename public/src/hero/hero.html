@@ -23,6 +23,29 @@
     font-style: italic;
     
   }
+  .moving-box {
+    transition:4s linear all;
+    /*display: none;*/
+  }
+  .moving-box.isInView-add {
+    background:white;
+  }
+  .moving-box.isInView {
+    background:yellow;
+    /*display: block;*/
+  }
+  .moving-box.isInView-remove {
+    background:black;
+  }
+  .outer-moving-box{
+    /*overflow: hidden;*/
+  }
+  .havy-padding{
+    padding: 15px;
+  }
+  .havy-margin{
+    margin: 15px;
+  }
 </style>
 <div class="view-column" ng-cloak>
   <div layout="column" layout-gt-sm="row" style="">
@@ -99,7 +122,7 @@
       </div>
   </div>
 
-  <md-grid-list
+  <md-grid-list class="havy-margin"
         md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3"
         md-row-height="1.3:1"
         md-gutter-gt-sm="36px" md-gutter="32px" >
@@ -121,84 +144,46 @@
       <div layout="row"><span flex></span><div>- Donald Knuth</div></div>
     </div>
   </div>
-<style>
-.moving-box {
-  transition:4s linear all;
-  /*display: none;*/
-}
-.moving-box.isInView-add {
-  background:white;
-}
-.moving-box.isInView {
-  background:yellow;
-  /*display: block;*/
-}
-.moving-box.isInView-remove {
-  background:black;
-}
-.outer-moving-box{
-  /*overflow: hidden;*/
-}
-</style>
+  
 
-  <md-content layout-xs="column" layout="row">
-    <div class="outer-moving-box" flex-gt-xs="50" in-view="$ctrl.isVisible_1 = $inview">
-      <md-card class="moving-box" ng-class="{ 'animated slideInLeft': $ctrl.isVisible_1 }">
-        <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">Action buttons</span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
+  <md-content class="havy-padding" layout-sm="column" layout="row" layout-align="center center" style="overflow: hidden;">
+    <div flex-order-gt-sm="2" class="outer-moving-box" flex flex-gt-sm="50">
+      <div class="moving-box md-padding">
+
+          <h2>Maximize Your Impact</h2>
           <p>
-            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+            Create an amazing future that you love in any field from transportation to commerce and health care to government. 
+            Expand your opportunities. Exceed your expectations. Excel!!
           </p>
-          <p>
-            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-          </p>
-          <p>
-            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-          </p>
-        </md-card-content>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button>Action 1</md-button>
-          <md-button>Action 2</md-button>
-        </md-card-actions>
+
+      </div>
+    </div>
+    <div  flex-order-gt-sm="1" class="outer-moving-box" flex flex-gt-sm="50" in-view="$ctrl.isVisible_1 = $inview">
+      <md-card class="moving-box" ng-class="{ 'animated slideInUp': $ctrl.isVisible_1 }">
+        <img src="front/assets/img/2.jpeg" class="md-card-image" alt="Washed Out">
       </md-card>
     </div>
-    <div class="outer-moving-box" flex-gt-xs="50" in-view="$ctrl.isVisible_2 = $inview">
+    
+  </md-content>
+
+  <md-content class="havy-padding" layout-sm="column" layout="row" layout-align="center center" style="overflow: hidden;">
+    <div  class="outer-moving-box" flex flex-gt-sm="50">
+      <div class="moving-box md-padding">
+
+          <h2>Maximize Your Impact</h2>
+          <p>
+            Create an amazing future that you love in any field from transportation to commerce and health care to government. 
+            Expand your opportunities. Exceed your expectations. Excel!!
+          </p>
+
+      </div>
+    </div>
+    <div  class="outer-moving-box" flex flex-gt-sm="50" in-view="$ctrl.isVisible_2 = $inview">
       <md-card class="moving-box" ng-class="{ 'animated slideInRight': $ctrl.isVisible_2 }">
-        <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">Action buttons</span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-          <p>
-            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-          </p>
-          <p>
-            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-          </p>
-          <p>
-            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-          </p>
-        </md-card-content>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button>Action 1</md-button>
-          <md-button>Action 2</md-button>
-        </md-card-actions>
+        <img src="front/assets/img/3.jpeg" class="md-card-image" alt="Washed Out">
       </md-card>
-
     </div>
+    
   </md-content>
 
 </div>
