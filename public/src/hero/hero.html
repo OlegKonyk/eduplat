@@ -11,7 +11,7 @@
     min-height: 180px;
     margin: 30px 0px;
     border-top:    1px solid  #CFD8DC;
-    border-bottom: 1px solid #CFD8DC;
+    /*border-bottom: 1px solid #CFD8DC;*/
     color: #607D8B;
   }
 
@@ -127,14 +127,14 @@
 
   </div>
 
-  <div  layout="row" layout-align="center center" class="quotations havy-margin">
+  <div layout="row" layout-align="center center" class="quotations havy-margin">
       <div flex="70">
         <div class="quotation-text">"Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live."</div>
         <div layout="row"><span flex></span><div>- Rick Osborne</div></div>
       </div>
   </div>
 
-  <md-grid-list class="havy-margin"
+  <!--md-grid-list class="havy-margin"
         md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3"
         md-row-height="1.3:1"
         md-gutter-gt-sm="36px" md-gutter="32px" >
@@ -148,7 +148,9 @@
         </md-grid-tile-footer>
     </md-grid-tile>
 
-  </md-grid-list>
+  </md-grid-list-->
+
+  <ed-featured-playlists></ed-featured-playlists>
 
   <!--div  layout="row" layout-align="center center" class="quotations gradient-secondary">
     <div flex="70">
@@ -158,23 +160,23 @@
   </div-->
 </div>
 
-  <div  layout="row" layout-align="center center" class="gradient-secondary" style="">
-    <div layout="row" layout-align="center center" class="view-column" style="width: 100%;">
-      <md-whiteframe class="md-whiteframe-15dp havy-padding" flex="80" layout-gt-sm="row" layout= "column" layout-align="center center" style="background-color: white; min-height: 240px;" >
-        <span hide show-gt-sm flex></span>
-        <div flex-gt-sm="60">
-          <h1>Imagine your future!</h1>
-          <p style="font-size: 1.6em">
-            What do you want to learn today? What's your dream job? Discover the program that's right for you!
-          </p>
-        </div>
-        
-        <div flex-gt-sm="30" layout= "row" layout-align="center center">
-          <md-button class="md-raised md-primary">Get Started</md-button>
-        </div>
-      </md-whiteframe>
-    </div>
+<div  layout="row" layout-align="center center" class="gradient-secondary">
+  <div layout="row" layout-align="center center" class="view-column" style="width: 100%;">
+    <md-whiteframe class="md-whiteframe-15dp havy-padding" flex="80" layout-gt-sm="row" layout= "column" layout-align="center center" style="background-color: white; min-height: 240px;" >
+      <span hide show-gt-sm flex></span>
+      <div flex-gt-sm="60">
+        <h1>Imagine your future!</h1>
+        <p style="font-size: 1.6em">
+          What do you want to learn today? What's your dream job? Discover the program that's right for you!
+        </p>
+      </div>
+      
+      <div flex-gt-sm="30" layout= "row" layout-align="center center">
+        <md-button class="md-raised md-primary">Get Started</md-button>
+      </div>
+    </md-whiteframe>
   </div>
+</div>
   
 <div class="view-column" ng-cloak>
   <md-content class="havy-padding" layout="column" layout-gt-sm="row" layout-align="center center" style="overflow: hidden;">
