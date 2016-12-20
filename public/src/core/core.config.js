@@ -65,7 +65,7 @@
           template: '<ed-signin></ed-signin>'
         })
         .state('signup', {
-          url: 'signup',
+          url: '/signup',
           template: '<ed-signup></ed-signup>'
         })
         .state('profile', {

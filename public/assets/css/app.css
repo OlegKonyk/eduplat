@@ -147,3 +147,10 @@ span.name {
   margin: 0px auto;
   position: relative;
 }
+
+.google-button{
+  padding: 0px 10px 0px 10px;
+}
+.google-button img{
+  width: 20px; height: 20px; margin: -5px 10px -5px 0px;
+}

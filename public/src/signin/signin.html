@@ -33,10 +33,15 @@
                         <md-divider></md-divider>
                         
                         <div layout="column" layout-align="center center">
-                            <div class="md-padding">or sign in with one of these services</div>
+                            <div class="md-padding">or sign in with</div>
                             <section layout="row" layout-align="center center">
-                                <md-button flex="50" href="/facebook">Facebook</md-button>
-                                <md-button ng-click="$ctrl.authenticate('google')" flex="50">Google</md-button>
+                                <!--md-button flex="50" href="/facebook">Facebook</md-button-->
+                                <md-button class="google-button" ng-click="$ctrl.authenticate('google')" flex>
+                                    <div layout="row" layout-align="center center">
+                                        <div><img src="front/assets/svg/google-logo.svg"></div>
+                                        <div>Google</div>
+                                    </div>
+                                </md-button>
                             </section>
                         </div>
 
