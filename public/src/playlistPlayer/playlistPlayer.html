@@ -1,11 +1,38 @@
-<div layout="column" ng-cloak>
+<style>
+.embed-responsive {
+  position: relative;
+  display: block;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+}
 
-  <section style="" layout="row" flex>
+.embed-responsive.embed-responsive-16by9 {
+  padding-bottom: 56.25%;
+}
+
+.embed-responsive-item {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+</style>
+
+<div style="height: 100%;" layout="column" ng-cloak>
+  <!--ed-toolbar-main></ed-toolbar-main-->
+  <section style="height: 100%; width: 100%;" layout="row">
+    
     <md-sidenav
         class="md-sidenav-left"
         md-component-id="left"
         md-is-locked-open="$mdMedia('gt-xs')"
-        md-whiteframe="4">
+        md-whiteframe="4"
+        style="max-width: 300px;"
+        flex>
 
       <md-content layout="column">
         <md-button ng-repeat="video in $ctrl.playlist.links" class="md-raised" ng-click="$ctrl.setVideoUrl(video)">Video {{$index+1}}</md-button>
@@ -13,11 +40,13 @@
 
     </md-sidenav>
 
-    <md-content style="height: 100%;" layout="row" layout-align="center center" layout-margin flex>
-
-        <youtube-video video-url="$ctrl.currentVideo"></youtube-video>
-
-    </md-content>
+    <div flex layout="row" layout-align="center start" layout-padding>
+      <div flex="80" style="position: relative; height: 100%; width: 100%;">
+        <div class="embed-responsive embed-responsive-16by9">
+          <youtube-video class="embed-responsive-item" video-url="$ctrl.currentVideo"></youtube-video>
+        </div>
+      </div>
+    </div>
 
   </section>
 
