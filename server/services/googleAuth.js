@@ -25,6 +25,9 @@ module.exports = function(req, res, next) {
 
     var accessToken = token.access_token;
 
+    console.log('=========>>>>>>>');
+    console.log(accessToken)
+
     var headers = {
       Authorization: 'Bearer ' + accessToken
     };
@@ -36,9 +39,9 @@ module.exports = function(req, res, next) {
       json: true
     }, function(err, response, profile) {
       if (err) return next(err);
-      if (response.statusCode !== 200) return res.status(response.statusCode);
-      //console.log("========");
-      //console.log(JSON.stringify(response.body));
+      //if (response.statusCode !== 200) return res.status(response.statusCode);
+      console.log("========");
+      console.log(JSON.stringify(response.body));
     });*/
 
     request.get({

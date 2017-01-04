@@ -6,12 +6,15 @@ const emailVerification = require('../services/emailVerification');
 const createSendToken = require('../services/jwt.js');
 const config = require('../config/config');
 const googleAuth = require('../services/googleAuth');
+const googleSystem = require('../services/googleSystem');
 const auth = require('../controllers/authHandlers');
 const User = require('../models/User.js');
 
 router.get('/api/auth/verifyEmail', emailVerification.handler);
 
 router.post('/api/auth/google', googleAuth);
+
+router.post('/api/auth/googleSystemUser', googleSystem);
 
 router.post('/api/register', auth.register, register);
 

@@ -10,7 +10,7 @@ const config = require('../config/config');
 
 function Model() {
   return {
-    verifyUrl: config.APP_URL + 'api/auth/verifyEmail?token=',
+    verifyUrl: config.APP_URL + '/api/auth/verifyEmail?token=',
     title: 'EDUPLAT',
     subTitle: 'Thanks for signing up!',
     body: 'Please verify your email address by clicking the button below'

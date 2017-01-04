@@ -6,10 +6,11 @@
 
   function edAuthService($rootScope, $resource, $auth,
                          edToasterService, $location,
-                         edErrorsService) {
+                         edErrorsService, $window, $http, $q) {
     "ngInject";
     var service = {
       authenticate,
+      authenticateYoutubeSysUser,
       signup,
       login,
       logout,
@@ -35,6 +36,60 @@
             });
             $location.path('/');
           }, edErrorsService.handleError);
+    }
+
+    var urlBuilder = [];
+    var clientId = '180115616906-3dekl0d823bbm280f1hidk1kk41cd9fl.apps.googleusercontent.com';
+
+    urlBuilder.push('response_type=code',
+      'client_id=' + clientId,
+      'redirect_uri=' + $window.location.origin,
+      'access_type=offline',
+      'scope=profile email https://gdata.youtube.com');
+
+    function authenticateYoutubeSysUser() {
+      /*var url = "https://accounts.google.com/o/oauth2/auth?" + urlBuilder.join('&');
+      var options = 'width=500,height=500,left=' + ($window.outerWidth - 500) / 2 + ',top=' + ($window.outerHeight - 500) / 2.5;
+      
+      var deferred = $q.defer();
+
+      var popup = $window.open(url, '', options);
+      $window.focus();
+
+      $window.addEventListener('message', function(event){
+        if (event.origin === $window.location.origin) {
+          var code = event.data;
+          console.log(code);
+          popup.close();
+
+          $http.post('/api/auth/googleSystemUser', {
+            code: code, 
+            clientId: clientId,
+            redirectUri: $window.location.origin
+          }).then(function(jwt) {
+            //authSuccessfull(jwt);
+            console.log(jwt);
+            deferred.resolve(jwt);
+          });
+        }
+      });
+
+      return deferred.promise;*/
+      var options = 'width=500,height=500,left=' + ($window.outerWidth - 500) / 2 + ',top=' + ($window.outerHeight - 500) / 2.5;
+      $http.post('/api/auth/googleSystemUser', {})
+        .then(function(res) {
+          //authSuccessfull(jwt);
+          var url = res.data.url;
+          console.log("////////");
+          console.log(url);
+          var popup = $window.open(url, '', options);
+          $window.focus();
+          console.log(popup);
+        }, function(err) {
+          //authSuccessfull(jwt);
+          console.log("////////");
+          console.log(err);
+        });
     }
 
     function signup(user) {

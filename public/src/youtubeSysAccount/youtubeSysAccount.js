@@ -12,10 +12,14 @@
     }
   );
 
-  function youtubeSysAccountCtrl() {
+  function youtubeSysAccountCtrl(edAuthService) {
     "ngInject";
 
     var ctrl = this;
+
+    ctrl.authenticateYoutubeSysUser = function() {
+      edAuthService.authenticateYoutubeSysUser();
+    };
   }
 })();
 

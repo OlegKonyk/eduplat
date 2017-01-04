@@ -13,7 +13,8 @@ function baseEnvironment(customConfig) {
   this.db = 'mongodb://localhost/eduplat';
   this.rootPath = rootPath;
   this.port = 3030;
-  this.APP_URL = 'http://localhost:3030/';
+  this.APP_URL = 'http://localhost:3030';
+  this.GOOGLE_CLIENT_ID = '180115616906-3dekl0d823bbm280f1hidk1kk41cd9fl.apps.googleusercontent.com';
   this.FACEBOOK_SECRET = secrets.development.FACEBOOK_SECRET;
   this.GOOGLE_SECRET = secrets.development.GOOGLE_SECRET;
   this.EMAIL_SECRET = secrets.development.EMAIL_SECRET;
@@ -31,7 +32,7 @@ function getEnvironment(env) {
     docker: new baseEnvironment({
       db: 'mongodb://mongodb/eduplat',
       port: 3030,
-      APP_URL: 'http://www.okonyk.com:3030/'
+      APP_URL: 'http://www.okonyk.com:3030'
     }),
     production: new baseEnvironment({
       db: 'mongodb://localhost/eduplat',
