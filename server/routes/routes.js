@@ -19,6 +19,8 @@ router.post('/api/login', auth.login, login);
 
 router.get('/api/user/', auth.jwt, returnUser);
 
+router.get('/api/users/', auth.jwt, returnUsers);
+
 router.get('/front/*', function(req, res) {
   res.sendFile(path.join(config.rootPath, 'public', req.params[0]));
 });
@@ -42,6 +44,13 @@ function returnUser(req, res, next) {
   .then(function(user) {
     res.json(user.toJSON()).status(200);
   });
+}
+
+function returnUsers(req, res, next) {
+  User.find({}).exec()
+    .then(function(users) {
+      res.json(users).status(200);
+    });
 }
 
 module.exports = router;

@@ -79,8 +79,11 @@
         })
         .state('admin.youtubeSysAccount', {
           url: '/youtubeSysAccount',
-          template: '<ed-youtube-sys-account></ed-youtube-sys-account>'/*,
-          resolve: {getCurrentUser: getCurrentUser}*/
+          template: '<ed-youtube-sys-account></ed-youtube-sys-account>'
+        })
+        .state('admin.usersManagement', {
+          url: '/usersManagement',
+          template: '<ed-users-management></ed-users-management>'
         })
 
         .state('playlists', {
