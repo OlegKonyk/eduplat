@@ -50,7 +50,7 @@
     });
 
     $urlRouterProvider.otherwise('/');
-    
+
     $stateProvider
         .state('home', {
           url: '/',
@@ -75,6 +75,11 @@
         .state('admin', {
           url: '/admin',
           template: '<ed-admin></ed-admin>'
+        })
+        .state('admin.youtubeSysAccount', {
+          url: '/youtubeSysAccount',
+          template: '<ed-youtube-sys-account></ed-youtube-sys-account>'/*,
+          resolve: {getCurrentUser: getCurrentUser}*/
         })
 
         .state('playlists', {
