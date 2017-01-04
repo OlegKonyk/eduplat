@@ -50,7 +50,7 @@
     });
 
     $urlRouterProvider.otherwise('/');
-
+    
     $stateProvider
         .state('home', {
           url: '/',
@@ -76,10 +76,11 @@
           url: '/admin',
           template: '<ed-admin></ed-admin>'
         })
+
         .state('playlists', {
           url: '/playlists',
           template: '<ed-playlists></ed-playlists>',
-          resolve: {getCurrentUser: getCurrentUser}
+          redirectTo: 'playlists.myPlaylists'
         })
         .state('playlists.myPlaylists', {
           url: '/myPlaylists',
@@ -91,6 +92,7 @@
           template: '<ed-playlist-editor></ed-playlist-editor>',
           resolve: {getCurrentUser: getCurrentUser}
         })
+
         .state('player', {
           url: '/playlist/public?video',
           template: '<ed-playlist-player></ed-playlist-player>'
@@ -111,4 +113,3 @@
     }
   }
 })();
-

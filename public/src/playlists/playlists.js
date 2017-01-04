@@ -18,7 +18,6 @@
     var ctrl = this;
 
     ctrl.currentNavItem = 'myPlaylists';
-    $state.go('playlists.myPlaylists');
   }
 })();
 
