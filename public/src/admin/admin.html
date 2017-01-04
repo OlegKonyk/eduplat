@@ -11,7 +11,7 @@
         flex>
 
       <md-content layout="column">
-        <md-button class="md-raised">Youtube sys account</md-button>
+        <md-button class="md-raised" ui-sref="admin.youtubeSysAccount">Youtube sys account</md-button>
         <md-button class="md-raised">Users management</md-button>
       </md-content>
 
@@ -20,7 +20,8 @@
     <div flex layout="row" layout-align="center start" layout-padding>
       <div flex="80" style="position: relative; height: 100%; width: 100%;">
         <div>
-          <div style="width: 300px; height: 300px; background-color: red;"></div>
+          <!--div style="width: 300px; height: 300px; background-color: red;"></div-->
+          <div ui-view></div>
         </div>
       </div>
     </div>

@@ -74,7 +74,8 @@
         })
         .state('admin', {
           url: '/admin',
-          template: '<ed-admin></ed-admin>'
+          template: '<ed-admin></ed-admin>',
+          redirectTo: 'admin.youtubeSysAccount'
         })
         .state('admin.youtubeSysAccount', {
           url: '/youtubeSysAccount',
