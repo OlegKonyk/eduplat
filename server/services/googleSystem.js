@@ -25,7 +25,6 @@ function authorize(req, res, next) {
     scope: scopes
   });
 
-  console.log('take it all!!!');
   res.send({url: url});
 }
 

@@ -22,16 +22,7 @@
         return response;
       }
     };
-  })
-  .run(function($window) {
-    var params = $window.location.search.substring(1);
-    if (params && $window.opener.location.origin === $window.location.origin) {
-      var pair = params.split('=');
-      var code = decodeURIComponent(pair[1]);
-
-      $window.opener.postMessage(code, $window.location.origin);
-    }
-  });
+});
 
   function config($mdThemingProvider, $mdIconProvider, $stateProvider, $urlRouterProvider,
                  $locationProvider, $authProvider, $httpProvider, $compileProvider) {
@@ -84,11 +75,11 @@
         .state('admin', {
           url: '/admin',
           template: '<ed-admin></ed-admin>',
-          redirectTo: 'admin.youtubeSysAccount'
+          redirectTo: 'admin.googleSysAccount'
         })
-        .state('admin.youtubeSysAccount', {
-          url: '/youtubeSysAccount',
-          template: '<ed-youtube-sys-account></ed-youtube-sys-account>'
+        .state('admin.googleSysAccount', {
+          url: '/googleSysAccount',
+          template: '<ed-google-sys-account></ed-google-sys-account>'
         })
         .state('admin.usersManagement', {
           url: '/usersManagement',

@@ -1,12 +1,12 @@
 (function() {
   'use strict';
-  angular.module('app')
+  angular.module('app.playlists')
     .component('edPlaylistPlayer',
     {
       bindings: {},
       template: function($templateCache) {
         "ngInject";
-        return $templateCache.get('public/src/playlistPlayer/playlistPlayer.html');
+        return $templateCache.get('public/src/playlists/playlistPlayer/playlistPlayer.html');
       },
       controller: playlistPlayerCtrl
     }

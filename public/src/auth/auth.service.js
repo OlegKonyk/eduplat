@@ -10,7 +10,7 @@
     "ngInject";
     var service = {
       authenticate,
-      authenticateYoutubeSysUser,
+      authenticateGoogleSysUser,
       signup,
       login,
       logout,
@@ -44,7 +44,7 @@
       {post: {method: 'POST'}}
     );
 
-    function authenticateYoutubeSysUser() {
+    function authenticateGoogleSysUser() {
       var options = `width=500,height=600,left=${($window.outerWidth - 500) / 2},top=${($window.outerHeight - 500) / 2.5}`;
       var popup = $window.open('', '', options);
       googleSystemUserResource.post().$promise

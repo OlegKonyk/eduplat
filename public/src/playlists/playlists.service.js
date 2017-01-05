@@ -1,22 +1,28 @@
-angular.module('app').service('edPlaylistsService', function($resource) {
-  "ngInject";
+(function() {
+  'use strict';
+  angular
+    .module('app.playlists')
+    .service('edPlaylistsService', function($resource) {
+      "ngInject";
 
-  var personalResource = $resource(
-    '/api/playlist/personal',
-    {},
-    {get: {method: 'GET', isArray: true}}
-  );
+      var personalResource = $resource(
+        '/api/playlist/personal',
+        {},
+        {get: {method: 'GET', isArray: true}}
+      );
 
-  var featuredResource = $resource(
-    '/api/playlist/featured',
-    {},
-    {get: {method: 'GET', isArray: true}}
-  );
+      var featuredResource = $resource(
+        '/api/playlist/featured',
+        {},
+        {get: {method: 'GET', isArray: true}}
+      );
 
-  var publicResource = $resource(
-    '/api/playlist/public/',
-    {_id: '@_id'}
-  );
+      var publicResource = $resource(
+        '/api/playlist/public/',
+        {_id: '@_id'}
+      );
 
-  return {personalResource, featuredResource, publicResource};
-});
+      return {personalResource, featuredResource, publicResource};
+    });
+})();
+

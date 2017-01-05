@@ -3,7 +3,9 @@
   angular
   .module('app', [
     'app.core',
-    'app.hero'
+    'app.hero',
+    'app.admin',
+    'app.playlists'
   ]);
 })();
 

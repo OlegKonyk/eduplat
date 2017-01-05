@@ -1,12 +1,12 @@
 (function() {
   'use strict';
-  angular.module('app')
+  angular.module('app.admin')
     .component('edUsersManagement',
     {
       bindings: {},
       template: function($templateCache) {
         "ngInject";
-        return $templateCache.get('public/src/usersManagement/usersManagement.html');
+        return $templateCache.get('public/src/admin/usersManagement/usersManagement.html');
       },
       controller: usersManagementCtrl
     }
@@ -17,7 +17,9 @@
 
     var ctrl = this;
 
-    var usersResource = $resource('/api/users', {}, { get: { method: 'GET', isArray: true } });
+    var usersResource = $resource('/api/users', {}, {
+      get: {method: 'GET', isArray: true}
+    });
 
     usersResource.get().$promise
       .then(function(users) {
