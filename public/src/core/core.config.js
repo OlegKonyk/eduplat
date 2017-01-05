@@ -22,6 +22,14 @@
         return response;
       }
     };
+}).run(function($window) {
+  var params = $window.location.search.substring(1);
+  if (params && $window.opener.location.origin === $window.location.origin) {
+    var pair = params.split('=');
+    var code = decodeURIComponent(pair[1]);
+
+    $window.opener.postMessage(code, $window.location.origin);
+    }
 });
 
   function config($mdThemingProvider, $mdIconProvider, $stateProvider, $urlRouterProvider,
@@ -29,8 +37,8 @@
     "ngInject";
     $locationProvider.html5Mode(true);
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|ftp|blob):|data:image\//);
-    $authProvider.loginUrl = 'api/login';
-    $authProvider.signupUrl = 'api/register';
+    $authProvider.loginUrl = 'api/auth/login';
+    $authProvider.signupUrl = 'api/auth/register';
 
     $httpProvider.interceptors.push('authInterceptor');
 

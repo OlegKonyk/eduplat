@@ -6,7 +6,7 @@ const fs = require('fs');
 const multiparty = require('connect-multiparty');
 const multipartyMiddleware = multiparty();
 
-const auth = require('../controllers/authHandlers');
+const auth = require('../routeControllers/auth');
 const Playlist = require('../models/Playlist.js');
 
 router.post('/personal', auth.jwt, createPlaylist);

@@ -1,12 +1,14 @@
 'use strict';
-const express = require('express');
-const path = require('path');
-
 const routes = require('../routes/routes');
 const playlist = require('../routes/playlist');
+const admin = require('../routes/admin');
+const auth = require('../routes/auth');
+const users = require('../routes/users');
 
 module.exports = function(app, config) {
-  app.use(express.static(path.join(config.rootPath, 'public/app')));
   app.use('/api/playlist', playlist);
+  app.use('/api/admin', admin);
+  app.use('/api/auth', auth);
+  app.use('/api/users', users);
   app.use('/', routes);
 };

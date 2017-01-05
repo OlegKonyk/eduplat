@@ -19,7 +19,7 @@
     };
 
     var userResource = $resource(
-      '/api/user/',
+      '/api/users/current/',
       {_id: '@_id'}
     );
 

@@ -12,9 +12,8 @@
       authenticate
     };
 
-
     var googleSystemUserResource = $resource(
-      '/api/auth/googleSystemUser',
+      '/api/admin/googleSystemUser',
       {code: '@code'},
       {post: {method: 'POST'}}
     );

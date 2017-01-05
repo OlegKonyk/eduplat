@@ -17,7 +17,7 @@
 
     var ctrl = this;
 
-    var usersResource = $resource('/api/users', {}, {
+    var usersResource = $resource('/api/users/all', {}, {
       get: {method: 'GET', isArray: true}
     });
 
