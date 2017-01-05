@@ -14,7 +14,9 @@ router.get('/api/auth/verifyEmail', emailVerification.handler);
 
 router.post('/api/auth/google', googleAuth);
 
-router.post('/api/auth/googleSystemUser', googleSystem);
+router.post('/api/auth/googleSystemUser', googleSystem.authorize);
+
+router.get('/api/auth/googleSystemUser', googleSystem.getToken);
 
 router.post('/api/register', auth.register, register);
 
