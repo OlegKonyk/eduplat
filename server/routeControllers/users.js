@@ -5,8 +5,6 @@ function returnUser(req, res, next) {
   let id = req.query._id;
   User.findById(id).exec()
   .then(function(user) {
-    console.log(':::::')
-    console.log(user.toJSON())
     res.json(user.toJSON()).status(200);
   });
 }

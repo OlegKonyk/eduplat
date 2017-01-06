@@ -7,8 +7,9 @@ router.post('/googleSystemUser', googleSystem.authorize);
 
 router.get('/googleSystemUser', googleSystem.getToken);
 
-// TO DO
-// router.get('/googleSystemUser/status', googleSystem.getStatus);
+router.delete('/googleSystemUser', googleSystem.unlink);
+
+router.get('/googleSystemUser/status', googleSystem.getStatus);
 
 
 module.exports = router;

@@ -9,7 +9,9 @@
                          edErrorsService, $window, $http, $q) {
     "ngInject";
     var service = {
-      authenticate
+      link,
+      unlink,
+      getStatus
     };
 
     var googleSystemUserResource = $resource(
@@ -18,10 +20,18 @@
       {post: {method: 'POST'}}
     );
 
-    function authenticate() {
+    var googleSystemUserStatusResource = $resource(
+      '/api/admin/googleSystemUser/status'
+    );
+
+    function getStatus() {
+      return googleSystemUserStatusResource.get().$promise;
+    }
+
+    function link() {
       var options = `width=500,height=600,left=${($window.outerWidth - 500) / 2},top=${($window.outerHeight - 500) / 2.5}`;
       var popup = $window.open('', '', options);
-      googleSystemUserResource.post().$promise
+      return googleSystemUserResource.post().$promise
         .then(function(res) {
           var url = res.url;
           popup.location = url;
@@ -34,6 +44,10 @@
         function(err) {
           console.log(err);
         });
+    }
+
+    function unlink() {
+      return googleSystemUserResource.delete().$promise;
     }
 
     function asyncPopupMsgHandler() {

@@ -50,7 +50,28 @@ function getToken(req, res, next) {
   });
 }
 
+function getStatus(req, res, next) {
+  //console.log(new Date(oauth2Client.credentials.expiry_date).toLocaleTimeString());
+  if (oauth2Client.credentials.access_token &&
+      oauth2Client.credentials.expiry_date >= new Date().getTime()) {
+    res.send({isAuth: true, expiryDate: oauth2Client.credentials.expiry_date});
+  } else {
+    res.send({isAuth: false});
+  }
+}
+
+function unlink(req, res, next) {
+  oauth2Client = new OAuth2(
+    config.GOOGLE_CLIENT_ID,
+    config.GOOGLE_SECRET,
+    config.APP_URL// redirect url
+  );
+  res.sendStatus(200);
+}
+
 module.exports = {
   authorize,
-  getToken
+  getToken,
+  unlink,
+  getStatus
 };

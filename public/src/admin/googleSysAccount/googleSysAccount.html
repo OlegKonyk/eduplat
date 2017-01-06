@@ -1,9 +1,29 @@
-<h2>Google System Account Status</h2>
-<section layout="row" layout-align="start center">
-    <md-button class="google-button" ng-click="$ctrl.authenticateGoogleSysUser()">
+<h2>Google System Account</h2>
+<md-content layout="row" layout-align="start center">
+<section ng-if="!$ctrl.status.isAuth" layout="column">
+    <div layout="row">
+        <div style="margin-right: 50px;">Status: NOT authorized</div>
+    </div>
+    <md-button style="width: 230px;" class="google-button" ng-click="$ctrl.linkGoogleSysUser()">
+        <div layout="row" layout-align="center center">
+            <div><img ng-hide="$ctrl.authorising" src="front/assets/svg/google-logo.svg"></div>
+            <md-progress-circular style="margin-right: 10px;" ng-show="$ctrl.authorising" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+            <div>Link Google Account</div>
+        </div>
+    </md-button>
+    
+</section>
+
+<section ng-if="$ctrl.status.isAuth" layout="column">
+    <div layout="row">
+        <div style="margin-right: 50px;">Status: Authorized</div>
+        <div>Expires: {{$ctrl.status.expiryDate | date:'MM/dd/yyyy @ h:mma'}}</div>
+    </div>
+    <md-button style="width: 230px;" class="google-button" ng-click="$ctrl.unlinkGoogleSysUser()">
         <div layout="row" layout-align="center center">
             <div><img src="front/assets/svg/google-logo.svg"></div>
-            <div>Google System Account</div>
+            <div>UnLink Google Account</div>
         </div>
     </md-button>
 </section>
+</md-content>
