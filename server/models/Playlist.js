@@ -5,7 +5,10 @@ const PlaylistSchema = new mongoose.Schema({
   ownerId: String,
   name: String,
   groups: [String],
-  links: [String],
+  links: [{
+    id: String,
+    title: String
+  }],
   thumbnail: String
 });
 

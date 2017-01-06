@@ -37,15 +37,6 @@ function getToken(req, res, next) {
     } else {
       oauth2Client.setCredentials(tokens);
       res.sendStatus(200);
-      // example youtube call
-      /* youtube.videos.list({
-        id: 'ybdFLSeSS6I',
-        part: 'snippet'},
-       function (err, response) {
-        // handle err and response
-        if (err) console.log(err);
-        console.log(JSON.stringify(response))
-      });*/
     }
   });
 }

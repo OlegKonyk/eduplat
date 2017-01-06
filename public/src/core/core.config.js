@@ -24,7 +24,7 @@
     };
 }).run(function($window) {
   var params = $window.location.search.substring(1);
-  if (params && $window.opener.location.origin === $window.location.origin) {
+  if (params && $window.opener && $window.opener.location.origin === $window.location.origin) {
     var pair = params.split('=');
     var code = decodeURIComponent(pair[1]);
 

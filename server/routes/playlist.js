@@ -9,6 +9,9 @@ const multipartyMiddleware = multiparty();
 const auth = require('../routeControllers/auth');
 const Playlist = require('../models/Playlist.js');
 
+const google = require('googleapis');
+const youtube = google.youtube('v3');
+
 router.post('/personal', auth.jwt, createPlaylist);
 
 router.delete('/personal', auth.jwt, function(req, res) {
@@ -30,18 +33,40 @@ router.post('/upload', auth.jwt, multipartyMiddleware, function(req, res) {
   // console.log(file, data);
   // console.log(file.type);
   var fileData = fs.readFileSync(file.path);
-  console.log(fileData);
+  //console.log(fileData);
 
   var playlistData = req.body.data;
-  playlistData.ownerId = req.user._id;
-  playlistData.thumbnail = fileData.toString('base64');
-  var newPlaylist = new Playlist(playlistData);
-  newPlaylist.save()
-    .then(function() {
-      res.send('New playlist created: ' + playlistData.name).status(200);
-    }, function(err) {
-      res.send(err.message).status(500);
+  // example youtube call
+  console.log(playlistData.links.join(','))
+  youtube.videos.list({
+    id: playlistData.links.join(','), // fix format and property name on front!!!!!/
+    part: 'snippet'},
+    function (err, response) {
+      // handle err and response
+      if (err) console.log(err);
+      console.log(JSON.stringify(response));
+
+      playlistData.ownerId = req.user._id;
+      playlistData.thumbnail = fileData.toString('base64');
+      playlistData.links = playlistData.links.map(function(item, index) {
+        return {
+          id: item,
+          title: response.items[index].snippet.title // make fool proof
+        };
+      })
+      console.log( playlistData.links)
+      var newPlaylist = new Playlist(playlistData);
+      newPlaylist.save()
+        .then(function() {
+          res.send('New playlist created: ' + playlistData.name).status(200);
+        }, function(err) {
+          res.send(err.message).status(500);
+        });
+
     });
+
+
+  
 });
 
 router.get('/personal', auth.jwt, getPersonalPlaylists);
@@ -52,6 +77,8 @@ router.get('/public', getPublicPlaylist);
 
 function createPlaylist(req, res, next) {
   var playlistData = req.body;
+  
+
   playlistData.ownerId = req.user._id;
   var newPlaylist = new Playlist(playlistData);
   newPlaylist.save()
