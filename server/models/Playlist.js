@@ -7,7 +7,10 @@ const PlaylistSchema = new mongoose.Schema({
   groups: [String],
   links: [{
     id: String,
-    title: String
+    title: String,
+    publishedAt: Date,
+    description: String,
+    channelTitle: String
   }],
   thumbnail: String
 });

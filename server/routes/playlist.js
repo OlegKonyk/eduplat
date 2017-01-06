@@ -30,19 +30,16 @@ router.post('/upload', auth.jwt, multipartyMiddleware, function(req, res) {
   // the multiparty middleware
   var file = req.files.file;
   var data = req.body.data;
-  // console.log(file, data);
-  // console.log(file.type);
   var fileData = fs.readFileSync(file.path);
-  //console.log(fileData);
-
   var playlistData = req.body.data;
+
+
   // example youtube call
-  console.log(playlistData.links.join(','))
-  youtube.videos.list({
+  //console.log(playlistData.links.join(','))
+  /*youtube.videos.list({
     id: playlistData.links.join(','), // fix format and property name on front!!!!!/
     part: 'snippet'},
     function (err, response) {
-      // handle err and response
       if (err) console.log(err);
       console.log(JSON.stringify(response));
 
@@ -63,8 +60,35 @@ router.post('/upload', auth.jwt, multipartyMiddleware, function(req, res) {
           res.send(err.message).status(500);
         });
 
-    });
+    });*/
 
+  youtube.playlistItems.list({
+    playlistId: playlistData.links, // fix format and property name on front!!!!!/
+    part: 'snippet',
+    maxResults: 50},
+    function(err, response) {
+      if (err) console.log(err);
+      console.log(JSON.stringify(response));
+      playlistData.ownerId = req.user._id;
+      playlistData.thumbnail = fileData.toString('base64');
+      playlistData.links = response.items.map(function(item, index) {
+        return {
+          id: item.snippet.resourceId.videoId,
+          title: item.snippet.title, // make fool proof
+          publishedAt: item.snippet.publishedAt,
+          description: item.snippet.description,
+          channelTitle: item.snippet.channelTitle
+        };
+      })
+      //console.log(videos);
+      var newPlaylist = new Playlist(playlistData);
+      newPlaylist.save()
+        .then(function() {
+          res.send('New playlist created: ' + playlistData.name).status(200);
+        }, function(err) {
+          res.send(err.message).status(500);
+        });
+    });
 
   
 });
@@ -77,7 +101,36 @@ router.get('/public', getPublicPlaylist);
 
 function createPlaylist(req, res, next) {
   var playlistData = req.body;
-  
+
+  /*youtube.videos.list({
+    id: 'LXAdJhNY_ZU', // fix format and property name on front!!!!!/
+    part: 'snippet'},
+    function(err, response) {
+      if (err) console.log(err);
+      console.log(JSON.stringify(response));
+  });*/
+
+  youtube.playlistItems.list({
+    playlistId: 'PLB004ECC0B789A45D', // fix format and property name on front!!!!!/
+    part: 'snippet',
+    maxResults: 50},
+    function(err, response) {
+      if (err) console.log(err);
+      
+      var videos = response.items.map(function(item, index) {
+        return {
+          id: item.snippet.resourceId.videoId,
+          title: item.snippet.title, // make fool proof
+          publishedAt: item.snippet.publishedAt,
+          description: item.snippet.description,
+          channelTitle: item.snippet.channelTitle
+        };
+      })
+      console.log(videos);
+    });
+
+    res.sendStatus(200);
+  /*
 
   playlistData.ownerId = req.user._id;
   var newPlaylist = new Playlist(playlistData);
@@ -86,7 +139,7 @@ function createPlaylist(req, res, next) {
       res.send('New playlist created: ' + playlistData.name).status(200);
     }, function(err) {
       res.send(err.message).status(500);
-    });
+    });*/
 }
 
 function getPersonalPlaylists(req, res, next) {

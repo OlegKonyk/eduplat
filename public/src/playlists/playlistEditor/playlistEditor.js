@@ -23,7 +23,7 @@
       });
 
     ctrl.addPlaylist = function(newPlaylist) {
-      newPlaylist.links = newPlaylist.links.split(',');
+      newPlaylist.links = 'newPlaylist'//newPlaylist.links.split(',');
       edPlaylistsService.personalResource
         .save(newPlaylist)
         .$promise
@@ -39,7 +39,7 @@
     };
 
     ctrl.upload = function(file, newPlaylist) {
-      newPlaylist.links = newPlaylist.links.split(',');
+      newPlaylist.links = newPlaylist.links;//.split(',');
       console.log(newPlaylist);
       ctrl.log = '';
       if (file) {

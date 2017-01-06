@@ -23,7 +23,7 @@
       .$promise
       .then(function(playlist) {
         ctrl.playlist = playlist;
-        ctrl.currentVideo = ctrl.playlist.links[0].id;
+        ctrl.currentVideo = ctrl.playlist.links[0];
       }, function(err) {
         console.log(err);
       });
