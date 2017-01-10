@@ -3,15 +3,18 @@ const mongoose = require('mongoose');
 
 const PlaylistSchema = new mongoose.Schema({
   ownerId: String,
+  playlistYoutubeId: String,
   name: String,
   groups: [String],
-  links: [{
+  //videos
+  videos: [{
     id: String,
     title: String,
     publishedAt: Date,
     description: String,
     channelTitle: String
   }],
+  //thumbnailBin: Buffer,
   thumbnail: String
 });
 

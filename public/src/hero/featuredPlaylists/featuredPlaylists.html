@@ -6,7 +6,7 @@
     <md-grid-tile  ng-click="$ctrl.goToPlaylist(playlist._id)" style="cursor:pointer;" 
                    ng-repeat="playlist in $ctrl.featuredPlaylists">
             <img ng-if="!playlist.thumbnail" src="front/assets/img/comp.jpg" class="md-card-image" alt="Washed Out" layout-fill>
-            <img ng-if="playlist.thumbnail" ng-src="data:image/JPEG;base64,{{playlist.thumbnail}}" layout-fill>
+            <img ng-if="playlist.thumbnail" ng-src="{{playlist.thumbnail}}" layout-fill>
         <md-grid-tile-footer>
             <h3>{{playlist.name}}</h3>
         </md-grid-tile-footer>

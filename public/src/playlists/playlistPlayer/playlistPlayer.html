@@ -235,7 +235,7 @@ md-content {
         flex>
 
       <md-content layout="column">
-        <md-button ng-repeat="video in $ctrl.playlist.links" class="md-raised" ng-click="$ctrl.setVideoUrl(video.id)">{{$index+1}} {{video.title}}</md-button>
+        <md-button ng-repeat="video in $ctrl.playlist.videos" class="md-raised" ng-click="$ctrl.setVideoUrl(video.id)">{{$index+1}} {{video.title}}</md-button>
       </md-content>
 
     </md-sidenav-->
@@ -244,7 +244,7 @@ md-content {
 
         <md-content  style="" flex role="navigation">
             <ul class="docs-menu md-hue-2" style="margin-top: 15px;">
-                <li ng-repeat="video in $ctrl.playlist.links" class="">                    
+                <li ng-repeat="video in $ctrl.playlist.videos" class="">                    
                     <md-button ng-click="$ctrl.setVideoUrl(video)" ng-class="{'active' : $ctrl.currentVideo.id == video.id}">
 
                         <span>{{video.title}}</span>

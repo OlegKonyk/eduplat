@@ -25,7 +25,7 @@ router.delete('/personal', auth.jwt, function(req, res) {
   });
 });
 
-router.post('/upload', auth.jwt, multipartyMiddleware, function(req, res) {
+/*router.post('/upload', auth.jwt, multipartyMiddleware, function(req, res) {
   // We are able to access req.files.file thanks to 
   // the multiparty middleware
   var file = req.files.file;
@@ -34,36 +34,8 @@ router.post('/upload', auth.jwt, multipartyMiddleware, function(req, res) {
   var playlistData = req.body.data;
 
 
-  // example youtube call
-  //console.log(playlistData.links.join(','))
-  /*youtube.videos.list({
-    id: playlistData.links.join(','), // fix format and property name on front!!!!!/
-    part: 'snippet'},
-    function (err, response) {
-      if (err) console.log(err);
-      console.log(JSON.stringify(response));
-
-      playlistData.ownerId = req.user._id;
-      playlistData.thumbnail = fileData.toString('base64');
-      playlistData.links = playlistData.links.map(function(item, index) {
-        return {
-          id: item,
-          title: response.items[index].snippet.title // make fool proof
-        };
-      })
-      console.log( playlistData.links)
-      var newPlaylist = new Playlist(playlistData);
-      newPlaylist.save()
-        .then(function() {
-          res.send('New playlist created: ' + playlistData.name).status(200);
-        }, function(err) {
-          res.send(err.message).status(500);
-        });
-
-    });*/
-
   youtube.playlistItems.list({
-    playlistId: playlistData.links, // fix format and property name on front!!!!!/
+    playlistId: playlistData.playlistYoutubeId,
     part: 'snippet',
     maxResults: 50},
     function(err, response) {
@@ -71,16 +43,16 @@ router.post('/upload', auth.jwt, multipartyMiddleware, function(req, res) {
       console.log(JSON.stringify(response));
       playlistData.ownerId = req.user._id;
       playlistData.thumbnail = fileData.toString('base64');
-      playlistData.links = response.items.map(function(item, index) {
+      // /playlistData.thumbnailBin = fileData;
+      playlistData.videos = response.items.map(function(item, index) {
         return {
           id: item.snippet.resourceId.videoId,
-          title: item.snippet.title, // make fool proof
+          title: item.snippet.title,
           publishedAt: item.snippet.publishedAt,
           description: item.snippet.description,
           channelTitle: item.snippet.channelTitle
         };
-      })
-      //console.log(videos);
+      });
       var newPlaylist = new Playlist(playlistData);
       newPlaylist.save()
         .then(function() {
@@ -89,9 +61,7 @@ router.post('/upload', auth.jwt, multipartyMiddleware, function(req, res) {
           res.send(err.message).status(500);
         });
     });
-
-  
-});
+});*/
 
 router.get('/personal', auth.jwt, getPersonalPlaylists);
 
@@ -101,45 +71,33 @@ router.get('/public', getPublicPlaylist);
 
 function createPlaylist(req, res, next) {
   var playlistData = req.body;
-
-  /*youtube.videos.list({
-    id: 'LXAdJhNY_ZU', // fix format and property name on front!!!!!/
-    part: 'snippet'},
-    function(err, response) {
-      if (err) console.log(err);
-      console.log(JSON.stringify(response));
-  });*/
+  playlistData.ownerId = req.user._id;
 
   youtube.playlistItems.list({
-    playlistId: 'PLB004ECC0B789A45D', // fix format and property name on front!!!!!/
+    playlistId: playlistData.playlistYoutubeId,
     part: 'snippet',
     maxResults: 50},
     function(err, response) {
       if (err) console.log(err);
-      
-      var videos = response.items.map(function(item, index) {
+
+      playlistData.videos = response.items.map(function(item, index) {
         return {
           id: item.snippet.resourceId.videoId,
-          title: item.snippet.title, // make fool proof
+          title: item.snippet.title,
           publishedAt: item.snippet.publishedAt,
           description: item.snippet.description,
           channelTitle: item.snippet.channelTitle
         };
-      })
-      console.log(videos);
+      });
+      var newPlaylist = new Playlist(playlistData);
+      newPlaylist.save()
+        .then(function() {
+          console.log('New playlist created: ' + playlistData.name);
+          res.send('New playlist created: ' + playlistData.name).status(200);
+        }, function(err) {
+          res.send(err.message).status(500);
+        });
     });
-
-    res.sendStatus(200);
-  /*
-
-  playlistData.ownerId = req.user._id;
-  var newPlaylist = new Playlist(playlistData);
-  newPlaylist.save()
-    .then(function() {
-      res.send('New playlist created: ' + playlistData.name).status(200);
-    }, function(err) {
-      res.send(err.message).status(500);
-    });*/
 }
 
 function getPersonalPlaylists(req, res, next) {

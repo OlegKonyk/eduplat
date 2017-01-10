@@ -28,7 +28,7 @@ const config = require('./config/config');
 
 app.use(logger('dev'));
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '5mb'}));
 
 app.use(passport.initialize());
 

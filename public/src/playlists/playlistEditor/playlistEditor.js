@@ -8,6 +8,15 @@
       return $templateCache.get('public/src/playlists/playlistEditor/playlistEditor.html');
     },
     controller: playlistEditorCtrl
+  })
+  .filter('byteSizeConvertor', function() {
+    return function(bytes, precision) {
+      if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
+      if (typeof precision === 'undefined') precision = 1;
+      var units = ['bytes', 'kB', 'MB'];
+      var number = Math.floor(Math.log(bytes) / Math.log(1024));
+      return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) + ' ' + units[number];
+    };
   });
 
   function playlistEditorCtrl($scope, Upload, $timeout, edPlaylistsService, edAuthService) {
@@ -22,50 +31,39 @@
         return {name: group};
       });
 
-    ctrl.addPlaylist = function(newPlaylist) {
-      newPlaylist.links = 'newPlaylist'//newPlaylist.links.split(',');
-      edPlaylistsService.personalResource
-        .save(newPlaylist)
-        .$promise
-        .then(function(something) {
-          console.log(something);
-        }, function(err) {
-          console.log(err);
-        });
-    };
-
     ctrl.newPlaylist = {
       groups: [ctrl.groups[0].name]
     };
 
-    ctrl.upload = function(file, newPlaylist) {
-      newPlaylist.links = newPlaylist.links;//.split(',');
-      console.log(newPlaylist);
-      ctrl.log = '';
+    $scope.$watch('$ctrl.file', function() {
+      if (ctrl.file && !ctrl.file.$error) {
+        Upload.imageDimensions(ctrl.file)
+          .then(function(dimensions) {
+            ctrl.dimentions = dimensions;
+          });
+      }
+    });
+
+    ctrl.addPlaylist = function(file, newPlaylist) {
+      ctrl.dimentions = {};
       if (file) {
         if (!file.$error) {
-          Upload.upload({
-            url: '/api/playlist/upload',
-            data: {
-              data: newPlaylist,
-              file: file
-            }
+          // Upload.imageDimensions(file)
+          // .then(function(dimensions) {
+          //   ctrl.dimentions = dimensions;
+          //   console.log(ctrl.dimentions);
+          //   return file;
+          // })
+          // .then(Upload.base64DataUrl(file))
+          Upload.base64DataUrl(file)
+          .then(function(thumbnail) {
+            newPlaylist.thumbnail = thumbnail;
+            return edPlaylistsService.personalResource
+              .save(newPlaylist)
+              .$promise;
           })
-          .then(function(resp) {
-            $timeout(function() {
-              ctrl.log = 'file: ' +
-              resp.config.data.file.name +
-              ', Response: ' + JSON.stringify(resp.data) +
-              '\n' + ctrl.log;
-            });
-          }, function(resp) {
-            console.log('Error status: ' + resp.status);
-          }, function(evt) {
-            var progressPercentage = parseInt(100.0 *
-              evt.loaded / evt.total, 10);
-            ctrl.log = 'progress: ' + progressPercentage +
-              '% ' + evt.config.data.file.name + '\n' +
-              ctrl.log;
+          .then(function(res) {
+            console.log(res);
           });
         }
       }

@@ -22,8 +22,8 @@
         </md-input-container>
                 
         <md-input-container class="md-block">
-            <label>Paste links separated by coma</label>
-            <textarea ng-model="$ctrl.newPlaylist.links"></textarea>
+            <label>Playlist ID</label>
+            <textarea ng-model="$ctrl.newPlaylist.playlistYoutubeId"></textarea>
         </md-input-container>
         <md-input-container class="md-block">
             <label>Groups</label>
@@ -33,7 +33,7 @@
         </md-input-container>
 
         <!--md-button class="md-raised md-primary" ng-click="$ctrl.addPlaylist($ctrl.newPlaylist);">Add playlist</md-button-->
-        <md-button class="md-raised md-primary" ng-click="$ctrl.upload($ctrl.file, $ctrl.newPlaylist);">Add playlist</md-button>
+        <md-button class="md-raised md-primary" ng-click="$ctrl.addPlaylist($ctrl.file, $ctrl.newPlaylist);">Add playlist</md-button>
     </div>
 
     <div flex  class="md-padding">
@@ -42,8 +42,9 @@
 
             <div ngf-drop ngf-select ng-model="$ctrl.file" class="drop-box" 
                 ngf-drag-over-class="'dragover'" ngf-multiple="false"
-                accept="image/*,application/pdf" 
-                ngf-pattern="'image/*,application/pdf'">Drop image here or click to upload</div>
+                accept="image/*" 
+                ngf-pattern="'image/*'"
+                ngf-max-size="3MB">Drop image here or click to upload</div>
             <!--div ngf-no-file-drop>
                 <div class="button" ngf-select ng-model="$ctrl.file" ngf-multiple="false">Select File</div>
             </div-->
@@ -51,8 +52,11 @@
 
         <img ngf-thumbnail="$ctrl.file">
 
-        <h3 style="font:smaller">File: {{$ctrl.file.name}} {{$ctrl.file.$error}} {{$ctrl.file.$errorParam}}</h3>
-        Upload Log:
-        <pre>{{$ctrl.log}}</pre>
+        <div ng-if="$ctrl.file">
+            <h3 style="font:smaller">Name: {{$ctrl.file.name}}</h3>
+            <h3 style="font:smaller">Dimentions: {{$ctrl.dimentions.width}}x{{$ctrl.dimentions.height}}</h3>
+            <h3 style="font:smaller">Size: {{$ctrl.file.size | byteSizeConvertor}}</h3>
+        </div>
+
     </div>
 </div>

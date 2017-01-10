@@ -7,7 +7,7 @@
             <div layout="row"><h3>{{playlist.name}}</h3>
             <md-button class="md-raised md-warn" ng-click="$ctrl.deletePlaylist(playlist._id);">Delete</md-button>
             </div>
-            <youtube-video video-url=" playlist.links[0]"></youtube-video>
+            <youtube-video video-url=" playlist.videos[0]"></youtube-video>
         </li>
     </ul>
 </md-content-->
@@ -24,7 +24,7 @@
             <md-button class="md-raised md-warn" ng-click="$ctrl.deletePlaylist(playlist._id);">Delete</md-button>
         </md-grid-tile-header>
             <img ng-if="!playlist.thumbnail" src="front/assets/img/comp.jpg" class="md-card-image" alt="Washed Out" layout-fill>
-            <img ng-if="playlist.thumbnail" ng-src="data:image/JPEG;base64,{{playlist.thumbnail}}" layout-fill>
+            <img ng-if="playlist.thumbnail" ng-src="{{playlist.thumbnail}}" layout-fill>
         <md-grid-tile-footer>
             <h3>{{playlist.name}}</h3>
         </md-grid-tile-footer>
