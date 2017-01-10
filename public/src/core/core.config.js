@@ -76,6 +76,14 @@
           url: '/signup',
           template: '<ed-signup></ed-signup>'
         })
+        .state('catalog', {
+          url: '/catalog',
+          template: '<ed-catalog></ed-catalog>'
+        })
+        .state('myClassrom', {
+          url: '/myClassrom',
+          template: '<ed-my-classrom></ed-my-classrom>'
+        })
         .state('profile', {
           url: '/profile',
           template: '<ed-user-profile></ed-user-profile>'

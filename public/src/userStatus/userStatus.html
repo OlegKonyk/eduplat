@@ -1,15 +1,16 @@
-<div style="">
-    <md-menu-bar>
+<div>
+    <md-menu-bar style="padding: 0px;">
         <md-menu>
             <div class="md-toolbar-tools" layout="row" ng-click="$ctrl.openMenu($mdOpenMenu, $event)" >
-                <div>
-                    <h1>{{$ctrl.user.firstName}} {{$ctrl.user.lastName}}</h1>
-                </div>
+                
                 <md-button class="md-icon-button">
                     <md-icon style="" md-svg-src="front/assets/svg/user.svg"></md-icon>
                 </md-button>
             </div>
             <md-menu-content width="4">
+                <div style="padding-left: 16px; color: #78909C;">
+                    {{$ctrl.user.firstName}} {{$ctrl.user.lastName}}
+                </div>
                 <md-menu-item>
                     <md-button href="/profile">
                         My profile

@@ -1,3 +1,15 @@
+<style>
+  .horizontal-menu-buttons div{
+    padding-left: 20px;
+  }
+  .button-navigation-divider::before { 
+    content: '';
+    border-left: 2px solid rgba(255, 255, 255, 0.4);
+    width: 0px;
+    height: 12px;
+    margin-left: 16px;
+  }
+</style>
 <md-toolbar class="md-whiteframe-1dp" layout="row">
     <!--md-button class="menu" aria-label="Menu">
         <md-icon md-svg-icon="chevron_right" >chevron_right</md-icon>
@@ -5,6 +17,12 @@
     <div class="md-toolbar-tools">
         <h1><a href="/home">COURSESPIN</a></h1>
         <span flex class="flex"></span>
+        
+        <div class="horizontal-menu-buttons" layout="row" style="font-size: 0.9em;">
+            <div><a href="/catalog">Catalog</a></div>
+            <div><a href="/myClassrom">My Classrom</a></div>
+        </div>
+        <div class="button-navigation-divider"></div>
         <ed-auth></ed-auth>
     </div>
 </md-toolbar>
