@@ -32,6 +32,7 @@
       });
 
     ctrl.newPlaylist = {
+      isPlaylist: true,
       groups: [ctrl.groups[0].name]
     };
 

@@ -3,10 +3,10 @@
     .drop-box {
         background: #F8F8F8;
         border: 5px dashed #DDD;
-        width: 200px;
-        height: 65px;
+        width: 460px;
+        height: 345px;
         text-align: center;
-        padding-top: 25px;
+        /*padding-top: 25px;*/
         margin: 10px;
     }
     .dragover {
@@ -20,11 +20,25 @@
             <label>Playlist Name</label>
             <input ng-model="$ctrl.newPlaylist.name">
         </md-input-container>
-                
-        <md-input-container class="md-block">
-            <label>Playlist ID</label>
-            <textarea ng-model="$ctrl.newPlaylist.playlistYoutubeId"></textarea>
-        </md-input-container>
+
+        <div layout="row">
+            <md-input-container layout-fill style="margin: 18px 18px 18px 0px;" ng-if="$ctrl.newPlaylist.isPlaylist" class="md-block">
+                <label>Playlist ID</label>
+                <textarea ng-model="$ctrl.newPlaylist.playlistYoutubeId"></textarea>
+            </md-input-container>
+            <md-input-container layout-fill style="margin: 18px 18px 18px 0px;" ng-if="!$ctrl.newPlaylist.isPlaylist" class="md-block">
+                <label>Video ID (coma separate for multiple)</label>
+                <textarea ng-model="$ctrl.newPlaylist.playlistYoutubeId"></textarea>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <md-switch style="width: 90px;" ng-model="$ctrl.newPlaylist.isPlaylist">
+                    <span ng-if="$ctrl.newPlaylist.isPlaylist">Playlist</span>
+                    <span ng-if="!$ctrl.newPlaylist.isPlaylist">Video</span>
+                </md-switch>
+            </md-input-container>
+        </div>
+
         <md-input-container class="md-block">
             <label>Groups</label>
             <md-select ng-model="$ctrl.newPlaylist.groups" multiple>
@@ -38,16 +52,21 @@
 
     <div flex  class="md-padding">
         <div ng-hide="$ctrl.file">
-            
-
             <div ngf-drop ngf-select ng-model="$ctrl.file" class="drop-box" 
                 ngf-drag-over-class="'dragover'" ngf-multiple="false"
                 accept="image/*" 
                 ngf-pattern="'image/*'"
-                ngf-max-size="3MB">Drop image here or click to upload</div>
-            <!--div ngf-no-file-drop>
-                <div class="button" ngf-select ng-model="$ctrl.file" ngf-multiple="false">Select File</div>
-            </div-->
+                ngf-max-size="3MB">
+
+                <div layout="row" layout-align="center center">
+                    <div>
+                        <h3>Drop image here or click to upload</h3>
+                        <h4>Max-size: 3MB;</h4>
+                        <h4>Recomended dimentions: 460x345px;</h4>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
         <img ngf-thumbnail="$ctrl.file">
