@@ -30,12 +30,12 @@ function getEnvironment(env) {
   let evironments = {
     development: new baseEnvironment(),
     docker: new baseEnvironment({
-      db: 'mongodb://mongodb/eduplat',
+      db: 'mongodb://admin:123@ds159988.mlab.com:59988/staging',
       port: 3030,
       APP_URL: 'http://www.okonyk.com:3030'
     }),
     production: new baseEnvironment({
-      db: 'mongodb://localhost/eduplat',
+      db: 'mongodb://admin:123@ds159988.mlab.com:59988/staging',
       port: 80
     })
   };
