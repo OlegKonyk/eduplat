@@ -5,8 +5,14 @@ const PlaylistSchema = new mongoose.Schema({
   ownerId: String,
   playlistYoutubeId: String,
   name: String,
-  groups: [String],
-  //videos
+  groups: [String], // private/public/comersial_id
+  categories: [{
+    masterName: String, // Software development
+    categoryName: String, // JavaScript
+    subName: String // Angular
+  }],
+  skillLevels: [String], // Beginer/Intermidiate/Advanced
+  tags: [String], // buzz words
   videos: [{
     id: String,
     title: String,
@@ -14,7 +20,6 @@ const PlaylistSchema = new mongoose.Schema({
     description: String,
     channelTitle: String
   }],
-  //thumbnailBin: Buffer,
   thumbnail: String
 });
 

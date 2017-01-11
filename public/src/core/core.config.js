@@ -101,6 +101,10 @@
           url: '/usersManagement',
           template: '<ed-users-management></ed-users-management>'
         })
+        .state('admin.categoriesManagement', {
+          url: '/categoriesManagement',
+          template: '<ed-categories-management></ed-categories-management>'
+        })
 
         .state('playlists', {
           url: '/playlists',
