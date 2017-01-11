@@ -1,17 +1,17 @@
 <style>
 .master-table {
     border-collapse: collapse;
-    border: 1px solid red;
+    border: 2px solid red;
 }
 
 .category-table {
     border-collapse: collapse;
-    border: 1px solid green;
+    border: 2px solid green;
 }
 
 .sub-category-table {
     border-collapse: collapse;
-    border: 1px solid blue;
+    border: 2px solid blue;
 }
 
 
@@ -62,9 +62,35 @@
     </table>
 
     <div layout="row" layout-align="end center">
-        <md-button class="md-raised md-primary" ng-click="$ctrl.confirmCreatingCategory()">Done</md-button>
+        <md-button class="md-raised md-primary" ng-click="$ctrl.confirmCreatingCategory($ctrl.newCategory)">Done</md-button>
     </div>
 </div>
-<div>
-    {{$ctrl.categories}}
-</div>
+
+<div ng-if="$ctrl.categories.length > 0">
+    <table class="master-table" ng-repeat="category in $ctrl.categories">
+        <tr>
+            <td>
+                {{category.masterName}}
+            </td>
+            <td>
+                <table class="category-table" ng-repeat="category in category.categories">
+                    <tr>
+                        <td>
+                            {{category.name}}
+                        </td>
+                        <td>
+                            <table class="sub-category-table" ng-repeat="subCategory in category.subCategories">
+                                <tr>
+                                    <td>
+                                        {{subCategory.name}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    
+                </table>
+            </tr>
+        </tr>
+    </table>

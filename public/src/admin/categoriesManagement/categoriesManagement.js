@@ -12,27 +12,35 @@
     }
   );
 
-  function categoriesManagementCtrl($resource) {
+  function categoriesManagementCtrl($resource, edAuthService) {
     "ngInject";
 
     var ctrl = this;
 
     ctrl.isAddingMode = false;
 
-    var categoriesResource = $resource('/api/categories/all', {}, {
+    ctrl.$onInit = function() {
+      getAllCategories();
+    };
+
+    var allCategoriesResource = $resource('/api/categories/all', {}, {
       get: {method: 'GET', isArray: true}
     });
 
-    categoriesResource.get().$promise
-      .then(function(categories) {
-        console.log("categories");
-        ctrl.categories = categories;
-      }, function(err) {
-        console.log(err);
-      });
+    var categoriesResource = $resource('/api/categories');
+
+    function getAllCategories() {
+      return allCategoriesResource.get().$promise
+        .then(function(categories) {
+          console.log(categories);
+          ctrl.categories = categories;
+        }, function(err) {
+          console.log(err);
+        });
+    }
 
     ctrl.addCategory = function() {
-      console.log("adding category");
+      //console.log(edAuthService.user);
       ctrl.isAddingMode = true;
       ctrl.newCategory = {
         masterName: undefined,
@@ -62,9 +70,16 @@
       });
     };
 
-    ctrl.confirmCreatingCategory = function() {
-      console.log("confirm creating category");
-      ctrl.isAddingMode = false;
+    ctrl.confirmCreatingCategory = function(newCategory) {
+      categoriesResource.save(newCategory).$promise
+        .then(getAllCategories)
+        .then(function(res) {
+          console.log("rererere");
+          ctrl.isAddingMode = false;
+        }, function(err) {
+          console.log(err);
+        })
+        
     };
   }
 })();
