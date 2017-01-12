@@ -17,7 +17,23 @@ services:
   depends_on:
    - mongodb
   restart: unless-stopped
-  #command: NODE_ENV=docker node server/server.js
+ staging:
+  image: konyk88/eduplat
+  ports:
+   - "3030:3030"
+  volumes:
+   - ./sec:/sec
+  restart: unless-stopped
+ production:
+  environment:
+   NODE_ENV: production
+  image: konyk88/eduplat
+  ports:
+   - "80:80"
+  volumes:
+   - ./sec:/sec
+  restart: unless-stoppedd
+  command: node server/server.js
 
   # Command to run DB & Web app
   # docker-compose run -d -p 3000:3000 webapp npm start

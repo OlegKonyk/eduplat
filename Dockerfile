@@ -7,8 +7,8 @@ ADD . .
 #RUN npm install
 #RUN bower install --allow-root
 #RUN node server/server.js
-EXPOSE 3030
+#EXPOSE 3030
 
-CMD NODE_ENV=docker node server/server.js
+#CMD NODE_ENV=docker node server/server.js
 
 #Fix port for production deployment
