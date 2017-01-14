@@ -32,11 +32,12 @@ function getEnvironment(env) {
     docker: new baseEnvironment({
       db: 'mongodb://admin:123@ds159988.mlab.com:59988/staging',
       port: 3030,
-      APP_URL: 'http://www.okonyk.com:3030'
+      APP_URL: 'http://okonyk.com:3030'
     }),
     production: new baseEnvironment({
       db: 'mongodb://admin:123@ds159988.mlab.com:59988/staging',
-      port: 80
+      port: 80,
+      APP_URL: 'http://coursespin.com'
     })
   };
   if (evironments[env]) {
