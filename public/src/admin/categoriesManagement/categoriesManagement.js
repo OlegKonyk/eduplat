@@ -53,7 +53,6 @@
     };
 
     ctrl.appendNextCategory = function(category) {
-      console.log(">>>>>", category)
       if (category.name) {
         ctrl.newCategory.categories.push({
           name: undefined,

@@ -1,17 +1,36 @@
 <style>
-.master-table {
+.master-table tr td:first-child{
     border-collapse: collapse;
-    border: 2px solid red;
+    border-left: 1px solid red;
 }
 
-.category-table {
+.category-table tr td:first-child{
     border-collapse: collapse;
-    border: 2px solid green;
+    border-left: 1px solid green;
 }
 
-.sub-category-table {
+.sub-category-table tr td:first-child{
     border-collapse: collapse;
-    border: 2px solid blue;
+    border-left: 1px solid blue;
+}
+
+.master-table md-input-container {
+    margin: 0px;
+}
+
+.master-list-table {
+    border-collapse: collapse;
+}
+.master-list-table tr td {
+    border: 1px solid orange;
+}
+
+.category-list-table tr td {
+    border: none;
+}
+
+.sub-category-list-table tr td {
+    border: none;
 }
 
 
@@ -36,7 +55,7 @@
                 <table class="category-table" ng-repeat="category in $ctrl.newCategory.categories">
                     <tr>
                         <td>
-                            <md-input-container >
+                            <md-input-container>
                                 <label>Category</label>
                                 <input ng-model="category.name" ng-blur="$ctrl.appendNextCategory(category)">
                             </md-input-container>
@@ -67,20 +86,22 @@
 </div>
 
 <div ng-if="$ctrl.categories.length > 0">
-    <table class="master-table" ng-repeat="category in $ctrl.categories">
+
+
+    <!--table class="master-list-table" ng-repeat="category in $ctrl.categories">
         <tr>
             <td>
                 {{category.masterName}}
             </td>
             <td>
-                <table class="category-table" ng-repeat="category in category.categories">
-                    <tr>
+                <table class="category-list-table" ng-repeat="category in category.categories">
+                    <tr ng-if="category.name">
                         <td>
                             {{category.name}}
                         </td>
                         <td>
-                            <table class="sub-category-table" ng-repeat="subCategory in category.subCategories">
-                                <tr>
+                            <table class="sub-category-list-table" ng-repeat="subCategory in category.subCategories">
+                                <tr ng-if="subCategory.name">
                                     <td>
                                         {{subCategory.name}}
                                     </td>
@@ -88,9 +109,38 @@
                             </table>
                         </td>
                     </tr>
-
-                    
                 </table>
             </tr>
         </tr>
-    </table>
+    </table-->
+<style>
+    .categories-list .row-top-border{
+        border-top: 1px solid green;
+    }
+
+    .categories-list .row-top-border_1 {
+        border-top: 1px solid purple;
+    }
+</style>
+
+
+    <div style="border: 1px solid red;" class="categories-list">
+        <div layout="row" ng-repeat="category in $ctrl.categories" layout-align="center center" ng-class="{'row-top-border': $index != 0}">
+            <div flex layout-padding>{{category.masterName}}</div>
+
+            <div flex layout="column" style="border-left: 1px solid blue;">
+                <div layout="row" ng-class="{'row-top-border_1': $index != 0}" ng-repeat="category in category.categories" ng-if="category.name" layout-align="center center">
+                    <div layout-padding flex>
+                        {{category.name}}
+                    </div>
+                    <div style="border-left: 1px solid saddlebrown;" flex layout="column">
+                        <div layout-padding ng-repeat="subCategory in category.subCategories" ng-if="subCategory.name">
+                            {{subCategory.name}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
