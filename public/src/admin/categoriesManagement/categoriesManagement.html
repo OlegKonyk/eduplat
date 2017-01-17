@@ -17,7 +17,7 @@
 
 </style>
 <h2>Categories Management</h2>
-<md-button class="google-button" ng-click="$ctrl.addCategory()" flex>
+<md-button class="google-button" ng-click="$ctrl.addMasterCategory()" flex>
     <div layout="row" layout-align="center center">
         <div><img src="front/assets/svg/category.svg"></div>
         <div>New Category</div>
@@ -38,7 +38,7 @@
                         <td>
                             <md-input-container >
                                 <label>Category</label>
-                                <input ng-model="category.name" ng-blur="$ctrl.appendNextCategory($ctrl.newCategory)">
+                                <input ng-model="category.name" ng-blur="$ctrl.appendNextCategory(category)">
                             </md-input-container>
                         </td>
                         <td>
@@ -47,7 +47,7 @@
                                     <td>
                                         <md-input-container>
                                             <label>Sub Category</label>
-                                            <input ng-blur="$ctrl.appendNextSubCategory(category)" ng-model="subCategory.name">
+                                            <input ng-blur="$ctrl.appendNextSubCategory(category, subCategory)" ng-model="subCategory.name">
                                         </md-input-container>
                                     </td>
                                 </tr>

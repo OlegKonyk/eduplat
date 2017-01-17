@@ -39,8 +39,7 @@
         });
     }
 
-    ctrl.addCategory = function() {
-      //console.log(edAuthService.user);
+    ctrl.addMasterCategory = function() {
       ctrl.isAddingMode = true;
       ctrl.newCategory = {
         masterName: undefined,
@@ -53,33 +52,34 @@
       };
     };
 
-    ctrl.appendNextCategory = function(newCategory) {
-      console.log("appendNextCategory");
-      newCategory.categories.push({
-        name: undefined,
-        subCategories: [{
-          name: undefined
-        }]
-      });
+    ctrl.appendNextCategory = function(category) {
+      console.log(">>>>>", category)
+      if (category.name) {
+        ctrl.newCategory.categories.push({
+          name: undefined,
+          subCategories: [{
+            name: undefined
+          }]
+        });
+      }
     };
 
-    ctrl.appendNextSubCategory = function(category) {
-      console.log("appendNextSubCategory");
-      category.subCategories.push({
-        name: undefined
-      });
+    ctrl.appendNextSubCategory = function(category, subCategory) {
+      if (subCategory.name) {
+        category.subCategories.push({
+          name: undefined
+        });
+      }
     };
 
     ctrl.confirmCreatingCategory = function(newCategory) {
       categoriesResource.save(newCategory).$promise
         .then(getAllCategories)
         .then(function(res) {
-          console.log("rererere");
           ctrl.isAddingMode = false;
         }, function(err) {
           console.log(err);
-        })
-        
+        });
     };
   }
 })();
