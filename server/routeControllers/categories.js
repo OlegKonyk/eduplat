@@ -2,10 +2,23 @@
 const Category = require('../models/Category.js');
 
 function getAll(req, res, next) {
-  Category.find({}).exec()
-  .then(function(categories) {
-    res.send(categories).status(200);
-  });
+  let mode = req.query.mode;
+  if (mode === 'unwind') {
+    console.log('lets unwind it all');
+    Category.aggregate([
+      {$unwind: "$categories"} /* ,
+      { $match: {$and: [{ $or: _or }, {"testCases.status": {$ne :'N/A'} } ]}},
+      { $group : { _id : {status: "$testCases.status"}, count: { $sum: 1 } }},
+      { $project: {_id: 0, status: '$_id.status', count: '$count'}}*/]).exec()
+      .then(function(categories) {
+        res.send(categories).status(200);
+      });
+  } else {
+    Category.find({}).exec()
+      .then(function(categories) {
+        res.send(categories).status(200);
+      });
+  }
 }
 
 function create(req, res, next) {

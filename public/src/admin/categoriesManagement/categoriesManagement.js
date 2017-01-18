@@ -12,7 +12,7 @@
     }
   );
 
-  function categoriesManagementCtrl($resource, edAuthService) {
+  function categoriesManagementCtrl($resource, edAuthService, edCategoriesManagementService) {
     "ngInject";
 
     var ctrl = this;
@@ -23,16 +23,9 @@
       getAllCategories();
     };
 
-    var allCategoriesResource = $resource('/api/categories/all', {}, {
-      get: {method: 'GET', isArray: true}
-    });
-
-    var categoriesResource = $resource('/api/categories');
-
     function getAllCategories() {
-      return allCategoriesResource.get().$promise
+      return edCategoriesManagementService.allCategoriesResource.get().$promise
         .then(function(categories) {
-          console.log(categories);
           ctrl.categories = categories;
         }, function(err) {
           console.log(err);
@@ -72,7 +65,7 @@
     };
 
     ctrl.confirmCreatingCategory = function(newCategory) {
-      categoriesResource.save(newCategory).$promise
+      edCategoriesManagementService.categoriesResource.save(newCategory).$promise
         .then(getAllCategories)
         .then(function(res) {
           ctrl.isAddingMode = false;
