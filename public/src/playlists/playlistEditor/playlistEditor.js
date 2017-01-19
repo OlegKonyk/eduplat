@@ -72,14 +72,19 @@
 
     edCategoriesManagementService.allCategoriesResource.get({mode: 'unwind'}).$promise
       .then(function(categories) {
-        ctrl.categories_ = categories;
+        ctrl.categories = categories.map(function(category) {
+          category._masterName = category.masterName.toLowerCase();
+          category._category = category.category.toLowerCase();
+          category._subCategory = category.subCategory.toLowerCase();
+          return category;
+        });
       }, function(err) {
         console.log(err);
       });
 
 
-    ctrl.selectedVegetables = [];
-    ctrl.categories = loadVegetables();
+    ctrl.selectedCategory = [];
+    //ctrl.categories = loadVegetables();
 
     ctrl.transformChip = function(chip) {
       // If it is an object, it's already a known chip
@@ -99,9 +104,10 @@
     function createFilterFor(query) {
       var lowercaseQuery = angular.lowercase(query);
 
-      return function filterFn(vegetable) {
-        return (vegetable._lowername.indexOf(lowercaseQuery) === 0) ||
-            (vegetable._lowertype.indexOf(lowercaseQuery) === 0);
+      return function filterFn(category) {
+        return (category._masterName.indexOf(lowercaseQuery) === 0) ||
+            (category._category.indexOf(lowercaseQuery) === 0) ||
+            (category._subCategory.indexOf(lowercaseQuery) === 0);
       };
     }
 

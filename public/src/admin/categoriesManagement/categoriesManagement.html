@@ -48,7 +48,7 @@
             <td>
                 <md-input-container>
                     <label>Master Category</label>
-                    <input ng-model="$ctrl.newCategory.masterName">
+                    <input autocomplete="off" ng-model="$ctrl.newCategory.masterName">
                 </md-input-container>
             </td>
             <td>
@@ -57,7 +57,7 @@
                         <td>
                             <md-input-container>
                                 <label>Category</label>
-                                <input ng-model="category.name" ng-blur="$ctrl.appendNextCategory(category)">
+                                <input autocomplete="off" ng-model="category.name" ng-blur="$ctrl.appendNextCategory(category)">
                             </md-input-container>
                         </td>
                         <td>
@@ -66,7 +66,7 @@
                                     <td>
                                         <md-input-container>
                                             <label>Sub Category</label>
-                                            <input ng-blur="$ctrl.appendNextSubCategory(category, subCategory)" ng-model="subCategory.name">
+                                            <input autocomplete="off" ng-blur="$ctrl.appendNextSubCategory(category, subCategory)" ng-model="subCategory.name">
                                         </md-input-container>
                                     </td>
                                 </tr>
