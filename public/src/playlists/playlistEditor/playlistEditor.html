@@ -76,7 +76,7 @@ md-virtual-repeat-container {
         <md-button class="md-raised md-primary" ng-click="$ctrl.addPlaylist($ctrl.file, $ctrl.newPlaylist);">Add playlist</md-button>
         <md-button style="width: 200px;" class="google-button md-raised" ng-click="$ctrl.fetchYoutubeData($ctrl.newPlaylist);">
             <div layout="row" layout-align="center center">
-                <div><img ng-hide="$ctrl.fetchingYoutubeData" src="front/assets/svg/google-logo.svg"></div>
+                <div><img ng-hide="$ctrl.fetchingYoutubeData" src="front/assets/svg/youtube.svg"></div>
                 <md-progress-circular style="margin-right: 10px;" ng-show="$ctrl.fetchingYoutubeData" class="md-hue-2" md-diameter="20px"></md-progress-circular>
                 <div>Get Youtube Data</div>
             </div>
@@ -113,5 +113,11 @@ md-virtual-repeat-container {
 
     </div>
 </div>
+
+<ul>
+    <li ng-repeat="video in $ctrl.youtubeData.videos">
+        {{video.title}}
+    </li>
+</ul>
 
 

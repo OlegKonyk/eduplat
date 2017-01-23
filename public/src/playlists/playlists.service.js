@@ -22,7 +22,11 @@
         {_id: '@_id'}
       );
 
-      return {personalResource, featuredResource, publicResource};
+      var fetchYoutubeResource = $resource(
+        '/api/playlist/fetchYoutubeData/'
+      );
+
+      return {personalResource, featuredResource, publicResource, fetchYoutubeResource};
     });
 })();
 

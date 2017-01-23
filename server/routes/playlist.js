@@ -100,7 +100,9 @@ function createPlaylist(req, res, next) {
     });
 }
 
-/*function fetchYoutubeData(req, res, next) {
+router.post('/fetchYoutubeData', auth.jwt, fetchYoutubeData);
+
+function fetchYoutubeData(req, res, next) {
   var playlistData = req.body;
   playlistData.ownerId = req.user._id;
 
@@ -120,16 +122,18 @@ function createPlaylist(req, res, next) {
           channelTitle: item.snippet.channelTitle
         };
       });
-      var newPlaylist = new Playlist(playlistData);
-      newPlaylist.save()
+
+      res.send(playlistData).status(200);
+
+      /*newPlaylist.save()
         .then(function() {
           console.log('New playlist created: ' + playlistData.name);
           res.send('New playlist created: ' + playlistData.name).status(200);
         }, function(err) {
           res.send(err.message).status(500);
-        });
+        });*/
     });
-}*/
+}
 
 function getPersonalPlaylists(req, res, next) {
   Playlist.find({ownerId: req.user._id})

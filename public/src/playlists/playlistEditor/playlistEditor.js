@@ -71,10 +71,16 @@
     };
 
     ctrl.fetchYoutubeData = function(newPlaylist) {
+      console.log(newPlaylist);
       ctrl.fetchingYoutubeData = true;
-      $timeout(function() {
-        ctrl.fetchingYoutubeData = false;
-      }, 2000);
+
+      edPlaylistsService.fetchYoutubeResource.save(newPlaylist).$promise
+        .then(function(youtubeData) {
+          ctrl.youtubeData = youtubeData;
+          ctrl.fetchingYoutubeData = false;
+        }, function(err) {
+          console.log(err);
+        });
     };
 
     edCategoriesManagementService.allCategoriesResource.get({mode: 'unwind'}).$promise
