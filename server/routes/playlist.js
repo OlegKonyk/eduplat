@@ -100,6 +100,37 @@ function createPlaylist(req, res, next) {
     });
 }
 
+/*function fetchYoutubeData(req, res, next) {
+  var playlistData = req.body;
+  playlistData.ownerId = req.user._id;
+
+  youtube.playlistItems.list({
+    playlistId: playlistData.playlistYoutubeId,
+    part: 'snippet',
+    maxResults: 50},
+    function(err, response) {
+      if (err) console.log(err);
+
+      playlistData.videos = response.items.map(function(item, index) {
+        return {
+          id: item.snippet.resourceId.videoId,
+          title: item.snippet.title,
+          publishedAt: item.snippet.publishedAt,
+          description: item.snippet.description,
+          channelTitle: item.snippet.channelTitle
+        };
+      });
+      var newPlaylist = new Playlist(playlistData);
+      newPlaylist.save()
+        .then(function() {
+          console.log('New playlist created: ' + playlistData.name);
+          res.send('New playlist created: ' + playlistData.name).status(200);
+        }, function(err) {
+          res.send(err.message).status(500);
+        });
+    });
+}*/
+
 function getPersonalPlaylists(req, res, next) {
   Playlist.find({ownerId: req.user._id})
     .then(function(playlists) {

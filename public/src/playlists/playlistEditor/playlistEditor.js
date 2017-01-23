@@ -70,6 +70,13 @@
       }
     };
 
+    ctrl.fetchYoutubeData = function(newPlaylist) {
+      ctrl.fetchingYoutubeData = true;
+      $timeout(function() {
+        ctrl.fetchingYoutubeData = false;
+      }, 2000);
+    };
+
     edCategoriesManagementService.allCategoriesResource.get({mode: 'unwind'}).$promise
       .then(function(categories) {
         ctrl.categories = categories.map(function(category) {
@@ -83,7 +90,7 @@
       });
 
 
-    ctrl.selectedCategory = [];
+    ctrl.selectedCategories = [];
     //ctrl.categories = loadVegetables();
 
     ctrl.transformChip = function(chip) {
@@ -92,12 +99,11 @@
         return chip;
       }
       // Otherwise, create a new one
-      return {name: chip, type: 'new'};
+      return {masterName: "New", category: "New", subCategory: chip};
     };
 
     ctrl.querySearch = function(query) {
       var results = query ? ctrl.categories.filter(createFilterFor(query)) : [];
-      console.log(results)
       return results;
     };
 
@@ -109,37 +115,6 @@
             (category._category.indexOf(lowercaseQuery) === 0) ||
             (category._subCategory.indexOf(lowercaseQuery) === 0);
       };
-    }
-
-    function loadVegetables() {
-      var veggies = [
-        {
-          'name': 'Broccoli',
-          'type': 'Brassica'
-        },
-        {
-          'name': 'Cabbage',
-          'type': 'Brassica'
-        },
-        {
-          'name': 'Carrot',
-          'type': 'Umbelliferous'
-        },
-        {
-          'name': 'Lettuce',
-          'type': 'Composite'
-        },
-        {
-          'name': 'Spinach',
-          'type': 'Goosefoot'
-        }
-      ];
-
-      return veggies.map(function(veg) {
-        veg._lowername = veg.name.toLowerCase();
-        veg._lowertype = veg.type.toLowerCase();
-        return veg;
-      });
     }
   }
 })();

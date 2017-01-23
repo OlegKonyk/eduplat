@@ -16,9 +16,9 @@
     .category-suggestion ul, .category-suggestion li, .category-suggestion {
 width: 300px !important;
 }
-/*md-virtual-repeat-container {
+md-virtual-repeat-container {
       width: 300px !important;
-    }*/
+    }
 </style>
 <div layout="row">
 
@@ -53,8 +53,35 @@ width: 300px !important;
             </md-select>
         </md-input-container>
 
-        <!--md-button class="md-raised md-primary" ng-click="$ctrl.addPlaylist($ctrl.newPlaylist);">Add playlist</md-button-->
+        <md-input-container class="md-block">
+            <md-chips ng-model="$ctrl.newPlaylist.selectedCategories" md-autocomplete-snap md-autocomplete-wrap-override
+                    md-transform-chip="$ctrl.transformChip($chip)" md-add-on-blur="true">
+                <md-autocomplete
+                    md-selected-item="$ctrl.selectedItem"
+                    md-search-text="$ctrl.searchText"
+                    md-items="item in $ctrl.querySearch($ctrl.searchText)"
+                    md-item-text="item.name"
+                    md-menu-class="category-suggestion">
+                    <span md-highlight-text="$ctrl.searchText">{{item.masterName}} :: {{item.category}} :: {{item.subCategory}}</span>
+                </md-autocomplete>
+                <md-chip-template>
+                    <span>
+                    <strong>{{$chip.subCategory}}</strong>
+                    <em>({{$chip.category}})</em>
+                    </span>
+                </md-chip-template>
+            </md-chips>
+        </md-input-container>
+
         <md-button class="md-raised md-primary" ng-click="$ctrl.addPlaylist($ctrl.file, $ctrl.newPlaylist);">Add playlist</md-button>
+        <md-button style="width: 200px;" class="google-button md-raised" ng-click="$ctrl.fetchYoutubeData($ctrl.newPlaylist);">
+            <div layout="row" layout-align="center center">
+                <div><img ng-hide="$ctrl.fetchingYoutubeData" src="front/assets/svg/google-logo.svg"></div>
+                <md-progress-circular style="margin-right: 10px;" ng-show="$ctrl.fetchingYoutubeData" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+                <div>Get Youtube Data</div>
+            </div>
+        </md-button>
+
     </div>
 
     <div flex  class="md-padding">
@@ -87,31 +114,4 @@ width: 300px !important;
     </div>
 </div>
 
-<div>
-    <md-chips ng-model="$ctrl.selectedCategories" md-autocomplete-snap md-autocomplete-wrap-override
-            md-transform-chip="$ctrl.transformChip($chip)">
-        <md-autocomplete
-            md-selected-item="$ctrl.selectedItem"
-            md-search-text="$ctrl.searchText"
-            md-items="item in $ctrl.querySearch($ctrl.searchText)"
-            md-item-text="item.name"
-            md-menu-class="category-suggestion"
-            placeholder="Categories">
-            <span md-highlight-text="$ctrl.searchText">{{item.masterName}} :: {{item.category}} :: {{item.subCategory}}</span>
-        </md-autocomplete>
-        <md-chip-template>
-            <span>
-            <strong>{{$chip.name}}</strong>
-            <em>({{$chip.type}})</em>
-            </span>
-        </md-chip-template>
-    </md-chips>
-</div>
 
-{{$ctrl.categories}}
-<md-divider></md-divider>
-{{$ctrl.selectedItem}}
-<md-divider></md-divider>
-{{$ctrl.selectedVegetables}}
-<md-divider></md-divider>
-{{$ctrl.categories_}}
