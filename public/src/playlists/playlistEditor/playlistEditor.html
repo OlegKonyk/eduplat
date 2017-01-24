@@ -114,10 +114,12 @@ md-virtual-repeat-container {
     </div>
 </div>
 
-<ul>
-    <li ng-repeat="video in $ctrl.youtubeData.videos">
-        {{video.title}}
-    </li>
-</ul>
+<div layout="column">
+    <div ng-repeat="item in $ctrl.youtubeData.items" ng-click="$ctrl.openVideoInModal($event, item.snippet.resourceId.videoId)">
+        <img ng-src="{{item.snippet.thumbnails.default.url}}">
+        <span>{{item.snippet.title}}</span>
+        
+    </div>
+</div>
 
 

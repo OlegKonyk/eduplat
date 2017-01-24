@@ -19,7 +19,7 @@
     };
   });
 
-  function playlistEditorCtrl($scope, Upload, $timeout, edPlaylistsService, edAuthService, edCategoriesManagementService) {
+  function playlistEditorCtrl($scope, Upload, $timeout, edPlaylistsService, edAuthService, edCategoriesManagementService, $mdDialog) {
     "ngInject";
 
     var ctrl = this;
@@ -32,6 +32,8 @@
       });
 
     ctrl.newPlaylist = {
+      playlistYoutubeId: 'PLGLfVvz_LVvSKgnFm8-6Fz1cd6zt_KxTC',
+      name: 'Android Development for Beginners',
       isPlaylist: true,
       groups: [ctrl.groups[0].name]
     };
@@ -122,6 +124,42 @@
             (category._subCategory.indexOf(lowercaseQuery) === 0);
       };
     }
+
+    ctrl.openVideoInModal = function(ev, videoId) {
+      $mdDialog.show({
+        controller: function DialogController($scope, $mdDialog, videoId) {
+          "ngInject";
+
+          $scope.videoId = videoId;
+
+          $scope.hide = function() {
+            $mdDialog.hide();
+          };
+
+          $scope.cancel = function() {
+            $mdDialog.cancel();
+          };
+
+          $scope.answer = function(answer) {
+            $mdDialog.hide(answer);
+          };
+        },
+        templateUrl: 'public/src/playlists/playlistEditor/modalPlayer.html',
+        locals: {videoId: videoId},
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+      })
+      .then(function(answer) {
+        $scope.status = 'You said the information was "' + answer + '".';
+      }, function() {
+        $scope.status = 'You cancelled the dialog.';
+      });
+    }
+
+    
+
   }
 })();
 

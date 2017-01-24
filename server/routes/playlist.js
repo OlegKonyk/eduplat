@@ -112,8 +112,9 @@ function fetchYoutubeData(req, res, next) {
     maxResults: 50},
     function(err, response) {
       if (err) console.log(err);
+      //console.log(JSON.stringify(response))
 
-      playlistData.videos = response.items.map(function(item, index) {
+      /*playlistData.videos = response.items.map(function(item, index) {
         return {
           id: item.snippet.resourceId.videoId,
           title: item.snippet.title,
@@ -121,9 +122,9 @@ function fetchYoutubeData(req, res, next) {
           description: item.snippet.description,
           channelTitle: item.snippet.channelTitle
         };
-      });
+      });*/
 
-      res.send(playlistData).status(200);
+      res.send(response).status(200);
 
       /*newPlaylist.save()
         .then(function() {
