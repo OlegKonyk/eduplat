@@ -156,10 +156,18 @@
       }, function() {
         $scope.status = 'You cancelled the dialog.';
       });
+    };
+
+    ctrl.goToPage = function(newPlaylist, pageToken) {
+      newPlaylist.pageToken = pageToken;
+      edPlaylistsService.fetchYoutubeResource.save(newPlaylist).$promise
+        .then(function(youtubeData) {
+          ctrl.youtubeData = youtubeData;
+          //ctrl.fetchingYoutubeData = false;
+        }, function(err) {
+          console.log(err);
+        });
     }
-
-    
-
   }
 })();
 

@@ -108,11 +108,12 @@ function fetchYoutubeData(req, res, next) {
 
   youtube.playlistItems.list({
     playlistId: playlistData.playlistYoutubeId,
+    pageToken: playlistData.pageToken,
     part: 'snippet',
-    maxResults: 50},
+    maxResults: 20},
     function(err, response) {
       if (err) console.log(err);
-      //console.log(JSON.stringify(response))
+      console.log(JSON.stringify(response))
 
       /*playlistData.videos = response.items.map(function(item, index) {
         return {

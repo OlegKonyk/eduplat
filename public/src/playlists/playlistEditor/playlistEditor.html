@@ -114,7 +114,12 @@ md-virtual-repeat-container {
     </div>
 </div>
 
-<div layout="column">
+<div layout="column" ng-if="$ctrl.youtubeData">
+    <h3>
+        <md-button class="md-primary" ng-click="$ctrl.goToPage($ctrl.newPlaylist, $ctrl.youtubeData.nextPageToken);" ng-if="$ctrl.youtubeData.prevPageToken">PREV</md-button>
+        Total videos: {{$ctrl.youtubeData.pageInfo.totalResults}} | Shown per page: {{$ctrl.youtubeData.pageInfo.resultsPerPage}}
+        <md-button class="md-primary" ng-click="$ctrl.goToPage($ctrl.newPlaylist, $ctrl.youtubeData.nextPageToken);" ng-if="$ctrl.youtubeData.nextPageToken">NEXT</md-button>
+    </h3>
     <div ng-repeat="item in $ctrl.youtubeData.items" ng-click="$ctrl.openVideoInModal($event, item.snippet.resourceId.videoId)">
         <img ng-src="{{item.snippet.thumbnails.default.url}}">
         <span>{{item.snippet.title}}</span>
