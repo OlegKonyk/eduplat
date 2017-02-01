@@ -32,28 +32,14 @@
         });
     }
 
-    ctrl.addMasterCategory = function() {
+    ctrl.addNewCategory = function() {
       ctrl.isAddingMode = true;
       ctrl.newCategory = {
-        masterName: undefined,
-        categories: [{
-          name: undefined,
-          subCategories: [{
-            name: undefined
-          }]
+        name: undefined,
+        subCategories: [{
+          name: undefined
         }]
       };
-    };
-
-    ctrl.appendNextCategory = function(category) {
-      if (category.name) {
-        ctrl.newCategory.categories.push({
-          name: undefined,
-          subCategories: [{
-            name: undefined
-          }]
-        });
-      }
     };
 
     ctrl.appendNextSubCategory = function(category, subCategory) {
@@ -65,10 +51,15 @@
     };
 
     ctrl.confirmCreatingCategory = function(newCategory) {
-      newCategory.categories = newCategory.categories.map(category => {
+      /*newCategory.categories = newCategory.categories.map(category => {
         category.subCategories = category.subCategories.filter(subCategory => subCategory.name);
         return category;
-      }).filter(category => category.name);
+      }).filter(category => category.name);*/
+
+      newCategory.subCategories = newCategory.subCategories.filter(category => category.name);
+
+      console.log(newCategory)
+      
       edCategoriesManagementService.categoriesResource.save(newCategory).$promise
         .then(getAllCategories)
         .then(function(res) {

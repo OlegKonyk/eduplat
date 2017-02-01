@@ -36,50 +36,35 @@
 
 </style>
 <h2>Categories Management</h2>
-<md-button class="google-button" ng-click="$ctrl.addMasterCategory()" flex>
+<md-button class="google-button" ng-click="$ctrl.addNewCategory()" flex>
     <div layout="row" layout-align="center center">
         <div><img src="front/assets/svg/category.svg"></div>
         <div>New Category</div>
     </div>
 </md-button>
 <div ng-if="$ctrl.isAddingMode">
-    <table class="master-table">
+    <table class="category-table">
         <tr>
             <td>
                 <md-input-container>
-                    <label>Master Category</label>
-                    <input autocomplete="off" ng-model="$ctrl.newCategory.masterName">
+                    <label>Category</label>
+                    <input autocomplete="off" ng-model="$ctrl.newCategory.name">
                 </md-input-container>
             </td>
             <td>
-                <table class="category-table" ng-repeat="category in $ctrl.newCategory.categories">
+                <table class="sub-category-table" ng-repeat="subCategory in $ctrl.newCategory.subCategories">
                     <tr>
                         <td>
                             <md-input-container>
-                                <label>Category</label>
-                                <input autocomplete="off" ng-model="category.name" ng-blur="$ctrl.appendNextCategory(category)">
+                                <label>Sub Category</label>
+                                <input autocomplete="off" ng-blur="$ctrl.appendNextSubCategory($ctrl.newCategory, subCategory)" ng-model="subCategory.name">
                             </md-input-container>
                         </td>
-                        <td>
-                            <table class="sub-category-table" ng-repeat="subCategory in category.subCategories">
-                                <tr>
-                                    <td>
-                                        <md-input-container>
-                                            <label>Sub Category</label>
-                                            <input autocomplete="off" ng-blur="$ctrl.appendNextSubCategory(category, subCategory)" ng-model="subCategory.name">
-                                        </md-input-container>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
                     </tr>
-
-                    
                 </table>
-            </tr>
+            </td>
         </tr>
     </table>
-
     <div layout="row" layout-align="end center">
         <md-button class="md-raised md-primary" ng-click="$ctrl.confirmCreatingCategory($ctrl.newCategory)">Done</md-button>
     </div>

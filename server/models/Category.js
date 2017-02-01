@@ -2,21 +2,15 @@
 const mongoose = require('mongoose');
 
 const CategorySchema = new mongoose.Schema({
-  masterName: String,
+  name: String,
   description: String,
   authorId: String,
   approved: Boolean,
-  categories: [{
+  subCategories: [{
     name: String,
     description: String,
     authorId: String,
-    approved: Boolean,
-    subCategories: [{
-      name: String,
-      description: String,
-      authorId: String,
-      approved: Boolean
-    }]
+    approved: Boolean
   }]
 });
 
