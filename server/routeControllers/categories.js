@@ -24,14 +24,10 @@ function getAll(req, res, next) {
 
 function create(req, res, next) {
   var newCategory = req.body;
-  // newCategory.authorId = req.user._id;
-  // newCategory.approved = (req.user.roles.indexOf('admin') > -1); // temp
   userSpecificCategoryProperties.call(newCategory, req.user);
-  newCategory.categories.forEach(function(category) {
-    userSpecificCategoryProperties.call(category, req.user);
+  newCategory.subCategories.forEach(function(subCategory) {
+    userSpecificCategoryProperties.call(subCategory, req.user);
   });
-  console.log(JSON.stringify(newCategory));
-
   var category = new Category(newCategory);
   category.save()
     .then(function() {

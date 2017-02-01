@@ -51,15 +51,7 @@
     };
 
     ctrl.confirmCreatingCategory = function(newCategory) {
-      /*newCategory.categories = newCategory.categories.map(category => {
-        category.subCategories = category.subCategories.filter(subCategory => subCategory.name);
-        return category;
-      }).filter(category => category.name);*/
-
       newCategory.subCategories = newCategory.subCategories.filter(category => category.name);
-
-      console.log(newCategory)
-      
       edCategoriesManagementService.categoriesResource.save(newCategory).$promise
         .then(getAllCategories)
         .then(function(res) {
