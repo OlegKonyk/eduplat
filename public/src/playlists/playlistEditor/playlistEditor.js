@@ -35,7 +35,8 @@
       playlistYoutubeId: 'PLGLfVvz_LVvSKgnFm8-6Fz1cd6zt_KxTC',
       name: 'Android Development for Beginners',
       isPlaylist: true,
-      groups: [ctrl.groups[0].name]
+      groups: [ctrl.groups[0].name],
+      categories: []
     };
 
     $scope.$watch('$ctrl.file', function() {
@@ -88,8 +89,7 @@
     edCategoriesManagementService.allCategoriesResource.get({mode: 'unwind'}).$promise
       .then(function(categories) {
         ctrl.categories = categories.map(function(category) {
-          category._masterName = category.masterName.toLowerCase();
-          category._category = category.category.toLowerCase();
+          category._name = category.name.toLowerCase();
           category._subCategory = category.subCategory.toLowerCase();
           return category;
         });
@@ -98,20 +98,22 @@
       });
 
 
-    ctrl.selectedCategories = [];
+    //ctrl.selectedCategories = [];
     //ctrl.categories = loadVegetables();
 
     ctrl.transformChip = function(chip) {
+      console.log('+++++', chip)
       // If it is an object, it's already a known chip
       if (angular.isObject(chip)) {
         return chip;
       }
       // Otherwise, create a new one
-      return {masterName: "New", category: "New", subCategory: chip};
+      return {name: "New", subCategory: chip};
     };
 
     ctrl.querySearch = function(query) {
       var results = query ? ctrl.categories.filter(createFilterFor(query)) : [];
+      console.log('????', results)
       return results;
     };
 
@@ -119,8 +121,7 @@
       var lowercaseQuery = angular.lowercase(query);
 
       return function filterFn(category) {
-        return (category._masterName.indexOf(lowercaseQuery) === 0) ||
-            (category._category.indexOf(lowercaseQuery) === 0) ||
+        return (category._name.indexOf(lowercaseQuery) === 0) ||
             (category._subCategory.indexOf(lowercaseQuery) === 0);
       };
     }

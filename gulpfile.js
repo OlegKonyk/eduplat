@@ -74,7 +74,7 @@ gulp.task('minify-app-css', ['concat-app-css'], () => {
 });
 
 gulp.task('concat-vendor-js', function() {
-  return gulp.src(getMainBowerFiles('js', true), {base: 'bower_components'})
+  return gulp.src(getMainBowerFiles('js', false), {base: 'bower_components'})
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest('public/build/'));
 });

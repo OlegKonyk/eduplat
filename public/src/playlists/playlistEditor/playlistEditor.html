@@ -54,20 +54,20 @@ md-virtual-repeat-container {
         </md-input-container>
 
         <md-input-container class="md-block">
-            <md-chips ng-model="$ctrl.newPlaylist.selectedCategories" md-autocomplete-snap md-autocomplete-wrap-override
-                    md-transform-chip="$ctrl.transformChip($chip)" md-add-on-blur="true">
+            <md-chips ng-model="$ctrl.newPlaylist.categories" md-autocomplete-snap
+                    md-transform-chip="$ctrl.transformChip($chip)"> <!-- md-add-on-blur="true" -->
                 <md-autocomplete
                     md-selected-item="$ctrl.selectedItem"
                     md-search-text="$ctrl.searchText"
                     md-items="item in $ctrl.querySearch($ctrl.searchText)"
                     md-item-text="item.name"
                     md-menu-class="category-suggestion">
-                    <span md-highlight-text="$ctrl.searchText">{{item.masterName}} :: {{item.category}} :: {{item.subCategory}}</span>
+                    <span md-highlight-text="$ctrl.searchText">{{item.subCategory}} | {{item.name}}</span>
                 </md-autocomplete>
                 <md-chip-template>
                     <span>
-                    <strong>{{$chip.subCategory}}</strong>
-                    <em>({{$chip.category}})</em>
+                        <strong>{{$chip.subCategory}}</strong>
+                        <em>({{$chip.name}})</em>
                     </span>
                 </md-chip-template>
             </md-chips>
@@ -126,5 +126,3 @@ md-virtual-repeat-container {
         
     </div>
 </div>
-
-

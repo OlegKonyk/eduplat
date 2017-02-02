@@ -111,18 +111,10 @@
 
     <div style="border: 1px solid red;" class="categories-list">
         <div layout="row" ng-repeat="category in $ctrl.categories" layout-align="center center" ng-class="{'row-top-border': $index != 0}">
-            <div flex layout-padding>{{category.masterName}}</div>
-
-            <div flex layout="column" style="border-left: 1px solid blue;">
-                <div layout="row" ng-class="{'row-top-border_1': $index != 0}" ng-repeat="category in category.categories" ng-if="category.name" layout-align="center center">
-                    <div layout-padding flex>
-                        {{category.name}}
-                    </div>
-                    <div style="border-left: 1px solid saddlebrown;" flex layout="column">
-                        <div layout-padding ng-repeat="subCategory in category.subCategories" ng-if="subCategory.name">
-                            {{subCategory.name}}
-                        </div>
-                    </div>
+            <div flex layout-padding>{{category.name}}</div>
+            <div style="border-left: 1px solid saddlebrown;" flex layout="column">
+                <div layout-padding ng-repeat="subCategory in category.subCategories" ng-if="subCategory.name">
+                    {{subCategory.name}}
                 </div>
             </div>
         </div>

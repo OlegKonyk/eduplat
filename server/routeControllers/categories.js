@@ -6,11 +6,11 @@ function getAll(req, res, next) {
   if (mode === 'unwind') {
     console.log('lets unwind it all');
     Category.aggregate([
-      {$unwind: "$categories"},
-      {$unwind: "$categories.subCategories"},
-      {$project: {_id: 0, masterName: '$masterName',
-        category: '$categories.name',
-        subCategory: '$categories.subCategories.name'}}]).exec()
+      {$unwind: "$subCategories"},
+      //{$unwind: "$categories.subCategories"},
+      {$project: {_id: 0, name: '$name',
+        //category: '$subCategories.name',
+        subCategory: '$subCategories.name'}}]).exec()
       .then(function(categories) {
         res.send(categories).status(200);
       });
