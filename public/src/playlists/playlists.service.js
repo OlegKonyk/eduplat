@@ -17,6 +17,12 @@
         {get: {method: 'GET', isArray: true}}
       );
 
+      var playlistsByCategoryResource = $resource(
+        '/api/playlist/catalog/:category',
+        {},
+        {get: {method: 'GET', isArray: true}}
+      );
+
       var publicResource = $resource(
         '/api/playlist/public/',
         {_id: '@_id'}
@@ -26,7 +32,7 @@
         '/api/playlist/fetchYoutubeData/'
       );
 
-      return {personalResource, featuredResource, publicResource, fetchYoutubeResource};
+      return {personalResource, featuredResource, publicResource, fetchYoutubeResource, playlistsByCategoryResource};
     });
 })();
 
