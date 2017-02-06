@@ -80,6 +80,10 @@
           url: '/catalog',
           template: '<ed-catalog></ed-catalog>'
         })
+        .state('subcategories', {
+          url: '/catalog/subcategories?category',
+          template: '<ed-subcategories></ed-subcategories>'
+        })
         .state('myClassrom', {
           url: '/myClassrom',
           template: '<ed-my-classrom></ed-my-classrom>'

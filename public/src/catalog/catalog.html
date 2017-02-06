@@ -1,4 +1,19 @@
-<md-content class="view-column">
-    <h1>CATALOG</h1>
-    <h2 ng-repeat="category in $ctrl.categories">{{category.name}}</h2>
+<md-content class="view-column" layout-padding>
+    <!--<h1>CATALOG</h1>
+    <h2 ng-repeat="category in $ctrl.categories">{{category.name}}</h2>-->
+    <md-grid-list class="havy-margin"
+        md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3"
+        md-row-height="1.3:1"
+        md-gutter-gt-sm="36px" md-gutter="32px" >
+
+        <md-grid-tile  ng-click="$ctrl.goToCategory(category._id)" style="cursor:pointer;" 
+                   ng-repeat="category in $ctrl.categories">
+            <img src="front/assets/img/comp.jpg" class="md-card-image" layout-fill>
+            <!--<img ng-if="playlist.thumbnail" ng-src="{{playlist.thumbnail}}" layout-fill>-->
+            <md-grid-tile-footer>
+                <h3>{{category.name}}</h3>
+            </md-grid-tile-footer>
+        </md-grid-tile>
+
+    </md-grid-list>
 </md-content>

@@ -22,6 +22,25 @@ function getAll(req, res, next) {
   }
 }
 
+function subcataegories(req, res, next) {
+  let category = req.query.category;
+  // if (mode === 'unwind') {
+  //   console.log('lets unwind it all');
+  //   Category.aggregate([
+  //     {$unwind: "$subCategories"},
+  //     {$project: {_id: 0, name: '$name',
+  //       subCategory: '$subCategories.name'}}]).exec()
+  //     .then(function(categories) {
+  //       res.send(categories).status(200);
+  //     });
+  // } else {
+    Category.findById(category).exec()
+      .then(function(categories) {
+        res.send(categories).status(200);
+      });
+  //}
+}
+
 function create(req, res, next) {
   var newCategory = req.body;
   userSpecificCategoryProperties.call(newCategory, req.user);
@@ -40,4 +59,4 @@ function userSpecificCategoryProperties(user) {
   this.approved = user.roles.indexOf('admin') > -1;
 }
 
-module.exports = {getAll, create};
+module.exports = {getAll, create, subcataegories};
