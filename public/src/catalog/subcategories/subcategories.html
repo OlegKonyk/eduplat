@@ -1,4 +1,51 @@
-<md-content class="view-column">
-    <h3>subcategories</h3>
-    {{$ctrl.subcategories}}
-</md-content>
+<!--md-content class="view-column">
+    <h2>{{$ctrl.subcategories.name}}</h2>
+    <ul>
+        <li ng-repeat="subCategory in $ctrl.subcategories.subCategories">{{subCategory.name}}</li>
+    </ul>
+</md-content-->
+
+<div style="height: 100%;" layout="column" ng-cloak>
+    <div style="height: 180px; background-color: lightslategrey;">
+
+    </div>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button>
+                Coolest
+            </md-button>
+            <md-button>
+                Best
+            </md-button>
+            <md-button>
+                Newst
+            </md-button>
+            <md-button>
+                Newst
+            </md-button>
+        </div>
+    </md-toolbar>
+    <section style="height: 100%; width: 100%;" layout="row">
+
+        <div flex layout="row" layout-align="center start" layout-padding>
+        <div flex="80" style="position: relative; height: 100%; width: 100%;">
+            <div>
+            <!--div style="width: 300px; height: 300px; background-color: red;"></div-->
+            <div ui-view></div>
+            </div>
+        </div>
+        </div>
+
+        <md-sidenav md-component-id="right" 
+            md-is-locked-open="$mdMedia('min-width: 333px')" 
+            class="md-sidenav-right"
+            md-whiteframe="4"
+            style="max-width: 300px;">
+            <ul>
+                <li ng-repeat="subCategory in $ctrl.subcategories.subCategories">{{subCategory.name}}</li>
+            </ul>
+        </md-sidenav>
+
+    </section>
+
+</div>
