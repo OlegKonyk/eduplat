@@ -11,10 +11,10 @@
       get: {method: 'GET', isArray: true}
     });
 
-    var subcategoriesResource = $resource('/api/categories/subcategories', {category: '@category'});
+    var singleCategoryResource = $resource('/api/categories/subcategories', {category: '@category'});
 
     var categoriesResource = $resource('/api/categories');
 
-    return {categoriesResource, allCategoriesResource, subcategoriesResource};
+    return {categoriesResource, allCategoriesResource, singleCategoryResource};
   }
 })();

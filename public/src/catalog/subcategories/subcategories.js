@@ -12,13 +12,17 @@
     }
   );
 
-  function subcategoriesCtrl(edCategoriesManagementService, $stateParams) {
+  function subcategoriesCtrl(edCategoriesManagementService, edPlaylistsService, $stateParams, $state) {
     "ngInject";
 
     var ctrl = this;
 
     ctrl.$onInit = function() {
-      getSubcategories();
+      getCategoryData()
+        .then(getPlaylistsForCategory)
+        .then(null, function(err) {
+          console.log(err);
+        });
     };
 
     // ctrl.goToCategory = function(id) {
@@ -26,14 +30,27 @@
     //   $state.go('subcategories', {category: id});
     // };
 
-    function getSubcategories() {
-      return edCategoriesManagementService.subcategoriesResource.get({category: $stateParams.category}).$promise
-        .then(function(subcategories) {
-          ctrl.subcategories = subcategories;
-        }, function(err) {
-          console.log(err);
+    function getCategoryData() {
+      return edCategoriesManagementService.singleCategoryResource.get({category: $stateParams.category}).$promise
+        .then(function(category) {
+          ctrl.category = category;
+          // ctrl.allSubcategoryNames = ctrl.category.subCategories.map(function(subCtegory) {
+          //   return subCtegory.name;
+          // });
+          return ctrl.category;
         });
     }
+
+    function getPlaylistsForCategory(category) {
+      return edPlaylistsService.playlistsByCategoryResource.get({categoryName: category.name}).$promise
+        .then(function(playlists) {
+          ctrl.playlists = playlists;
+        });
+    }
+
+    ctrl.goToPlaylist = function(id) {
+      $state.go('player', {video: id});
+    };
   }
 })();
 

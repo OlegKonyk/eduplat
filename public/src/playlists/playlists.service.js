@@ -18,8 +18,8 @@
       );
 
       var playlistsByCategoryResource = $resource(
-        '/api/playlist/catalog/:category',
-        {},
+        '/api/playlist/catalog',
+        {categoryName: '@category'},
         {get: {method: 'GET', isArray: true}}
       );
 

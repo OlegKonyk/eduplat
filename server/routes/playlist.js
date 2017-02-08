@@ -137,6 +137,20 @@ function fetchYoutubeData(req, res, next) {
     });
 }
 
+router.get('/catalog', function(req, res) {
+  let categoryName = req.query.categoryName;
+  console.log('^^^^', categoryName)
+  Playlist.aggregate([
+      {$unwind: "$categories"},
+      {$match: {"categories.name": categoryName}}]).exec()
+      .then(function(categories) {
+        res.send(categories).status(200);
+      }, function(err) {
+        console.log(err);
+        res.status(500);
+      });
+});
+
 function getPersonalPlaylists(req, res, next) {
   Playlist.find({ownerId: req.user._id})
     .then(function(playlists) {
