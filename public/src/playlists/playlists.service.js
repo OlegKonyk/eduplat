@@ -8,7 +8,10 @@
       var personalResource = $resource(
         '/api/playlist/personal',
         {},
-        {get: {method: 'GET', isArray: true}}
+        {
+          get: {method: 'GET', isArray: true},
+          update: {method: 'PUT'}
+        }
       );
 
       var featuredResource = $resource(

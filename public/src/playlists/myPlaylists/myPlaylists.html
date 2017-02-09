@@ -21,6 +21,9 @@
     <md-grid-tile  ng-click="$ctrl.goToPlaylist(playlist._id)" style="cursor:pointer;" 
                    ng-repeat="playlist in $ctrl.playlists">
         <md-grid-tile-header layout-align="end center">
+            <md-checkbox ng-change="$ctrl.updatePlaylist(playlist)" ng-model="playlist.isFeatured">
+                Featured
+            </md-checkbox>
             <md-button class="md-raised md-warn" ng-click="$ctrl.deletePlaylist(playlist._id);">Delete</md-button>
         </md-grid-tile-header>
             <img ng-if="!playlist.thumbnail" src="front/assets/img/comp.jpg" class="md-card-image" alt="Washed Out" layout-fill>

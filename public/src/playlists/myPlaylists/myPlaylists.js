@@ -17,7 +17,7 @@
 
     var ctrl = this;
 
-    function grtPlaylists() {
+    function getPlaylists() {
       return edPlaylistsService.personalResource
         .get()
         .$promise
@@ -27,18 +27,29 @@
         });
     }
 
-    grtPlaylists()
+    getPlaylists()
       .then(null,
         function(err) {
           console.log(err);
         });
+
+    ctrl.updatePlaylist = function(playlist) {
+      edPlaylistsService.personalResource
+        .update({_id: playlist._id}, {isFeatured: playlist.isFeatured})
+        .$promise
+        .then(function(data) {
+          Object.assign(playlist, data);
+        }, function(err) {
+          console.log(err);
+        });
+    };
 
     ctrl.deletePlaylist = function(_id) {
       console.log(_id);
       edPlaylistsService.personalResource
         .delete({_id: _id})
         .$promise
-        .then(grtPlaylists,
+        .then(getPlaylists,
           function(err) {
             console.log(err);
           });

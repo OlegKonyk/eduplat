@@ -1,10 +1,10 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-const fs = require('fs');
+//const fs = require('fs');
 
-const multiparty = require('connect-multiparty');
-const multipartyMiddleware = multiparty();
+//const multiparty = require('connect-multiparty');
+//const multipartyMiddleware = multiparty();
 
 const auth = require('../routeControllers/auth');
 const Playlist = require('../models/Playlist.js');
@@ -17,12 +17,30 @@ router.post('/personal', auth.jwt, createPlaylist);
 router.delete('/personal', auth.jwt, function(req, res) {
   let id = req.query._id;
   Playlist.findById(id).remove().exec()
-  .then(function(playlist) {
-    res.json(playlist.toJSON()).status(200);
-  }, function(err) {
-    console.log(err);
-    res.status(500);
-  });
+    .then(function(playlist) {
+      res.json(playlist.toJSON()).status(200);
+    }, function(err) {
+      console.log(err);
+      res.status(500);
+    });
+});
+
+router.put('/personal', auth.jwt, function(req, res) {
+  let id = req.query._id;
+  Playlist.findById(id).exec()
+    .then(function(playlist) {
+      Object.assign(playlist, req.body);
+      return playlist;
+    })
+    .then(function(playlist) {
+      return playlist.save();
+    })
+    .then(function(playlist) {
+      res.send(playlist).status(200);
+    }, function(err) {
+      console.log(err);
+      res.status(500);
+    });
 });
 
 /*router.post('/upload', auth.jwt, multipartyMiddleware, function(req, res) {

@@ -19,7 +19,8 @@ const PlaylistSchema = new mongoose.Schema({
     description: String,
     channelTitle: String
   }],
-  thumbnail: String
+  thumbnail: String,
+  isFeatured: Boolean
 });
 
 module.exports = mongoose.model('Playlist', PlaylistSchema);
