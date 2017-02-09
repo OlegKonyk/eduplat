@@ -179,7 +179,7 @@ function getPersonalPlaylists(req, res, next) {
 }
 
 function getFeaturedPlaylists(req, res, next) {
-  Playlist.find({groups: 'public'})
+  Playlist.find({groups: 'public', isFeatured: true})
     .then(function(playlists) {
       res.json(playlists).status(200);
     }, function(err) {
