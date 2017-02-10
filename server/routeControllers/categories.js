@@ -1,5 +1,6 @@
 'use strict';
 const Category = require('../models/Category.js');
+const mongoose = require('mongoose');
 
 function getAll(req, res, next) {
   let mode = req.query.mode;
@@ -24,6 +25,8 @@ function getAll(req, res, next) {
 
 function subcataegories(req, res, next) {
   let category = req.query.category;
+  let subCategory = req.query.subCategory;
+  console.log('------->', category, subCategory)
   // if (mode === 'unwind') {
   //   console.log('lets unwind it all');
   //   Category.aggregate([
@@ -34,10 +37,28 @@ function subcataegories(req, res, next) {
   //       res.send(categories).status(200);
   //     });
   // } else {
-    Category.findById(category).exec()
+  if (!subCategory) {
+    Category.find({_id: category}).exec()
+    .then(function(categories) {
+      res.send(categories).status(200);
+    });
+  } else {
+    Category.aggregate([
+      {$unwind: "$subCategories"},
+      {$match: {_id: new mongoose.Types.ObjectId(category),
+                "subCategories._id": new mongoose.Types.ObjectId(subCategory)}
+      }]).exec()
       .then(function(categories) {
+        console.log('&&&&&&&', categories)
         res.send(categories).status(200);
       });
+    // Category.findById(category).exec()
+    //   .then(function(categories) {
+    //     console.log('&&&&&&&', categories)
+    //     res.send(categories).status(200);
+    //   });
+  }
+    
   //}
 }
 

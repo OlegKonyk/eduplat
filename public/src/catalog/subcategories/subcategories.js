@@ -17,9 +17,13 @@
 
     var ctrl = this;
 
+    var category = $stateParams.category;
+    var sub = $stateParams.sub;
+    console.log(category)
+
     ctrl.$onInit = function() {
       getCategoryData()
-        .then(getPlaylistsForCategory)
+        //.then(getPlaylistsForCategory)
         .then(null, function(err) {
           console.log(err);
         });
@@ -31,9 +35,11 @@
     // };
 
     function getCategoryData() {
-      return edCategoriesManagementService.singleCategoryResource.get({category: $stateParams.category}).$promise
+      //console.log('####', {category: category})
+      return edCategoriesManagementService.singleCategoryResource
+        .get({category: category}).$promise
         .then(function(category) {
-          ctrl.category = category;
+          ctrl.category = category[0];
           // ctrl.allSubcategoryNames = ctrl.category.subCategories.map(function(subCtegory) {
           //   return subCtegory.name;
           // });
@@ -41,16 +47,33 @@
         });
     }
 
-    function getPlaylistsForCategory(category) {
-      return edPlaylistsService.playlistsByCategoryResource.get({categoryName: category.name}).$promise
+    // function getPlaylistsForCategory(category) {
+    //   return edPlaylistsService.playlistsByCategoryResource.get({categoryName: category.name}).$promise
+    //     .then(function(playlists) {
+    //       ctrl.playlists = playlists;
+    //     });
+    // }
+
+    /*function getPlaylistsForSubCategory(subCategory) {
+      return edPlaylistsService.playlistsByCategoryResource
+        .get({categoryName: ctrl.category.name, subCategoryName: subCategory}).$promise
         .then(function(playlists) {
           ctrl.playlists = playlists;
         });
-    }
+    }*/
 
-    ctrl.goToPlaylist = function(id) {
-      $state.go('player', {video: id});
+    /*ctrl.loadDataForSubCategory = function(subCategory) {
+      getPlaylistsForSubCategory(subCategory);
+    };*/
+
+    ctrl.goToSubCategory = function(subCategory) {
+      console.log('^^^^^^', {category: category, sub: subCategory._id});
+      $state.go('subcategories.selected', {category: category, subCategory: subCategory._id});
     };
+
+    // ctrl.goToPlaylist = function(id) {
+    //   $state.go('player', {video: id});
+    // };
   }
 })();
 

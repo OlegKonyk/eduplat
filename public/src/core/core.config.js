@@ -76,14 +76,21 @@
           url: '/signup',
           template: '<ed-signup></ed-signup>'
         })
+
         .state('catalog', {
           url: '/catalog',
           template: '<ed-catalog></ed-catalog>'
         })
         .state('subcategories', {
           url: '/catalog/subcategories?category',
-          template: '<ed-subcategories></ed-subcategories>'
+          template: '<ed-subcategories></ed-subcategories>',
+          redirectTo: 'subcategories.selected'
         })
+        .state('subcategories.selected', {
+          url: '/selected?subCategory',
+          template: '<ed-category-list></ed-category-list>'
+        })
+
         .state('myClassrom', {
           url: '/myClassrom',
           template: '<ed-my-classrom></ed-my-classrom>'

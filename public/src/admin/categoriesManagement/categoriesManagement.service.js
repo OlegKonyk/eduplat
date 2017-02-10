@@ -11,10 +11,14 @@
       get: {method: 'GET', isArray: true}
     });
 
-    var singleCategoryResource = $resource('/api/categories/subcategories', {category: '@category'});
+    var singleCategoryResource = $resource('/api/categories/subcategories', {category: '@category', subCategory: '@subCategory'},
+      {get: {method: 'GET', isArray: true}});
+
+    var singleSubcategoryResource = $resource('/api/categories/subcategories', {category: '@category', subCategory: '@subCategory'},
+      {get: {method: 'GET', isArray: true}});
 
     var categoriesResource = $resource('/api/categories');
 
-    return {categoriesResource, allCategoriesResource, singleCategoryResource};
+    return {categoriesResource, allCategoriesResource, singleCategoryResource, singleSubcategoryResource};
   }
 })();

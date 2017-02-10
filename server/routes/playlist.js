@@ -157,10 +157,13 @@ function fetchYoutubeData(req, res, next) {
 
 router.get('/catalog', function(req, res) {
   let categoryName = req.query.categoryName;
-  console.log('^^^^', categoryName)
+  let subCategory = req.query.subCategory;
+  var query = subCategory ? {"categories.name": categoryName, "categories.subCategory": subCategory} :
+                        {"categories.name": categoryName};
+  console.log('^^^^', query)
   Playlist.aggregate([
       {$unwind: "$categories"},
-      {$match: {"categories.name": categoryName}}]).exec()
+      {$match: query}]).exec()
       .then(function(categories) {
         res.send(categories).status(200);
       }, function(err) {
