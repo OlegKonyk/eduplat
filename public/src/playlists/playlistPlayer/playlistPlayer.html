@@ -12,7 +12,7 @@
 }
 
 .embed-responsive-item {
-  position: absolute;
+  position: relative;
   top: 0;
   bottom: 0;
   left: 0;
@@ -222,42 +222,24 @@ md-content {
 
 </style>
 
-<div style="height: 100%;" layout="column" ng-cloak>
+<div style="height: 100%;" class="view-column" layout="column" ng-cloak>
   <!--ed-toolbar-main></ed-toolbar-main-->
   <section style="height: 100%; width: 100%;" layout="row">
-    
-    <!--md-sidenav
-        class="md-sidenav-left"
-        md-component-id="left"
-        md-is-locked-open="$mdMedia('gt-xs')"
-        md-whiteframe="4"
-        style="max-width: 300px;"
-        flex>
 
-      <md-content layout="column">
-        <md-button ng-repeat="video in $ctrl.playlist.videos" class="md-raised" ng-click="$ctrl.setVideoUrl(video.id)">{{$index+1}} {{video.title}}</md-button>
-      </md-content>
-
-    </md-sidenav-->
-
-    <md-sidenav layout="column" class="md-raised md-primary"class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-xs')">
-
-        <md-content  style="" flex role="navigation">
+    <md-sidenav style="height: 100%;" layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-xs')">
+        <md-content flex role="navigation">
             <ul class="docs-menu md-hue-2" style="margin-top: 15px;">
-                <li ng-repeat="video in $ctrl.playlist.videos" class="">                    
+                <li ng-repeat="video in $ctrl.playlist.videos" class="">
                     <md-button ng-click="$ctrl.setVideoUrl(video)" ng-class="{'active' : $ctrl.currentVideo.id == video.id}">
-
                         <span>{{video.title}}</span>
-
                     </md-button>
                 </li>
             </ul>
         </md-content>
-
     </md-sidenav>
 
-    <div flex layout="column" layout-align="center start" layout-padding>
-      <div flex="100" style="position: relative; width: 100%;">
+    <div flex style="height: 100%;" layout-padding>
+      <div>
         <div class="embed-responsive embed-responsive-16by9">
           <youtube-video class="embed-responsive-item" video-url="$ctrl.currentVideo.id"></youtube-video>
         </div>
@@ -267,7 +249,6 @@ md-content {
           {{$ctrl.currentVideo.description}}
         </div>
       </div>
-      
     </div>
 
   </section>

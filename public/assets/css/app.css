@@ -143,7 +143,13 @@ span.name {
 }*/
 
 .view-column {
-  max-width: 1200px;
+  max-width: 1400px;
+  margin: 0px auto;
+  position: relative;
+}
+
+.view-column-wide {
+  max-width: 1400px;
   margin: 0px auto;
   position: relative;
 }

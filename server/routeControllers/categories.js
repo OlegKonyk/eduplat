@@ -26,17 +26,6 @@ function getAll(req, res, next) {
 function subcataegories(req, res, next) {
   let category = req.query.category;
   let subCategory = req.query.subCategory;
-  console.log('------->', category, subCategory)
-  // if (mode === 'unwind') {
-  //   console.log('lets unwind it all');
-  //   Category.aggregate([
-  //     {$unwind: "$subCategories"},
-  //     {$project: {_id: 0, name: '$name',
-  //       subCategory: '$subCategories.name'}}]).exec()
-  //     .then(function(categories) {
-  //       res.send(categories).status(200);
-  //     });
-  // } else {
   if (!subCategory) {
     Category.find({_id: category}).exec()
     .then(function(categories) {

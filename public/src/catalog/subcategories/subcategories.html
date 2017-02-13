@@ -14,48 +14,54 @@
   }
 </style>
 <div style="height: 100%;" layout="column" ng-cloak>
-    <div class="category-image" style="height: 180px; background-color: lightslategrey;">
+    <div>
+        <div style="height: 180px; background-color: #B2DFDB;" >
+            <div class="category-image view-column" style="height: 180px;">
 
-    </div>
-    <md-toolbar class="md-hue-1">
-        <div class="md-toolbar-tools">
-            <md-button>
-                Coolest
-            </md-button>
-            <md-button>
-                Best
-            </md-button>
-            <md-button>
-                Newst
-            </md-button>
-            <md-button>
-                Newst
-            </md-button>
+            </div>
         </div>
-    </md-toolbar>
-    <section style="height: 100%; width: 100%;" layout="row">
+        <md-toolbar class="md-hue-1">
+            <div class="md-toolbar-tools view-column">
+                <md-button>
+                    Coolest
+                </md-button>
+                <md-button>
+                    Best
+                </md-button>
+                <md-button>
+                    Newst
+                </md-button>
+                <md-button>
+                    Newst
+                </md-button>
+            </div>
+        </md-toolbar>
+    </div>
+
+
+    <section class="view-column" style="height: 100%; width: 100%;" layout="row">
 
         <div flex layout="row" layout-align="center start" layout-padding>
-        <div flex="100" style="position: relative; height: 100%; width: 100%;">
-            <div ui-view></div>
-            <!--div>
-                <md-grid-list class="havy-margin"
-                        md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3"
-                        md-row-height="1.3:1"
-                        md-gutter-gt-sm="36px" md-gutter="32px" >
+            <div flex="100" style="position: relative; height: 100%; width: 100%;">
+                <div ui-view></div>
+                <!--div>
+                    <md-grid-list class="havy-margin"
+                            md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3"
+                            md-row-height="1.3:1"
+                            md-gutter-gt-sm="36px" md-gutter="32px" >
 
-                    <md-grid-tile  ng-click="$ctrl.goToPlaylist(playlist._id)" style="cursor:pointer;" 
-                                ng-repeat="playlist in $ctrl.playlists">
-                            <img ng-if="!playlist.thumbnail" src="front/assets/img/comp.jpg" class="md-card-image" alt="Washed Out" layout-fill>
-                            <img ng-if="playlist.thumbnail" ng-src="{{playlist.thumbnail}}" layout-fill>
-                        <md-grid-tile-footer>
-                            <h3>{{playlist.name}}</h3>
-                        </md-grid-tile-footer>
-                    </md-grid-tile>
+                        <md-grid-tile  ng-click="$ctrl.goToPlaylist(playlist._id)" style="cursor:pointer;" 
+                                    ng-repeat="playlist in $ctrl.playlists">
+                                <img ng-if="!playlist.thumbnail" src="front/assets/img/comp.jpg" class="md-card-image" alt="Washed Out" layout-fill>
+                                <img ng-if="playlist.thumbnail" ng-src="{{playlist.thumbnail}}" layout-fill>
+                            <md-grid-tile-footer>
+                                <h3>{{playlist.name}}</h3>
+                            </md-grid-tile-footer>
+                        </md-grid-tile>
 
-                </md-grid-list>
-            </div-->
-        </div>
+                    </md-grid-list>
+                </div-->
+            </div>
         </div>
 
         <md-sidenav md-component-id="right" 
