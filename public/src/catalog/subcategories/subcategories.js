@@ -67,12 +67,18 @@
     };*/
 
     ctrl.goToSubCategory = function(subCategory) {
-      
-      $state.go('subcategories.selected', {category: category, subCategory: subCategory._id})
-      .then(function() {
-        ctrl.subCategory = $stateParams.subCategory;
-        console.log(ctrl.subCategory)
-      });
+      var query;
+      if (subCategory) {
+        query = {category: category, subCategory: subCategory._id};
+      } else {
+        query = {category: category, subCategory: undefined};
+      }
+      console.log('????', query)
+      $state.go('subcategories.selected', query)
+        .then(function() {
+          ctrl.subCategory = $stateParams.subCategory;
+          console.log(ctrl.subCategory)
+        });
     };
 
     // ctrl.goToPlaylist = function(id) {

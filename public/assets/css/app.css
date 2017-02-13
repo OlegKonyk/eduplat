@@ -294,9 +294,9 @@ span.name {
 md-sidenav > md-content {
   background: #B2DFDB;
 }
-md-content {
+/*md-content {
   background: #CFD8DC;
-}
+}*/
 .menu-heading {
   display: block;
   line-height: 32px;

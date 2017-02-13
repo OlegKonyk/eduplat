@@ -60,9 +60,12 @@
                 </md-button-->
 
                 <ul class="docs-menu md-hue-2" style="margin-top: 15px;">
+                    <li>
+                        <md-button ng-click="$ctrl.goToSubCategory()" ng-class="{'active' : !$ctrl.subCategory}">
+                            <span>All</span>
+                        </md-button></li>
                     <li ng-repeat="subCategory in $ctrl.category.subCategories" class="">
                         <md-button ng-click="$ctrl.goToSubCategory(subCategory)" ng-class="{'active' : $ctrl.subCategory == subCategory._id}">
-                            {{$ctrl.subCategory == subCategory._id}}
                             <span>{{subCategory.name}}</span>
                         </md-button>
                     </li>
