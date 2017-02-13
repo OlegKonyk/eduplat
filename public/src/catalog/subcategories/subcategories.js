@@ -18,7 +18,7 @@
     var ctrl = this;
 
     var category = $stateParams.category;
-    var sub = $stateParams.sub;
+    ctrl.subCategory = $stateParams.subCategory;
     console.log(category)
 
     ctrl.$onInit = function() {
@@ -67,8 +67,12 @@
     };*/
 
     ctrl.goToSubCategory = function(subCategory) {
-      console.log('^^^^^^', {category: category, sub: subCategory._id});
-      $state.go('subcategories.selected', {category: category, subCategory: subCategory._id});
+      
+      $state.go('subcategories.selected', {category: category, subCategory: subCategory._id})
+      .then(function() {
+        ctrl.subCategory = $stateParams.subCategory;
+        console.log(ctrl.subCategory)
+      });
     };
 
     // ctrl.goToPlaylist = function(id) {
