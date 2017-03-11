@@ -13,52 +13,42 @@
     height: 180px;
   }
 </style>
-<div style="height: 100%;" layout="column" ng-cloak>
-    <div>
-        <div style="height: 180px; background-color: #B2DFDB;" >
-            <div class="category-image view-column" style="height: 180px;">
+<div  style="height: 100%;" >
+    <div layout="column" ng-cloak>
+        <div>
+            <div style="height: 180px; background-color: #B2DFDB;" >
+                <div class="category-image view-column" style="height: 180px;">
 
+                </div>
             </div>
+            <md-toolbar class="md-hue-1">
+                <div class="md-toolbar-tools view-column">
+                    <md-button>
+                        Coolest
+                    </md-button>
+                    <md-button>
+                        Best
+                    </md-button>
+                    <md-button>
+                        Newst
+                    </md-button>
+                    <md-button>
+                        Newst
+                    </md-button>
+                </div>
+            </md-toolbar>
         </div>
-        <md-toolbar class="md-hue-1">
-            <div class="md-toolbar-tools view-column">
-                <md-button>
-                    Coolest
-                </md-button>
-                <md-button>
-                    Best
-                </md-button>
-                <md-button>
-                    Newst
-                </md-button>
-                <md-button>
-                    Newst
-                </md-button>
-            </div>
-        </md-toolbar>
     </div>
-</div>
-<div style="height: 100%;" class="view-column" layout="column" ng-cloak>
-    <section style="height: 100%; width: 100%;" layout="row">
+    <div class="view-column" layout="row" ng-cloak>
         <div flex layout="row" layout-align="center start" layout-padding>
-            <div flex="100" style=" height: 100%; width: 100%;">
-                <div ui-view></div>
-            </div>
+                <div flex="100" ui-view></div>
         </div>
         <md-sidenav  flex md-component-id="right" 
             md-is-locked-open="$mdMedia('min-width: 333px')" 
             class="md-sidenav-right"
             md-whiteframe="4"
-            style="max-width: 300px; height: 100%;">
+            style="max-width: 300px;">
             <md-content layout="column" flex role="navigation">
-                <!--md-button class="md-raised" ng-click="$ctrl.goToSubCategory()">
-                    All
-                </md-button>
-                <md-button ng-repeat="subCategory in $ctrl.category.subCategories"
-                           class="md-raised" ng-click="$ctrl.goToSubCategory(subCategory)">
-                    {{subCategory.name}}
-                </md-button-->
-
                 <ul class="docs-menu md-hue-2" style="margin-top: 15px;">
                     <li>
                         <md-button ng-click="$ctrl.goToSubCategory()" ng-class="{'active' : !$ctrl.subCategory}">
@@ -72,19 +62,6 @@
                 </ul>
             </md-content>
         </md-sidenav>
-    <!--md-sidenav style="height: 100%;" layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-xs')">
-        <md-content flex role="navigation">
-            <ul class="docs-menu md-hue-2" style="margin-top: 15px;">
-                <li ng-repeat="video in $ctrl.playlist.videos" class="">
-                    <md-button ng-click="$ctrl.setVideoUrl(video)" ng-class="{'active' : $ctrl.currentVideo.id == video.id}">
-                        <span>{{video.title}}</span>
-                    </md-button>
-                </li>
-            </ul>
-        </md-content>
-    </md-sidenav-->
-
-    </section>
-</div>
+    </div>
 
 </div>

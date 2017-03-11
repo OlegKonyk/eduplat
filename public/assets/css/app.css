@@ -382,3 +382,8 @@ md-sidenav > md-content {
 /* End Docs Menu */
 
 /*PLAYLIST PLAYER END*/
+
+ed-admin, ed-category-list {
+  display: block;
+  height: 100%;
+}

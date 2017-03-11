@@ -1,6 +1,5 @@
-<div style="height: 100%;" layout="column" ng-cloak>
+<div class="view-column" style="height: 100%;" layout="row" ng-cloak>
   <!--ed-toolbar-main></ed-toolbar-main-->
-  <section style="height: 100%; width: 100%;" layout="row">
     
     <md-sidenav
         class="md-sidenav-left"
@@ -8,13 +7,12 @@
         md-is-locked-open="$mdMedia('gt-xs')"
         md-whiteframe="4"
         style="max-width: 300px; height: 100%;"
+        layout="column"
         flex>
 
-      <md-content layout="column">
         <md-button class="md-raised" ui-sref="admin.googleSysAccount">Youtube sys account</md-button>
         <md-button class="md-raised" ui-sref="admin.usersManagement">Users management</md-button>
         <md-button class="md-raised" ui-sref="admin.categoriesManagement">Categories management</md-button>
-      </md-content>
 
     </md-sidenav>
 
@@ -26,7 +24,5 @@
         </div>
       </div>
     </div>
-
-  </section>
 
 </div>
